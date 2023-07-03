@@ -36,6 +36,11 @@ const route = createRouter({
       component: () => import("../views/CreateResume.vue"),
     },
     {
+      path: "/preview-components",
+      name: "preview-components",
+      component: () => import("../views/PreviewComponents.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "not-found",
       component: () => import("../views/NotFoundView.vue"),
