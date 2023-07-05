@@ -1,11 +1,26 @@
 <script setup lang="ts">
-// code here...
+withDefaults(
+  defineProps<{
+    /** Button Value */
+    value: string;
+    /** Button Width */
+    width: string;
+    /** Disable Button */
+    disabled: boolean;
+  }>(),
+  {
+    width: "100%",
+    disabled: false,
+  }
+);
 </script>
 
 <template>
-  <!-- component here... -->
+  <button :class="$style.btn" :disabled="disabled">{{ value }}</button>
 </template>
 
 <style module lang="scss">
-// styles here...
+.btn {
+  width: v-bind(width);
+}
 </style>
