@@ -1,0 +1,19 @@
+@use "sass:map";
+
+/// Colors
+/// @type Map
+$colors: (
+  "primary": #1967ff,
+  "danger": #ff404b,
+  "border": #1967ff,
+  "light-gray": #999999,
+  "dark-gray": #515151,
+  "text": #1b1b1b,
+  "text-light": #ffffff,
+);
+
+/// function to return colors
+/// @param {string} $key color value
+@function use($key) {
+  @return map.get($colors, $key);
+}
