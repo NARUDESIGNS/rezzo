@@ -1,6 +1,6 @@
 // imports up here...
+import HomeView from "@/views/HomeView.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 
 const route = createRouter({
   history: createWebHistory(),
@@ -13,37 +13,37 @@ const route = createRouter({
     {
       path: "/login-signup",
       name: "login-signup",
-      component: () => import("../views/LoginSignupView.vue"),
+      component: () => import("@/views/LoginSignupView.vue"),
     },
     {
       path: "/login",
       name: "login",
-      component: () => import("../views/BlogsView.vue"),
+      component: () => import("@/views/BlogsView.vue"),
     },
     {
       path: "/resources",
       name: "resources",
-      component: () => import("../views/ResourcesView.vue"),
+      component: () => import("@/views/ResourcesView.vue"),
     },
     {
       path: "/about",
       name: "about",
-      component: () => import("../views/AboutView.vue"),
+      component: () => import("@/views/AboutView.vue"),
     },
     {
       path: "/create-resume",
       name: "create-resume",
-      component: () => import("../views/CreateResume.vue"),
+      component: () => import("@/views/CreateResume.vue"),
     },
     {
-      path: "/preview-components",
-      name: "preview-components",
-      component: () => import("../views/PreviewComponents.vue"),
+      path: "/preview",
+      name: "preview",
+      component: () => import("@/views/ComponentsPreview.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
       name: "not-found",
-      component: () => import("../views/NotFoundView.vue"),
+      component: () => import("@/views/NotFoundView.vue"),
     },
   ],
 });
