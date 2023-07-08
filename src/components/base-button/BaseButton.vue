@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useCssModule } from "vue";
+import BaseLoader from "../base-loader/BaseLoader.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -8,7 +9,7 @@ const props = withDefaults(
     /** Button Width */
     width?: string;
     /** Button Loading State */
-    isLoading?: string;
+    isLoading?: boolean;
     /** Disable Button */
     disabled?: boolean;
     /** Button Type */
@@ -19,7 +20,6 @@ const props = withDefaults(
     normal?: boolean;
   }>(),
   {
-    width: "100%",
     disabled: false,
   }
 );
@@ -33,45 +33,59 @@ const style = computed(() => {
     [$style.disabled]: props.disabled,
   };
 });
+
+const width = computed(() => (props.width ? `${props.width}px` : "200px"));
 </script>
 
 <template>
   <button :class="[$style.btn, style]" :disabled="disabled">
-    <slot>
-      {{ value }}
-    </slot>
+    <template v-if="isLoading">
+      <BaseLoader :light="primary || danger" :primary="normal" />
+    </template>
+    <template v-else>
+      <slot>
+        {{ value }}
+      </slot>
+    </template>
   </button>
 </template>
 
 <style module lang="scss">
 @use "@/scss/colors";
 
+@mixin focus-outline($state: "light-blue") {
+  box-shadow: 0 0 0 3px colors.use($state);
+  outline: none;
+}
+
 .btn {
   width: v-bind(width);
-  padding: 15px;
-  min-height: 36px;
+  padding: 0 10px;
+  height: 45px;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   color: white;
   background-color: colors.use("primary");
   text-transform: uppercase;
+
+  &:focus {
+    @include focus-outline();
+  }
 }
 
 .primary {
   background-color: colors.use("primary");
 
   &:focus {
-    box-shadow: 0 0 0 3px colors.use("light-blue");
-    outline: none;
+    @include focus-outline();
   }
 }
 .danger {
   background-color: colors.use("danger");
 
   &:focus {
-    box-shadow: 0 0 0 3px colors.use("light-red");
-    outline: none;
+    @include focus-outline("light-red");
   }
 }
 .normal {
@@ -80,8 +94,7 @@ const style = computed(() => {
   border: 1px solid colors.use("border");
 
   &:focus {
-    box-shadow: 0 0 0 3px colors.use("light-blue");
-    outline: none;
+    @include focus-outline();
   }
 }
 
