@@ -40,7 +40,7 @@ const width = computed(() => (props.width ? `${props.width}px` : "200px"));
 <template>
   <button :class="[$style.btn, style]" :disabled="disabled">
     <template v-if="isLoading">
-      <BaseLoader :light="primary || danger" :primary="normal" />
+      <BaseLoader :light="!normal" />
     </template>
     <template v-else>
       <slot>
