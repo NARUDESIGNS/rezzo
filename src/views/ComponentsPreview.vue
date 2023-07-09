@@ -4,7 +4,7 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 </script>
 
 <template>
-  <h1 :class="$style.header">Buttons</h1>
+  <h2 :class="$style.header">Buttons</h2>
   <div :class="$style.content">
     <BaseButton> Primary Button </BaseButton>
     <BaseButton is-loading />
@@ -20,7 +20,7 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
     <BaseButton normal disabled> Normal Button </BaseButton>
   </div>
 
-  <h1 :class="$style.header">Loaders</h1>
+  <h2 :class="$style.header">Loaders</h2>
   <div :class="$style.content">
     <BaseLoader :size="50" />
     <BaseLoader :size="40" />
@@ -30,6 +30,8 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 </template>
 
 <style module lang="scss">
+@use "@/scss/colors";
+
 .header {
   margin-bottom: 20px;
 }
@@ -39,5 +41,8 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
   gap: 30px;
   flex-wrap: wrap;
   align-items: center;
+  border: 1px solid colors.use("border-light");
+  border-radius: 7px;
+  padding: 40px;
 }
 </style>
