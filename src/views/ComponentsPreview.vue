@@ -33,6 +33,7 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
   <div :class="$style.content">
     <InputCheckbox />
     <InputCheckbox filled />
+    <InputCheckbox size="20" />
   </div>
 </template>
 
