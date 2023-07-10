@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseButton from "@/components/base-button/BaseButton.vue";
+import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 </script>
 
@@ -26,6 +27,12 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
     <BaseLoader :size="40" />
     <BaseLoader :size="30" />
     <BaseLoader />
+  </div>
+
+  <h2 :class="$style.header">Form Inputs</h2>
+  <div :class="$style.content">
+    <InputCheckbox />
+    <InputCheckbox filled />
   </div>
 </template>
 

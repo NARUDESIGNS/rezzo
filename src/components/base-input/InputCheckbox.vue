@@ -1,11 +1,118 @@
 <script setup lang="ts">
-// code here...
+import { onMounted, ref } from "vue";
+
+const props = withDefaults(
+  defineProps<{
+    modelValue?: boolean;
+    filled?: boolean;
+    title?: string;
+    disabled?: boolean;
+    color?: string;
+    error?: boolean;
+  }>(),
+  {
+    modelValue: false,
+    color: "#1967ff",
+  }
+);
+
+const input = ref(null as unknown as HTMLElement);
+
+onMounted(() => {
+  // accept custom color and set input color
+  if (props.color) {
+    input.value.style.setProperty("--inputCheckbox", props.color);
+  }
+});
 </script>
 
 <template>
-  <!-- component here... -->
+  <input
+    :class="[
+      $style.input,
+      { [$style['filled-style']]: filled },
+      { [$style.error]: error },
+    ]"
+    type="checkbox"
+    :id="title"
+    ref="input"
+    :disabled="disabled"
+    :checked="modelValue"
+    @change="
+      $emit(
+        'update:modelValue',
+        ($event.target as unknown as HTMLInputElement).checked
+      )
+    "
+  />
 </template>
 
 <style module lang="scss">
-// styles here...
+@use "@/scss/colors";
+.input {
+  --inputCheckbox: colors.use("border");
+  -webkit-appearance: none;
+  margin: 0;
+  outline: none;
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+.input:before {
+  content: "";
+  display: block;
+  border-radius: 0.3em;
+  width: inherit;
+  height: inherit;
+  border: 1px solid colors.use("border-light");
+  cursor: pointer;
+  transition: 0.5s cubic-bezier(0, 1.12, 1, 1.08);
+}
+.input:after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  width: 45%;
+  height: 20%;
+  position: absolute;
+  top: 32%;
+  left: 30%;
+  border: solid var(--inputCheckbox);
+  border-width: 0 0 2px 2px;
+  cursor: pointer;
+  transform: rotate(310deg);
+}
+.input:checked:after {
+  visibility: visible;
+}
+
+.input:focus-within::before {
+  border: 1px solid var(--inputCheckbox, #1c7ed6);
+}
+
+.input:hover:before {
+  border-color: var(--inputCheckbox);
+}
+
+.input:disabled:before {
+  opacity: 40%;
+  cursor: not-allowed;
+}
+
+.filled-style:after {
+  display: none;
+}
+
+.filled-style:checked:after {
+  border-color: white;
+  visibility: visible;
+}
+.filled-style:checked:before {
+  background-color: var(--inputCheckbox);
+  box-shadow: inset 0 0 0 8px white;
+}
+
+.error::before {
+  border-color: #f03e3e;
+}
 </style>
