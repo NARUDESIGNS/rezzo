@@ -29,11 +29,12 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
     <BaseLoader />
   </div>
 
-  <h2 :class="$style.header">Form Inputs</h2>
+  <h2 :class="$style.header">Checkboxes</h2>
   <div :class="$style.content">
     <InputCheckbox />
     <InputCheckbox filled />
     <InputCheckbox size="20" />
+    <InputCheckbox size="20" filled />
   </div>
 </template>
 

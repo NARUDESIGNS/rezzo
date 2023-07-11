@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -9,6 +9,7 @@ const props = withDefaults(
     disabled?: boolean;
     color?: string;
     error?: boolean;
+    size?: string;
   }>(),
   {
     modelValue: false,
@@ -23,6 +24,10 @@ onMounted(() => {
   if (props.color) {
     input.value.style.setProperty("--inputCheckbox", props.color);
   }
+});
+
+const size = computed(() => {
+  return props.size ? `${props.size}px` : `32px`;
 });
 </script>
 
@@ -51,11 +56,11 @@ onMounted(() => {
 @use "@/scss/colors";
 .input {
   --inputCheckbox: colors.use("border");
-  -webkit-appearance: none;
+  appearance: none;
   margin: 0;
   outline: none;
-  width: 32px;
-  height: 32px;
+  width: v-bind(size);
+  height: v-bind(size);
   position: relative;
 }
 .input:before {
@@ -99,17 +104,13 @@ onMounted(() => {
   cursor: not-allowed;
 }
 
-.filled-style:after {
-  display: none;
-}
-
 .filled-style:checked:after {
   border-color: white;
   visibility: visible;
 }
 .filled-style:checked:before {
+  border: 1px solid colors.use("border");
   background-color: var(--inputCheckbox);
-  box-shadow: inset 0 0 0 8px white;
 }
 
 .error::before {
