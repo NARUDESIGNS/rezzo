@@ -9,11 +9,12 @@ const props = withDefaults(
     disabled?: boolean;
     color?: string;
     error?: boolean;
-    size?: string;
+    size?: number;
   }>(),
   {
     modelValue: false,
     color: "#1967ff",
+    size: 32,
   }
 );
 
@@ -27,7 +28,7 @@ onMounted(() => {
 });
 
 const size = computed(() => {
-  return props.size ? `${props.size}px` : `32px`;
+  return `${props.size}px`;
 });
 </script>
 
