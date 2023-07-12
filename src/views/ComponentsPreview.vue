@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseButton from "@/components/base-button/BaseButton.vue";
+import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 </script>
@@ -19,6 +20,13 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
     <BaseButton danger disabled> Danger Button </BaseButton>
     <BaseButton disabled> Primary Button </BaseButton>
     <BaseButton normal disabled> Normal Button </BaseButton>
+
+    <ButtonLabel plus>Add Button Label</ButtonLabel>
+    <ButtonLabel minus>Minus Button Label</ButtonLabel>
+    <ButtonLabel plus disabled>Add Button Label</ButtonLabel>
+    <ButtonLabel minus disabled>Minus Button Label</ButtonLabel>
+    <ButtonLabel plus :size="40" />
+    <ButtonLabel minus :size="40" />
   </div>
 
   <h2 :class="$style.header">Loaders</h2>
