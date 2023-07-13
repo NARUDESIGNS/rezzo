@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, useCssModule } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -30,15 +30,17 @@ onMounted(() => {
 const size = computed(() => {
   return `${props.size}px`;
 });
+
+const $style = useCssModule();
+const styles = computed(() => ({
+  [$style.filled_style]: props.filled,
+  [$style.error]: props.error,
+}));
 </script>
 
 <template>
   <input
-    :class="[
-      $style.input,
-      { [$style['filled-style']]: filled },
-      { [$style.error]: error },
-    ]"
+    :class="[$style.input, styles]"
     type="checkbox"
     :id="title"
     ref="input"
@@ -105,11 +107,16 @@ const size = computed(() => {
   cursor: not-allowed;
 }
 
-.filled-style:checked:after {
+.input:disabled:after {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.filled_style:checked:after {
   border-color: white;
   visibility: visible;
 }
-.filled-style:checked:before {
+.filled_style:checked:before {
   border: 1px solid transparent;
   background-color: var(--inputCheckbox);
 }
