@@ -2,7 +2,17 @@
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
+import InputText from "@/components/base-input/InputText.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
+import { ref } from "vue";
+
+const checkbox = ref(true);
+const checkboxFilled = ref(true);
+
+const email = ref("narudesigns@mail");
+const firstName = ref("Paul");
+const lastName = ref("Ibeabuchi");
+const middleName = ref("Naru");
 </script>
 
 <template>
@@ -39,10 +49,26 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 
   <h2 :class="$style.header">Checkboxes</h2>
   <div :class="$style.content">
-    <InputCheckbox />
-    <InputCheckbox filled />
+    <InputCheckbox v-model="checkbox" />
+    <InputCheckbox v-model="checkboxFilled" filled />
     <InputCheckbox :size="20" />
     <InputCheckbox :size="20" filled />
+    <InputCheckbox checked disabled />
+  </div>
+
+  <h2 :class="$style.header">Input Fields</h2>
+  <div :class="[$style.content, $style.input_fields]">
+    <InputText v-model="firstName" label="First Name" required />
+    <InputText v-model="lastName" label="Last Name" />
+    <InputText
+      v-model="email"
+      label="Email"
+      error-msg="Invalid Email Address!"
+      required
+      error
+      :class="$style.input"
+    />
+    <InputText v-model="middleName" label="Middle Name" disabled />
   </div>
 </template>
 
@@ -61,5 +87,9 @@ import BaseLoader from "@/components/base-loader/BaseLoader.vue";
   border: 1px solid colors.use("border-light");
   border-radius: 7px;
   padding: 40px;
+}
+
+.input_fields {
+  align-items: flex-start;
 }
 </style>
