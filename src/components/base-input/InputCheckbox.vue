@@ -101,7 +101,7 @@ const size = computed(() => {
 }
 
 .input:disabled:before {
-  opacity: 40%;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -110,7 +110,7 @@ const size = computed(() => {
   visibility: visible;
 }
 .filled-style:checked:before {
-  border: 1px solid colors.use("border");
+  border: 1px solid transparent;
   background-color: var(--inputCheckbox);
 }
 
