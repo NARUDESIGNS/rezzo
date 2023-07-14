@@ -56,7 +56,7 @@ const size = computed(() => `${props.size}px`);
     height: v-bind(size);
 
     * {
-      stroke-width: 1.5px;
+      stroke-width: 1px;
     }
   }
   .label {
