@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, useCssModule } from "vue";
+import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
+import { computed, ref, useCssModule } from "vue";
 
 // defineOptions({
 //   inheritAttrs: false,
@@ -13,6 +14,7 @@ const props = withDefaults(
     errorMsg?: string;
     label: string;
     disabled?: boolean;
+    placeholder?: string;
   }>(),
   {
     modelValue: undefined,
@@ -21,6 +23,7 @@ const props = withDefaults(
 
 defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
+  (e: "input-removed", inputLabel: string): void;
 }>();
 
 const $style = useCssModule();
@@ -28,22 +31,33 @@ const styles = computed(() => ({
   [$style.disabled]: props.disabled,
   [$style.error]: props.error,
 }));
+
+const hideInput = ref(false);
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div v-if="!hideInput" :class="$style.container">
     <label :class="[$style.label, { [$style.disabled]: disabled }]">
       {{ label }}
       <span v-if="required" :class="$style.required_asterisk">*</span>
     </label>
-    <input
-      :value="modelValue"
-      @input="
-        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
-      "
-      :class="[$style.input, styles]"
-      :disabled="disabled"
-    />
+    <div :class="$style.input_container">
+      <input
+        :value="modelValue"
+        @input="
+          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
+        :class="[$style.input, styles]"
+        :disabled="disabled"
+        :placeholder="placeholder"
+      />
+      <ButtonLabel
+        v-if="!disabled && !required"
+        minus
+        :class="$style.minus_btn"
+        @click="(hideInput = true), $emit('input-removed', label)"
+      />
+    </div>
     <p v-if="error" :class="$style.error_msg">
       {{ errorMsg || "Invalid Input" }}
     </p>
@@ -53,8 +67,24 @@ const styles = computed(() => ({
 <style module lang="scss">
 @use "@/scss/colors";
 
+::placeholder {
+  font-style: italic;
+}
 .container {
   min-height: 120px;
+  &:hover .minus_btn {
+    //TODO: use visibility: visible;
+    animation: fade 0.25s linear forwards;
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
 }
 .label {
   text-transform: capitalize;
@@ -65,6 +95,15 @@ const styles = computed(() => ({
   }
 }
 
+.input_container {
+  display: flex;
+
+  .minus_btn {
+    margin-left: 10px;
+    //TODO: use visibility: hidden;
+    opacity: 0;
+  }
+}
 .input {
   padding: 15px 20px;
   border-radius: 8px;

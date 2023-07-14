@@ -13,6 +13,9 @@ const email = ref("narudesigns@mail");
 const firstName = ref("Paul");
 const lastName = ref("Ibeabuchi");
 const middleName = ref("Naru");
+
+const logDetails = (inputLabel: string) =>
+  alert(`removed ${inputLabel} field!`);
 </script>
 
 <template>
@@ -59,7 +62,11 @@ const middleName = ref("Naru");
   <h2 :class="$style.header">Input Fields</h2>
   <div :class="[$style.content, $style.input_fields]">
     <InputText v-model="firstName" label="First Name" required />
-    <InputText v-model="lastName" label="Last Name" />
+    <InputText
+      v-model="lastName"
+      label="Last Name"
+      @input-removed="(label) => logDetails(label)"
+    />
     <InputText
       v-model="email"
       label="Email"
@@ -69,6 +76,11 @@ const middleName = ref("Naru");
       :class="$style.input"
     />
     <InputText v-model="middleName" label="Middle Name" disabled />
+    <InputText
+      label="Placeholder"
+      placeholder="Enter details here..."
+      @input-removed="(label) => logDetails(label)"
+    />
   </div>
 </template>
 
