@@ -5,7 +5,6 @@ const props = withDefaults(
   defineProps<{
     modelValue?: boolean;
     filled?: boolean;
-    title?: string;
     disabled?: boolean;
     color?: string;
     error?: boolean;
@@ -42,7 +41,6 @@ const styles = computed(() => ({
   <input
     :class="[$style.input, styles]"
     type="checkbox"
-    :id="title"
     ref="input"
     :disabled="disabled"
     :checked="modelValue"
