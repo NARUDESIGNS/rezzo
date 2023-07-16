@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
-import { computed, ref, useCssModule } from "vue";
+import { computed, useCssModule } from "vue";
 
-// defineOptions({
-//   inheritAttrs: false,
-// });
+defineOptions({
+  inheritAttrs: false,
+});
 
 const props = withDefaults(
   defineProps<{
@@ -12,7 +12,6 @@ const props = withDefaults(
     required?: boolean;
     error?: boolean;
     errorMsg?: string;
-    label: string;
     disabled?: boolean;
     placeholder?: string;
   }>(),
@@ -31,37 +30,34 @@ const styles = computed(() => ({
   [$style.disabled]: props.disabled,
   [$style.error]: props.error,
 }));
-
-const hideInput = ref(false);
 </script>
 
 <template>
-  <div v-if="!hideInput" :class="$style.container">
-    <label :class="[$style.label, { [$style.disabled]: disabled }]">
-      {{ label }}
-      <span v-if="required" :class="$style.required_asterisk">*</span>
-    </label>
-    <div :class="$style.input_container">
-      <input
-        :value="modelValue"
-        @input="
-          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
-        "
-        :class="[$style.input, styles]"
-        :disabled="disabled"
-        :placeholder="placeholder"
-      />
-      <ButtonLabel
-        v-if="!disabled && !required"
-        minus
-        :class="$style.minus_btn"
-        @click="(hideInput = true), $emit('input-removed', label)"
-      />
-    </div>
-    <p v-if="error" :class="$style.error_msg">
-      {{ errorMsg || "Invalid Input" }}
-    </p>
+  <div :class="[$style.container, $attrs.class]">
+    <input
+      :value="modelValue"
+      @input="
+        $emit(
+          'update:modelValue',
+          ($event.target as HTMLInputElement).value.trim()
+        )
+      "
+      :class="[$style.input, styles]"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      v-bind="$attrs"
+    />
+    <ButtonLabel
+      v-if="!required && !disabled"
+      minus
+      :class="$style.minus_btn"
+      @click="$emit('input-removed')"
+    />
+    <ButtonLabel v-else :class="$style.hide_minus_btn" />
   </div>
+  <p v-if="error" :class="$style.error_msg">
+    {{ errorMsg || "Invalid Input" }}
+  </p>
 </template>
 
 <style module lang="scss">
@@ -70,11 +66,14 @@ const hideInput = ref(false);
 ::placeholder {
   font-style: italic;
 }
+
 .container {
-  min-height: 120px;
+  display: flex;
+  width: 100%;
+
   &:hover .minus_btn {
-    //TODO: use visibility: visible;
-    animation: fade 0.25s linear forwards;
+    visibility: visible;
+    animation: fade 0.2s linear forwards;
 
     @keyframes fade {
       from {
@@ -85,23 +84,17 @@ const hideInput = ref(false);
       }
     }
   }
-}
-.label {
-  text-transform: capitalize;
-  display: inline-block;
-  margin-bottom: 10px;
-  .required_asterisk {
-    color: colors.use("primary");
-  }
-}
-
-.input_container {
-  display: flex;
 
   .minus_btn {
     margin-left: 10px;
-    //TODO: use visibility: hidden;
+    visibility: hidden;
     opacity: 0;
+  }
+
+  .hide_minus_btn {
+    margin-left: 10px;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 .input {
@@ -110,6 +103,7 @@ const hideInput = ref(false);
   border: 1px solid colors.use("border-light");
   width: 100%;
   font-size: 1.1rem;
+  width: 100% !important;
   min-width: 250px;
 
   &:focus {
