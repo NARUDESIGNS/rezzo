@@ -20,6 +20,10 @@ defineProps<{
   text-transform: capitalize;
   display: inline-block;
   margin-bottom: 10px;
+
+  &:not(:first-child) {
+    margin-top: 30px;
+  }
   .required_asterisk {
     color: colors.use("primary");
   }
