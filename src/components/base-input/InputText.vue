@@ -8,7 +8,7 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    modelValue?: string;
+    modelValue?: string | number;
     required?: boolean;
     error?: boolean;
     errorMsg?: string;
