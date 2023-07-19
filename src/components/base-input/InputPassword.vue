@@ -1,9 +1,9 @@
 <script setup lang="ts">
-// code here...
+import InputText from "./InputText.vue";
 </script>
 
 <template>
-  <!-- component here... -->
+  <InputText type="password" />
 </template>
 
 <style module lang="scss">
