@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
+import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
+import InputNumber from "@/components/base-input/InputNumber.vue";
+import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import { ref } from "vue";
@@ -13,9 +16,10 @@ const email = ref("narudesigns@mail");
 const firstName = ref("Paul");
 const lastName = ref("Ibeabuchi");
 const middleName = ref("Naru");
+const numbr = ref(10);
 
-const logDetails = (inputLabel: string) =>
-  alert(`removed ${inputLabel} field!`);
+const logDetails = () =>
+  alert("input filed will be removed when this button is clicked");
 </script>
 
 <template>
@@ -57,30 +61,41 @@ const logDetails = (inputLabel: string) =>
     <InputCheckbox :size="20" />
     <InputCheckbox :size="20" filled />
     <InputCheckbox checked disabled />
+    <InputCheckbox id="checkBox" filled />
+    <label for="checkBox">Remember Me</label>
   </div>
 
   <h2 :class="$style.header">Input Fields</h2>
   <div :class="[$style.content, $style.input_fields]">
-    <InputText v-model="firstName" label="First Name" required />
-    <InputText
-      v-model="lastName"
-      label="Last Name"
-      @input-removed="(label) => logDetails(label)"
-    />
+    <FieldLabel label="First Name" required />
+    <InputText v-model="firstName" required />
+
+    <FieldLabel label="lastName" />
+    <InputText v-model="lastName" @input-removed="() => logDetails()" />
+
+    <FieldLabel label="email" required />
     <InputText
       v-model="email"
-      label="Email"
       error-msg="Invalid Email Address!"
       required
       error
-      :class="$style.input"
     />
-    <InputText v-model="middleName" label="Middle Name" disabled />
+
+    <FieldLabel label="Middle Name" disabled />
+    <InputText v-model="middleName" type="text" disabled />
+
+    <FieldLabel label="Placeholder" />
     <InputText
-      label="Placeholder"
-      placeholder="Enter details here..."
-      @input-removed="(label) => logDetails(label)"
+      type="text"
+      placeholder="Tell me a secret here..."
+      @input-removed="() => logDetails()"
     />
+
+    <FieldLabel label="Password" required />
+    <InputPassword @input-removed="() => logDetails()" required />
+
+    <FieldLabel label="Number" />
+    <InputNumber v-model="numbr" @input-removed="() => logDetails()" />
   </div>
 </template>
 
@@ -103,5 +118,7 @@ const logDetails = (inputLabel: string) =>
 
 .input_fields {
   align-items: flex-start;
+  flex-direction: column;
+  gap: 0;
 }
 </style>
