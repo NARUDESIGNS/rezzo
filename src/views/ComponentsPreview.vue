@@ -6,6 +6,7 @@ import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
+import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import { ref } from "vue";
 
@@ -17,6 +18,7 @@ const firstName = ref("Paul");
 const lastName = ref("Ibeabuchi");
 const middleName = ref("Naru");
 const numbr = ref(10);
+const textarea = ref("Testing notes...");
 
 const logDetails = () =>
   alert("input filed will be removed when this button is clicked");
@@ -95,7 +97,15 @@ const logDetails = () =>
     <InputPassword @input-removed="() => logDetails()" required />
 
     <FieldLabel label="Number" />
-    <InputNumber v-model="numbr" @input-removed="() => logDetails()" />
+    <InputNumber
+      v-model="numbr"
+      @input-removed="() => logDetails()"
+      :min="1"
+      :max="10"
+    />
+
+    <FieldLabel label="Text Area" required />
+    <InputTextArea v-model="textarea" required />
   </div>
 </template>
 
