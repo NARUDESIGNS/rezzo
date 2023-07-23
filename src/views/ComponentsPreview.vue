@@ -18,6 +18,7 @@ const firstName = ref("Paul");
 const lastName = ref("Ibeabuchi");
 const middleName = ref("Naru");
 const numbr = ref(10);
+const password = ref("Narudesigns!");
 const textarea = ref("Testing notes...");
 
 const logDetails = () =>
@@ -94,7 +95,11 @@ const logDetails = () =>
     />
 
     <FieldLabel label="Password" required />
-    <InputPassword @input-removed="() => logDetails()" required />
+    <InputPassword
+      v-model="password"
+      @input-removed="() => logDetails()"
+      required
+    />
 
     <FieldLabel label="Number" />
     <InputNumber
@@ -111,7 +116,9 @@ const logDetails = () =>
 
 <style module lang="scss">
 @use "@/scss/colors";
-
+.test {
+  width: 500px;
+}
 .header {
   margin-bottom: 20px;
 }
