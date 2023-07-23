@@ -14,6 +14,7 @@ const props = withDefaults(
     errorMsg?: string;
     disabled?: boolean;
     placeholder?: string;
+    noButton?: boolean;
   }>(),
   {
     modelValue: undefined,
@@ -47,13 +48,15 @@ const styles = computed(() => ({
       :placeholder="placeholder"
       v-bind="$attrs"
     />
-    <ButtonLabel
-      v-if="!required && !disabled"
-      minus
-      :class="$style.minus_btn"
-      @click="$emit('input-removed')"
-    />
-    <ButtonLabel v-else :class="$style.hide_minus_btn" />
+    <template v-if="!noButton">
+      <ButtonLabel
+        v-if="!required && !disabled"
+        minus
+        :class="$style.minus_btn"
+        @click="$emit('input-removed')"
+      />
+      <ButtonLabel v-else :class="$style.hide_minus_btn" />
+    </template>
   </div>
   <p v-if="error" :class="$style.error_msg">
     {{ errorMsg || "Invalid Input" }}
