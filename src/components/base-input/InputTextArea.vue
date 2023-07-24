@@ -70,6 +70,7 @@ const styles = computed(() => ({
 .container {
   display: flex;
   width: 100%;
+  min-width: fit-content;
 
   &:hover .minus_btn {
     visibility: visible;
