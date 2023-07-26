@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <RouterView :class="$style.overall_container" />
+  <div :class="$style.overall_container">
+    <RouterView />
+  </div>
 </template>
 
 <style module lang="scss">
