@@ -3,9 +3,13 @@
 </script>
 
 <template>
-  <RouterView />
+  <RouterView :class="$style.overall_container" />
 </template>
 
 <style module lang="scss">
-// styles here...
+@use "@/scss/colors";
+
+.overall_container {
+  color: colors.use("text");
+}
 </style>
