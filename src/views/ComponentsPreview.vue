@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
@@ -20,6 +21,8 @@ const middleName = ref("Naru");
 const numbr = ref(10);
 const password = ref("Narudesigns!");
 const textarea = ref("Testing notes...");
+
+const showBackdrop = ref(false);
 
 const logDetails = () =>
   alert("input filed will be removed when this button is clicked");
@@ -111,6 +114,12 @@ const logDetails = () =>
 
     <FieldLabel label="Text Area" required />
     <InputTextArea v-model="textarea" required />
+  </div>
+
+  <h2 :class="$style.header">Backdrop, Modal, Info, Popups</h2>
+  <div :class="$style.content">
+    <BaseButton @click="showBackdrop = true"> Show Backdrop</BaseButton>
+    <BaseBackdrop :visible="showBackdrop" @click.self="showBackdrop = false" />
   </div>
 </template>
 
