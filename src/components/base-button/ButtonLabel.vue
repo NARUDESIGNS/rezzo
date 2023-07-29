@@ -66,8 +66,25 @@ const size = computed(() => `${props.size}px`);
     margin-left: 7px;
     font-weight: bold;
   }
-  &:hover .label {
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover .label,
+  &:focus .label {
     text-decoration: underline;
+  }
+
+  &:focus .icon_plus {
+    box-shadow: inset 0 0 0 3px colors.use("light-blue");
+    border-radius: 50%;
+    border: none;
+  }
+  &:focus .icon_minus {
+    box-shadow: inset 0 0 0 3px colors.use("light-red");
+    border-radius: 50%;
+    border: none;
   }
 }
 .minus_icon_label {

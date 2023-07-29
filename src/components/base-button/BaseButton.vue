@@ -34,7 +34,7 @@ const style = computed(() => {
   };
 });
 
-const width = computed(() => (props.width ? `${props.width}px` : "200px"));
+const width = computed(() => (props.width ? `${props.width}px` : "250px"));
 </script>
 
 <template>
