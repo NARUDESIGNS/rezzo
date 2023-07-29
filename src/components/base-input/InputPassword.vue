@@ -33,6 +33,7 @@ const hidePassword = () => (type.value = "password");
         )
       "
       v-bind="$attrs"
+      :class="$style.input"
     />
     <EyeClose
       v-if="type === 'password'"
@@ -54,10 +55,14 @@ const hidePassword = () => (type.value = "password");
 
   .icon {
     position: absolute;
-    right: 70px;
+    right: 17px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+  }
+
+  .input {
+    padding-right: 50px;
   }
 }
 </style>
