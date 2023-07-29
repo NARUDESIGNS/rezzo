@@ -14,7 +14,7 @@ const props = withDefaults(
     errorMsg?: string;
     disabled?: boolean;
     placeholder?: string;
-    noButton?: boolean;
+    showButton?: boolean;
   }>(),
   {
     modelValue: undefined,
@@ -34,7 +34,7 @@ const styles = computed(() => ({
 </script>
 
 <template>
-  <div :class="[$style.container, $attrs.class]">
+  <div :class="[$style.container]">
     <input
       :value="modelValue"
       @input="
@@ -43,12 +43,12 @@ const styles = computed(() => ({
           ($event.target as HTMLInputElement).value.trim()
         )
       "
-      :class="[$style.input, styles]"
+      :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
       v-bind="$attrs"
     />
-    <template v-if="!noButton">
+    <template v-if="showButton">
       <ButtonLabel
         v-if="!required && !disabled"
         minus
@@ -105,10 +105,9 @@ const styles = computed(() => ({
   padding: 15px 20px;
   border-radius: 8px;
   border: 1px solid colors.use("border-light");
+  min-width: 250px;
   width: 100%;
   font-size: 1.1rem;
-  width: 100% !important;
-  min-width: 250px;
 
   &:focus {
     outline: none;
@@ -128,5 +127,11 @@ const styles = computed(() => ({
 .error_msg {
   color: colors.use("danger");
   margin-top: 5px;
+}
+
+@media screen and (max-width: 400px) {
+  .input {
+    padding: 15px;
+  }
 }
 </style>

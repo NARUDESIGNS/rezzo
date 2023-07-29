@@ -14,6 +14,7 @@ const props = withDefaults(
     errorMsg?: string;
     disabled?: boolean;
     placeholder?: string;
+    showButton?: boolean;
   }>(),
   {
     modelValue: undefined,
@@ -33,7 +34,7 @@ const styles = computed(() => ({
 </script>
 
 <template>
-  <div :class="[$style.container, $attrs.class]">
+  <div :class="[$style.container]">
     <textarea
       :value="modelValue"
       @input="
@@ -42,18 +43,20 @@ const styles = computed(() => ({
           ($event.target as HTMLInputElement).value.trim()
         )
       "
-      :class="[$style.input, styles]"
+      :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
       v-bind="$attrs"
     />
-    <ButtonLabel
-      v-if="!required && !disabled"
-      minus
-      :class="$style.minus_btn"
-      @click="$emit('input-removed')"
-    />
-    <ButtonLabel v-else :class="$style.hide_minus_btn" />
+    <template v-if="showButton">
+      <ButtonLabel
+        v-if="!required && !disabled"
+        minus
+        :class="$style.minus_btn"
+        @click="$emit('input-removed')"
+      />
+      <ButtonLabel v-else :class="$style.hide_minus_btn" />
+    </template>
   </div>
   <p v-if="error" :class="$style.error_msg">
     {{ errorMsg || "Invalid Input" }}
