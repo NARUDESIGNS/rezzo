@@ -28,9 +28,8 @@ const style = computed(() => ({
 @use "@/scss/colors";
 
 @mixin border-colors($color: "primary") {
-  border-top-color: colors.use($color);
-  border-right-color: colors.use($color);
-  border-left-color: colors.use($color);
+  border-color: colors.use($color);
+  border-bottom-color: transparent;
 }
 
 .loader {
