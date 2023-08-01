@@ -1,14 +1,36 @@
 <script setup lang="ts">
 import DatePicker from "@vuepic/vue-datepicker";
-import { ref } from "vue";
 import InputText from "./InputText.vue";
 
-const date = ref(new Date());
+defineProps<{
+  modelValue?: Date;
+  disabled?: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", modelValue: string): void;
+}>();
+
+// TODO: v-model not working... Figure it out!
+const handleEmit = () => {
+  emit("update:modelValue", "");
+};
 </script>
 
 <template>
-  <DatePicker v-model="date" :enable-time-picker="false" format="dd/MM/yyyy">
+  <DatePicker
+    :model-value="modelValue"
+    :enable-time-picker="false"
+    format="dd/MM/yyyy"
+    :disabled="disabled"
+    :month-change-on-scroll="false"
+    text-input
+    auto-apply
+    :clearable="false"
+    @update:model-value="handleEmit"
+  >
     <template #dp-input="{ value, onInput, onEnter, onTab, onBlur }">
+      {{ value }}
       <div :class="$style.container">
         <InputText
           autocomplete="off"
