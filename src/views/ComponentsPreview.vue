@@ -4,11 +4,13 @@ import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
+import InputDate from "@/components/base-input/InputDate.vue";
 import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
+import BaseSearch from "@/components/base-search/BaseSearch.vue";
 import { ref } from "vue";
 
 const checkbox = ref(true);
@@ -21,6 +23,8 @@ const middleName = ref("Naru");
 const numbr = ref(10);
 const password = ref("Narudesigns!");
 const textarea = ref("Testing notes...");
+const date = new Date(2022, 5, 14);
+const searchQuery = ref();
 
 const showBackdrop = ref(false);
 
@@ -73,6 +77,8 @@ const logDetails = () =>
 
   <h2 :class="$style.header">Input Fields</h2>
   <div :class="[$style.content, $style.input_fields]">
+    <BaseSearch v-model="searchQuery" placeholder="search..." />
+
     <FieldLabel label="First Name" required />
     <InputText v-model="firstName" required />
 
@@ -113,10 +119,18 @@ const logDetails = () =>
     />
 
     <FieldLabel label="Text Area" required />
-    <InputTextArea v-model="textarea" required />
+    <InputTextArea
+      v-model="textarea"
+      required
+      @input-removed="() => logDetails()"
+    />
+
+    <FieldLabel label="Date" required />
+    <!-- {{ date }} -->
+    <InputDate v-model="date" />
   </div>
 
-  <h2 :class="$style.header">Backdrop, Modal, Info, Popups</h2>
+  <h2 :class="$style.header">Actions</h2>
   <div :class="$style.content">
     <BaseButton @click="showBackdrop = true"> Show Backdrop</BaseButton>
     <BaseBackdrop :visible="showBackdrop" @click.self="showBackdrop = false" />
@@ -146,5 +160,12 @@ const logDetails = () =>
   align-items: flex-start;
   flex-direction: column;
   gap: 0;
+}
+
+@media screen and (max-width: 400px) {
+  .content {
+    // justify-content: center;
+    padding: 30px 20px;
+  }
 }
 </style>
