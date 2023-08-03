@@ -23,7 +23,7 @@ const middleName = ref("Naru");
 const numbr = ref(10);
 const password = ref("Narudesigns!");
 const textarea = ref("Testing notes...");
-const date = new Date(2022, 5, 14);
+const date = ref(new Date());
 const searchQuery = ref();
 
 const showBackdrop = ref(false);
@@ -126,7 +126,6 @@ const logDetails = () =>
     />
 
     <FieldLabel label="Date" required />
-    <!-- {{ date }} -->
     <InputDate v-model="date" />
   </div>
 
