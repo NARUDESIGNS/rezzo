@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import EyeClose from "@/assets/EyeClose.vue";
-import EyeOpen from "@/assets/EyeOpen.vue";
+import EyeCloseIcon from "@/assets/EyeCloseIcon.vue";
+import EyeOpenIcon from "@/assets/EyeOpenIcon.vue";
 import { ref } from "vue";
 import InputText from "./InputText.vue";
 
@@ -35,12 +35,12 @@ const hidePassword = () => (type.value = "password");
       v-bind="$attrs"
       :class="$style.input"
     />
-    <EyeClose
+    <EyeCloseIcon
       v-if="type === 'password'"
       @click="showPassword"
       :class="$style.icon"
     />
-    <EyeOpen
+    <EyeOpenIcon
       v-if="type === 'text'"
       @click="hidePassword"
       :class="$style.icon"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MinusCircle from "@/assets/MinusCircle.vue";
-import PlusCircle from "@/assets/PlusCircle.vue";
+import MinusCircleIcon from "@/assets/MinusCircleIcon.vue";
+import PlusCircleIcon from "@/assets/PlusCircleIcon.vue";
 import { computed } from "vue";
 
 const props = withDefaults(
@@ -28,8 +28,8 @@ const size = computed(() => `${props.size}px`);
     ]"
     :disabled="disabled"
   >
-    <MinusCircle :class="$style.icon_minus" v-if="minus" />
-    <PlusCircle :class="$style.icon_plus" v-else />
+    <MinusCircleIcon :class="$style.icon_minus" v-if="minus" />
+    <PlusCircleIcon :class="$style.icon_plus" v-else />
 
     <p :class="$style.label">
       <slot>
