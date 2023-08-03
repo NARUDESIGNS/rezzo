@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CalendarIcon from "@/assets/CalendarIcon.vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import InputText from "./InputText.vue";
 
@@ -8,12 +9,12 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", modelValue: string): void;
+  (e: "update:modelValue", modelValue: Date): void;
 }>();
 
-// TODO: v-model not working... Figure it out!
-const handleEmit = () => {
-  emit("update:modelValue", "");
+const handleEmit = (value: Date) => {
+  emit("update:modelValue", value);
+  console.log(value);
 };
 </script>
 
@@ -27,10 +28,9 @@ const handleEmit = () => {
     text-input
     auto-apply
     :clearable="false"
-    @update:model-value="handleEmit"
+    @update:model-value="(value) => handleEmit(value)"
   >
     <template #dp-input="{ value, onInput, onEnter, onTab, onBlur }">
-      {{ value }}
       <div :class="$style.container">
         <InputText
           autocomplete="off"
@@ -45,11 +45,21 @@ const handleEmit = () => {
           @blur="onBlur"
           @keyup.esc="DatePicker?.closeMenu()"
         />
+        <CalendarIcon :class="$style.calendar_icon" />
       </div>
     </template>
   </DatePicker>
 </template>
 
 <style module lang="scss">
-// styles here...
+.container {
+  position: relative;
+
+  .calendar_icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+  }
+}
 </style>
