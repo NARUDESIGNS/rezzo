@@ -60,6 +60,7 @@ const size = computed(() => `${props.size}px`);
     }
   }
   .label {
+    position: relative;
     line-height: 1.5;
     font-size: 1rem;
     text-transform: capitalize;
@@ -69,11 +70,6 @@ const size = computed(() => `${props.size}px`);
 
   &:focus {
     outline: none;
-  }
-
-  &:hover .label,
-  &:focus .label {
-    text-decoration: underline;
   }
 
   &:focus .icon_plus {
@@ -87,8 +83,33 @@ const size = computed(() => `${props.size}px`);
     border: none;
   }
 }
+
+.label::after {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: colors.use("primary");
+  transform: scaleX(0);
+  transform-origin: left;
+  transition-duration: 0.2s;
+  opacity: 0;
+}
+
+.btn:focus .label::after,
+.btn:hover .label::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
 .minus_icon_label {
   color: colors.use("danger");
+}
+.minus_icon_label .label::after {
+  background-color: colors.use("danger") !important;
 }
 
 .plus_icon_label {
