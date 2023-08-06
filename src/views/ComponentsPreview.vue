@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseAction from "@/components/base-action/BaseAction.vue";
 import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
@@ -28,8 +29,8 @@ const searchQuery = ref();
 
 const showBackdrop = ref(false);
 
-const logDetails = () =>
-  alert("input filed will be removed when this button is clicked");
+const logDetails = (info?: string) =>
+  alert(info ?? "input filed will be removed when this button is clicked");
 </script>
 
 <template>
@@ -54,6 +55,20 @@ const logDetails = () =>
     <ButtonLabel minus disabled>Minus Button Label</ButtonLabel>
     <ButtonLabel plus :size="40" />
     <ButtonLabel minus :size="40" />
+
+    <BaseAction
+      href="/"
+      :action="() => logDetails('Test Action')"
+      label="Go Home"
+    />
+
+    <BaseAction
+      :action="() => logDetails('Test Danger Action')"
+      label="Danger Action"
+      danger
+    />
+
+    <BaseAction :action="() => {}" label="Disabled Action" disabled />
   </div>
 
   <h2 :class="$style.header">Loaders</h2>
