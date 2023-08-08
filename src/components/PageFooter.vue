@@ -9,7 +9,11 @@ defineProps<{
 <template>
   <div :class="[$style.footer, { [$style.darkMode]: darkMode }]">
     <p :class="$style.content">MADE WITH 🖤 BY</p>
-    <BaseAction href="https://github.com/narudesigns" :dark-mode="darkMode">
+    <BaseAction
+      :class="{ [$style.dark_mode]: darkMode }"
+      href="https://github.com/narudesigns"
+      :dark-mode="darkMode"
+    >
       @narudesigns
     </BaseAction>
     <p>© {{ new Date().getUTCFullYear() }}</p>
@@ -28,5 +32,14 @@ defineProps<{
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+
+.dark_mode,
+.dark_mode:hover {
+  color: white;
+  font-weight: bold;
+}
+.dark_mode:after {
+  background-color: white;
 }
 </style>
