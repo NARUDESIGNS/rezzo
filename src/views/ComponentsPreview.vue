@@ -12,6 +12,7 @@ import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import BaseSearch from "@/components/base-search/BaseSearch.vue";
+import PageFooter from "@/components/PageFooter.vue";
 import { ref } from "vue";
 
 const checkbox = ref(true);
@@ -149,6 +150,8 @@ const logDetails = (info?: string) =>
     <BaseButton @click="showBackdrop = true"> Show Backdrop</BaseButton>
     <BaseBackdrop :visible="showBackdrop" @click.self="showBackdrop = false" />
   </div>
+
+  <PageFooter />
 </template>
 
 <style module lang="scss">
