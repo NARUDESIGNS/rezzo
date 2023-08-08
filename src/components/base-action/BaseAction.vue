@@ -3,7 +3,7 @@ import { computed, useCssModule } from "vue";
 
 const props = defineProps<{
   label?: string;
-  action: () => void;
+  action?: () => void;
   href?: string;
   disabled?: boolean;
   danger?: boolean;
@@ -33,10 +33,14 @@ const styles = computed(() => ({
   cursor: pointer;
 }
 
+.action:hover {
+  color: colors.use("primary");
+}
+
 .action::after {
   display: block;
   content: "";
-  width: 100%;
+  width: inherit;
   height: 3px;
   background-color: colors.use("primary");
   transform: scaleX(0);
