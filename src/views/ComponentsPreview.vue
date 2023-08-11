@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageFooter from "@/components/PageFooter.vue";
 import BaseAction from "@/components/base-action/BaseAction.vue";
 import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 import BaseButton from "@/components/base-button/BaseButton.vue";
@@ -6,13 +7,13 @@ import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
+import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import BaseSearch from "@/components/base-search/BaseSearch.vue";
-import PageFooter from "@/components/PageFooter.vue";
 import { ref } from "vue";
 
 const checkbox = ref(true);
@@ -143,6 +144,9 @@ const logDetails = (info?: string) =>
 
     <FieldLabel label="Date" required />
     <InputDate v-model="date" />
+
+    <FieldLabel label="Skills" required />
+    <InputMultiText placeholder="add items clicking on the tab key" />
   </div>
 
   <h2 :class="$style.header">Actions</h2>
