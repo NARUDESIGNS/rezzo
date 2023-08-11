@@ -8,7 +8,6 @@ function createFile(svgFile) {
       console.error("Error creating file:", err);
       return;
     }
-    console.log(data);
   });
 
   // Specify the directory path and file name
@@ -40,7 +39,6 @@ function createFile(svgFile) {
       console.error("Error creating file:", err);
       return;
     }
-
     console.log("File created successfully!");
   });
 }
