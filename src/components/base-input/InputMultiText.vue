@@ -45,7 +45,7 @@ const emitData = () => emit("items-added", items.value);
     </template>
     <input
       @change="emitData"
-      @keydown.tab.prevent="(e) => items.push(capitalize((e.target as HTMLInputElement).value))"
+      @keydown.tab.prevent="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = ''}"
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
