@@ -13,5 +13,8 @@
 
 .overall_container {
   color: colors.use("text");
+  min-height: 98vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>

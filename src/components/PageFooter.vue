@@ -21,6 +21,9 @@ defineProps<{
 </template>
 
 <style module lang="scss">
+.footer {
+  margin-top: auto; // push footer to bottom of page
+}
 .content {
   width: fit-content;
 }
