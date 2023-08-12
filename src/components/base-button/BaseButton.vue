@@ -61,7 +61,7 @@ const width = computed(() => (props.width ? `${props.width}px` : "250px"));
 .btn {
   width: v-bind(width);
   padding: 0 10px;
-  height: 45px;
+  height: 50px;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -71,6 +71,10 @@ const width = computed(() => (props.width ? `${props.width}px` : "250px"));
 
   &:focus {
     @include focus-outline();
+  }
+
+  &:hover {
+    background-color: darken($color: colors.use("primary"), $amount: 5);
   }
 }
 

@@ -30,6 +30,7 @@ const styles = computed(() => ({
 .action {
   color: colors.use("primary");
   text-decoration: none;
+  display: inline-block;
   cursor: pointer;
 }
 
@@ -42,6 +43,7 @@ const styles = computed(() => ({
   content: "";
   width: inherit;
   height: 3px;
+  margin-top: -2px;
   background-color: colors.use("primary");
   transform: scaleX(0);
   transform-origin: left;
