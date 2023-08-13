@@ -83,7 +83,8 @@ const navItems = reactive([
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 70%;
+    width: 60%;
+    // margin-left: auto; // force items to the right
     list-style-type: none;
 
     .item {
