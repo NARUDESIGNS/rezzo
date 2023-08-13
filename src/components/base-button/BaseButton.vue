@@ -17,7 +17,7 @@ const props = withDefaults(
     /** Button Type */
     danger?: boolean;
     /** Button Type */
-    normal?: boolean;
+    outline?: boolean;
   }>(),
   {
     disabled: false,
@@ -29,7 +29,7 @@ const style = computed(() => {
   return {
     [$style.primary]: props.primary,
     [$style.danger]: props.danger,
-    [$style.normal]: props.normal,
+    [$style.outline]: props.outline,
     [$style.disabled]: props.disabled,
   };
 });
@@ -40,7 +40,7 @@ const width = computed(() => (props.width ? `${props.width}px` : "250px"));
 <template>
   <button :class="[$style.btn, style]" :disabled="disabled">
     <template v-if="isLoading">
-      <BaseLoader :light="!normal" />
+      <BaseLoader :light="!outline" />
     </template>
     <template v-else>
       <slot>
@@ -74,31 +74,35 @@ const width = computed(() => (props.width ? `${props.width}px` : "250px"));
   }
 
   &:hover {
-    background-color: darken($color: colors.use("primary"), $amount: 5);
+    background-color: darken($color: colors.use("primary"), $amount: 7);
+    transition: 0.2s ease;
   }
 }
 
-.primary {
-  background-color: colors.use("primary");
-
-  &:focus {
-    @include focus-outline();
-  }
-}
 .danger {
   background-color: colors.use("danger");
 
   &:focus {
     @include focus-outline("light-red");
   }
+  &:hover {
+    background-color: darken($color: colors.use("danger"), $amount: 7);
+    transition: 0.2s ease;
+  }
 }
-.normal {
+.outline {
   background-color: transparent;
   color: colors.use("primary");
   border: 1px solid colors.use("border");
 
   &:focus {
     @include focus-outline();
+  }
+  &:hover {
+    background-color: transparent;
+    border-color: darken($color: colors.use("primary"), $amount: 10);
+    color: darken($color: colors.use("primary"), $amount: 10);
+    transition: 0.2s ease;
   }
 }
 

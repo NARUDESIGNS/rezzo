@@ -7,12 +7,14 @@ const props = defineProps<{
   href?: string;
   disabled?: boolean;
   danger?: boolean;
+  warning?: boolean;
 }>();
 
 const $style = useCssModule();
 const styles = computed(() => ({
   [$style.disabled]: props.disabled,
   [$style.danger]: props.danger,
+  [$style.warning]: props.warning,
 }));
 </script>
 
@@ -61,6 +63,17 @@ const styles = computed(() => ({
 
   &::after {
     background-color: colors.use("danger") !important;
+  }
+}
+
+.warning {
+  color: darken($color: colors.use("warning"), $amount: 20) !important;
+
+  &::after {
+    background-color: darken(
+      $color: colors.use("warning"),
+      $amount: 20
+    ) !important;
   }
 }
 
