@@ -47,7 +47,7 @@ import BaseButton from "@/components/base-button/BaseButton.vue";
     justify-content: center;
     gap: 30px;
     padding: 50px;
-    margin-bottom: 5%;
+    margin-bottom: 20px;
 
     .illustration {
       width: 70%;
