@@ -30,7 +30,9 @@ const styles = computed(() => ({
 const items = ref<string[]>(["Vue", "React", "Nodejs"]);
 const removeItem = (index: number) => items.value.splice(index, 1);
 
-const emitData = () => emit("items-added", items.value);
+const emitData = () => {
+  emit("items-added", items.value);
+};
 </script>
 
 <template>
@@ -44,7 +46,7 @@ const emitData = () => emit("items-added", items.value);
       </div>
     </template>
     <input
-      @change="emitData"
+      @change="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = '', emitData()}"
       @keydown.tab.prevent="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = ''}"
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
@@ -137,6 +139,7 @@ const emitData = () => emit("items-added", items.value);
   font-size: 1.1rem;
 
   &:focus {
+    border: 1px solid colors.use("border");
     outline: none;
   }
 }
