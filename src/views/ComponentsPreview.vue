@@ -39,8 +39,11 @@ const infoProps = computed(() => ({
 
 const showBackdrop = ref();
 
-const logDetails = (info?: string) =>
+const logDetails = (info?: string) => {
   alert(info ?? "input filed will be removed when this button is clicked");
+};
+
+const logItemData = (itemData: string[]) => console.log(itemData);
 </script>
 
 <template>
@@ -184,7 +187,10 @@ const logDetails = (info?: string) =>
       <InputDate v-model="date" />
 
       <FieldLabel label="Skills" required />
-      <InputMultiText placeholder="add items clicking on the tab key" />
+      <InputMultiText
+        placeholder="add items clicking on the tab key"
+        @items-added="(itemData) => logItemData(itemData)"
+      />
     </div>
 
     <h2 :class="$style.header">Actions</h2>
