@@ -9,12 +9,5 @@
 </template>
 
 <style module lang="scss">
-@use "@/scss/colors";
-
-.overall_container {
-  color: colors.use("text");
-  min-height: 95vh;
-  display: flex;
-  flex-direction: column;
-}
+// app styles here...
 </style>
