@@ -70,7 +70,7 @@ const navItems = reactive([
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 30px 0;
 
   .nav {
     position: relative;

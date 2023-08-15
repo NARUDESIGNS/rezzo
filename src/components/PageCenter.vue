@@ -19,6 +19,6 @@ import PageNav from "@/components/PageNav.vue";
   min-height: 95vh;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 0 20px;
 }
 </style>
