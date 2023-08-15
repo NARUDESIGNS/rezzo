@@ -2,36 +2,35 @@
 import BlueLogo from "@/assets/BlueLogo.vue";
 import WhiteLogo from "@/assets/WhiteLogo.vue";
 import { reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 defineProps<{
   darkMode?: boolean;
 }>();
 
-const router = useRouter();
 const route = useRoute();
 const activeTab = ref(route.name);
 
 const navItems = reactive([
   {
     caption: "HOME",
-    onClick: () => router.push({ name: "home" }),
+    route: { name: "home" },
   },
   {
-    caption: "MY RESUME",
-    onClick: () => router.push({ name: "create-resume" }),
+    caption: "CREATE RESUME",
+    route: { name: "create-resume" },
   },
   {
-    caption: "BLOG",
-    onClick: () => router.push({ name: "blogs" }),
+    caption: "BLOGS",
+    route: { name: "blogs" },
   },
   {
     caption: "RESOURCES",
-    onClick: () => router.push({ name: "resources" }),
+    route: { name: "resources" },
   },
   {
     caption: "ABOUT",
-    onClick: () => router.push({ name: "about" }),
+    route: { name: "about" },
   },
 ]);
 </script>
@@ -43,10 +42,10 @@ const navItems = reactive([
 
     <nav :class="$style.nav">
       <ul :class="$style.nav_items">
-        <li
+        <RouterLink
+          :to="item.route"
           v-for="(item, index) in navItems"
           :key="index"
-          @click="item.onClick"
           :class="[
             $style.item,
             {
@@ -54,8 +53,10 @@ const navItems = reactive([
             },
           ]"
         >
-          {{ item.caption }}
-        </li>
+          <li>
+            {{ item.caption }}
+          </li>
+        </RouterLink>
       </ul>
     </nav>
   </div>
@@ -84,7 +85,7 @@ const navItems = reactive([
     align-items: center;
     justify-content: space-around;
     width: 60%;
-    // margin-left: auto; // force items to the right
+    // margin-left: auto; // force nav items to the right
     list-style-type: none;
 
     .item {
@@ -97,10 +98,9 @@ const navItems = reactive([
         cursor: pointer;
         transition: 0.2s ease;
       }
-    }
-
-    .active {
-      color: colors.use("primary");
+      &:global(.router-link-active) {
+        color: colors.use("primary");
+      }
     }
   }
 }
