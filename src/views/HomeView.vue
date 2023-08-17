@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FemalesIllustration from "@/assets/illustrations/FemalesIllustration.vue";
+import HomepageIllustration from "@/assets/illustrations/HomepageIllustration.vue";
 import BaseAction from "@/components/base-action/BaseAction.vue";
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import PageCenter from "@/components/PageCenter.vue";
@@ -9,7 +9,7 @@ import PageCenter from "@/components/PageCenter.vue";
   <PageCenter>
     <div :class="$style.home_view">
       <div :class="$style.main">
-        <FemalesIllustration :class="$style.illustration" />
+        <HomepageIllustration :class="$style.illustration" />
         <div :class="$style.description">
           <h1 :class="$style.header">
             CRAFT THE PERFECT <br />
@@ -41,16 +41,18 @@ import PageCenter from "@/components/PageCenter.vue";
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
     padding: 50px;
     margin-bottom: 20px;
 
     .illustration {
-      width: 70%;
+      // width: 70%;
+      width: 80%;
+      max-width: 500px;
     }
 
     .description {
-      width: 50%;
+      width: 40%;
 
       .header {
         font-weight: 900;
