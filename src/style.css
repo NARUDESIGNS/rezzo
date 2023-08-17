@@ -37,10 +37,6 @@ a:hover {
   margin: 0 auto;
 }
 
-.router-link-active {
-  color: red;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
