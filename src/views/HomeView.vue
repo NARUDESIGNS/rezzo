@@ -73,7 +73,16 @@ import PageCenter from "@/components/PageCenter.vue";
   .btn {
     display: block;
     margin: 0 auto;
+    margin-bottom: 30px;
     width: 350px;
+  }
+}
+
+@media only screen and (max-width: 1027px) {
+  .home_view {
+    .illustration {
+      width: 50% !important;
+    }
   }
 }
 </style>
