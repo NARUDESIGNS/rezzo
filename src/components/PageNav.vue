@@ -66,14 +66,16 @@ const navItems = reactive([
 @use "@/scss/colors";
 
 .wrap {
-  // border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid colors.use("light-gray");
   border-radius: 10px;
-  margin-top: 20px;
+  margin: 20px 0;
   padding: 30px 20px;
+  position: sticky;
+  top: 20px;
+  background-color: colors.use("background-light");
 
   .nav {
     position: relative;

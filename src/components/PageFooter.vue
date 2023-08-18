@@ -23,6 +23,7 @@ defineProps<{
 <style module lang="scss">
 .footer {
   margin-top: auto; // push footer to bottom of page
+  margin-bottom: 40px;
 }
 .content {
   width: fit-content;
