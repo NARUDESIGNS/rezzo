@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Plus Icon",
+  name: "Plus Circle Icon",
 };
 </script>
 

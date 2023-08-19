@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Minus Circle Icon",
+  name: "Menu Icon",
 };
 </script>
 
@@ -12,12 +12,13 @@ export default {
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    stroke-width="1.5"
+    stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="feather feather-minus-circle"
+    class="feather feather-menu"
   >
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="8" y1="12" x2="16" y2="12"></line>
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
   </svg>
 </template>
