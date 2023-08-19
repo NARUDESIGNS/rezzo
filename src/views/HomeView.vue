@@ -12,10 +12,10 @@ import PageCenter from "@/components/PageCenter.vue";
         <HomepageIllustration :class="$style.illustration" />
         <div :class="$style.description">
           <h1 :class="$style.header">
-            CRAFT THE PERFECT <br />
-            <span :class="$style.highlight">RESUME</span> TO LAND <br />
-            YOUR DREAM JOB
+            CRAFT THE PERFECT
+            <span :class="$style.highlight">RESUME</span> TO LAND YOUR DREAM JOB
           </h1>
+          <HomepageIllustration :class="$style.mobile_illustration" />
           <p :class="$style.message">
             With the help of AI and the trusted
             <BaseAction href="https://careers.google.com/how-we-hire/"
@@ -46,9 +46,12 @@ import PageCenter from "@/components/PageCenter.vue";
     margin-bottom: 20px;
 
     .illustration {
-      // width: 70%;
       width: 80%;
       max-width: 500px;
+    }
+
+    .mobile_illustration {
+      display: none;
     }
 
     .description {
@@ -73,15 +76,49 @@ import PageCenter from "@/components/PageCenter.vue";
   .btn {
     display: block;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     width: 350px;
   }
 }
 
-@media only screen and (max-width: 1027px) {
+@media screen and (max-width: 1027px) {
   .home_view {
     .illustration {
       width: 50% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 949px) {
+  .home_view {
+    .illustration {
+      display: none;
+    }
+
+    .main {
+      padding: 10px;
+
+      .header,
+      .description {
+        width: 100%;
+      }
+      .header {
+        text-align: center;
+      }
+
+      .mobile_illustration {
+        width: 80%;
+        display: block;
+        margin: 40px auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home_view {
+    .btn {
+      width: 100%;
     }
   }
 }
