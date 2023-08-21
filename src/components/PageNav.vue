@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import BlueLogo from "@/assets/BlueLogo.vue";
+import MenuIcon from "@/assets/MenuIcon.vue";
 import WhiteLogo from "@/assets/WhiteLogo.vue";
+import BaseModal from "@/components/base-modal/BaseModal.vue";
 import { reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 
@@ -33,12 +35,20 @@ const navItems = reactive([
     route: { name: "about" },
   },
 ]);
+
+const showModal = ref(false);
 </script>
 
 <template>
   <div :class="$style.wrap">
-    <BlueLogo v-if="!darkMode" :class="$style.logo" />
-    <WhiteLogo v-else :class="$style.logo" />
+    <RouterLink to="/">
+      <BlueLogo v-if="!darkMode" :class="$style.logo" />
+      <WhiteLogo v-else :class="$style.logo" />
+    </RouterLink>
+
+    <button :class="$style.menu_btn" @click="showModal = true">
+      <MenuIcon />
+    </button>
 
     <nav :class="$style.nav">
       <ul :class="$style.nav_items">
@@ -60,6 +70,8 @@ const navItems = reactive([
       </ul>
     </nav>
   </div>
+  <BaseModal :visible="showModal" enable-close @close="showModal = false">
+  </BaseModal>
 </template>
 
 <style module lang="scss">
@@ -76,6 +88,10 @@ const navItems = reactive([
   position: sticky;
   top: 20px;
   background-color: colors.use("background-light");
+
+  .menu_btn {
+    display: none;
+  }
 
   .nav {
     position: relative;
@@ -103,9 +119,30 @@ const navItems = reactive([
         cursor: pointer;
         transition: 0.2s ease;
       }
+      &:focus {
+        outline: none;
+        color: colors.use("primary");
+      }
       &:global(.router-link-active) {
         color: colors.use("primary");
       }
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .wrap {
+    padding: 15px;
+    .nav {
+      display: none;
+    }
+
+    .menu_btn {
+      display: block;
+      border: none;
+      padding: 7px;
+      background: none;
+      cursor: pointer;
     }
   }
 }
