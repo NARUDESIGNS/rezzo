@@ -88,6 +88,7 @@ const showModal = ref(false);
   position: sticky;
   top: 20px;
   background-color: colors.use("background-light");
+  z-index: 10;
 
   .menu_btn {
     display: none;
