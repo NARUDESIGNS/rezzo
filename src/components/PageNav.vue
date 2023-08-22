@@ -84,7 +84,7 @@ const showModal = ref(false);
   border: 1px solid colors.use("light-gray");
   border-radius: 10px;
   margin: 20px 0;
-  padding: 30px 20px;
+  padding: 20px;
   position: sticky;
   top: 20px;
   background-color: colors.use("background-light");
