@@ -52,6 +52,7 @@ defineEmits<{
 @use "@/scss/colors";
 
 .modal_wrap {
+  z-index: 10;
   .modal {
     background-color: colors.use("background-light");
     width: 100%;

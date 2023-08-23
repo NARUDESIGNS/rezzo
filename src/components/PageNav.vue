@@ -83,12 +83,12 @@ const showModal = ref(false);
   justify-content: space-between;
   border: 1px solid colors.use("light-gray");
   border-radius: 10px;
-  margin: 20px 0;
+  margin: 30px 0;
   padding: 20px;
   position: sticky;
   top: 20px;
   background-color: colors.use("background-light");
-  z-index: 10;
+  z-index: 1;
 
   .menu_btn {
     display: none;
@@ -133,7 +133,7 @@ const showModal = ref(false);
 
 @media screen and (max-width: 850px) {
   .wrap {
-    padding: 15px;
+    padding: 10px 20px;
     .nav {
       display: none;
     }
