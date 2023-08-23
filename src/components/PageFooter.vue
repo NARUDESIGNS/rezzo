@@ -13,6 +13,7 @@ defineProps<{
       :class="{ [$style.dark_mode]: darkMode }"
       href="https://github.com/narudesigns"
       :dark-mode="darkMode"
+      new-page
     >
       @narudesigns
     </BaseAction>

@@ -8,6 +8,7 @@ const props = defineProps<{
   disabled?: boolean;
   danger?: boolean;
   warning?: boolean;
+  newPage?: boolean;
 }>();
 
 const $style = useCssModule();
@@ -19,7 +20,12 @@ const styles = computed(() => ({
 </script>
 
 <template>
-  <a :href="href" @click="action" :class="[$style.action, styles]">
+  <a
+    :href="href"
+    :target="newPage ? '_blank' : ''"
+    @click="action"
+    :class="[$style.action, styles]"
+  >
     <slot>
       {{ label }}
     </slot>
