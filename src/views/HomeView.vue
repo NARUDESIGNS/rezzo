@@ -18,7 +18,8 @@ import PageCenter from "@/components/PageCenter.vue";
           <HomepageIllustration :class="$style.mobile_illustration" />
           <p :class="$style.message">
             With the help of AI and the trusted
-            <BaseAction href="https://careers.google.com/how-we-hire/"
+            <BaseAction
+              href="https://careers.google.com/how-we-hire/#step-your-resume"
               >Google’s XYZ formula</BaseAction
             >
             you can create a resume that stands out.<br /><br />
