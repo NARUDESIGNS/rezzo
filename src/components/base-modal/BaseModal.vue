@@ -127,4 +127,11 @@ defineEmits<{
     }
   }
 }
+
+@media screen and (max-width: 450px) {
+  .modal_wrap .modal {
+    width: unset;
+    left: 20px;
+  }
+}
 </style>
