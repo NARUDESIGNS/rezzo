@@ -21,6 +21,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  background-image: radial-gradient(
+    #1966ff1b 1.2000000000000002px,
+    #ffffff 1.2000000000000002px
+  );
+  background-size: 24px 24px;
 }
 
 a {
