@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import XIcon from "@/assets/XIcon.vue";
+import { ref } from "vue";
 import BaseBackdrop from "../base-backdrop/BaseBackdrop.vue";
 
 withDefaults(
@@ -19,32 +20,42 @@ withDefaults(
   }
 );
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "close"): void;
 }>();
+
+const modalElement = ref<HTMLElement>();
+const slideOut = () => {
+  if (modalElement.value) {
+    console.log("slide out");
+    modalElement.value.classList.add("slide-out");
+    setTimeout(() => {
+      modalElement.value && modalElement.value.classList.remove("slide-out"),
+        emit("close");
+    }, 200);
+  }
+};
 </script>
 
 <template>
   <div v-if="visible" :class="$style.modal_wrap">
     <BaseBackdrop @click="clickAnywhere && $emit('close')" visible />
-    <Transition name="modal">
-      <div :class="$style.modal">
-        <div :class="$style.header">
-          <button
-            v-show="enableClose"
-            :class="$style.close_btn"
-            @click="$emit('close')"
-          >
-            <XIcon :class="$style.close_icon" />
-          </button>
-          <slot name="header" />
-        </div>
-
-        <div :class="$style.main">
-          <slot />
-        </div>
+    <div :class="[$style.modal, 'slide-in']" ref="modalElement">
+      <div :class="$style.header">
+        <button
+          v-show="enableClose"
+          :class="$style.close_btn"
+          @click="slideOut"
+        >
+          <XIcon :class="$style.close_icon" />
+        </button>
+        <slot name="header" />
       </div>
-    </Transition>
+
+      <div :class="$style.main">
+        <slot />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -109,21 +120,6 @@ defineEmits<{
 
     .main {
       padding: 20px;
-    }
-
-    &:global(.tray-enter),
-    &:global(.tray-leave-to) {
-      opacity: 0;
-    }
-
-    &:global(.tray-leave),
-    &:global(.tray-enter-to) {
-      opacity: 1;
-    }
-
-    &:global(.tray-enter-active),
-    &:global(.tray-leave-active) {
-      transition: opacity 5s;
     }
   }
 }
