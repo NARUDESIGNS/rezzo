@@ -59,7 +59,7 @@ a:hover {
 }
 
 .slide-out {
-  animation: slide-in 0.3s ease forwards;
+  animation: slide-out 0.3s ease forwards;
 }
 
 @keyframes slide-out {
