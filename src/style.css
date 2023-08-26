@@ -11,6 +11,7 @@
   line-height: 1.5;
   font-weight: 400;
   font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
 
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -41,6 +42,33 @@ a:hover {
 #app {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+/* Animations */
+.slide-in {
+  animation: slide-in 0.3s ease forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.slide-out {
+  animation: slide-in 0.3s ease forwards;
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 @media (prefers-color-scheme: light) {
