@@ -20,8 +20,10 @@ import PageCenter from "@/components/PageCenter.vue";
             With the help of AI and the trusted
             <BaseAction
               href="https://careers.google.com/how-we-hire/#step-your-resume"
-              >Google’s XYZ formula</BaseAction
+              new-page
             >
+              Google’s XYZ formula
+            </BaseAction>
             you can create a resume that stands out.<br /><br />
             This platform is solely aimed at helping you land your dream job by
             crafting a perfect resume and providing you with interview-ready
