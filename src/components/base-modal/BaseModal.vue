@@ -27,12 +27,11 @@ const emit = defineEmits<{
 const modalElement = ref<HTMLElement>();
 const slideOut = () => {
   if (modalElement.value) {
-    console.log("slide out");
     modalElement.value.classList.add("slide-out");
     setTimeout(() => {
       modalElement.value && modalElement.value.classList.remove("slide-out"),
         emit("close");
-    }, 200);
+    }, 300);
   }
 };
 </script>
