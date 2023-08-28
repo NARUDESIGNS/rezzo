@@ -143,6 +143,7 @@ const showModal = ref(false);
       border: none;
       padding: 7px;
       background: none;
+      color: colors.use("dark-gray");
       cursor: pointer;
     }
   }

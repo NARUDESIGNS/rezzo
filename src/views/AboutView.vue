@@ -136,7 +136,7 @@ const navigate = () =>
       display: flex;
       justify-content: center;
       .image_photo {
-        width: 60%;
+        width: 50%;
         height: auto;
         aspect-ratio: 1;
       }
@@ -144,8 +144,8 @@ const navigate = () =>
       .image_memoji {
         position: absolute;
         border-radius: 50%;
-        left: 20%;
-        width: 15%;
+        left: 26.5%;
+        width: 10%;
         height: auto;
         aspect-ratio: 1;
       }
@@ -165,14 +165,34 @@ const navigate = () =>
 
 @media only screen and (max-width: 500px) {
   .wrap {
-    gap: 40px;
     .btn {
       width: 100%;
       max-width: unset;
     }
 
+    .image_wrap {
+      .image_photo {
+        width: 60%;
+      }
+
+      .image_memoji {
+        left: 20%;
+        width: 13%;
+      }
+    }
+
     .info_wrap {
       padding: 20px 0;
+      gap: 20px;
+
+      .info_header {
+        line-height: 1.2;
+        font-size: 1.6rem;
+      }
+      .info_username {
+        line-height: 1.2;
+        font-size: 1.5rem;
+      }
     }
   }
 }
