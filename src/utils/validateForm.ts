@@ -2,7 +2,7 @@
  * Validates form
  * @param form - form object
  * @param requiredFields - array of required fields
- * @param hasErrorField - boolean
+ * @param hasErrorField - boolean to show if form contains an error field
  * @returns returns a boolean
  */
 
