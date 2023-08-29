@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import PageFooter from "@/components/PageFooter.vue";
 import PageNav from "@/components/PageNav.vue";
+
+defineProps<{
+  hideNav?: boolean;
+}>();
 </script>
 
 <template>
   <div :class="$style.overall_container">
-    <PageNav />
+    <PageNav v-if="!hideNav" />
     <slot />
     <PageFooter />
   </div>
@@ -20,5 +24,7 @@ import PageNav from "@/components/PageNav.vue";
   display: flex;
   flex-direction: column;
   padding: 0 20px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 </style>

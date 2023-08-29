@@ -14,5 +14,10 @@
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;
+  line-height: 1.2;
+
+  @media screen and (max-width: 500px) {
+    font-size: 1.4rem;
+  }
 }
 </style>
