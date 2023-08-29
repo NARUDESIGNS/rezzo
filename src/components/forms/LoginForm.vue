@@ -8,13 +8,13 @@ import BaseButton from "../base-button/BaseButton.vue";
 import FormHeader from "../base-input/FormHeader.vue";
 import InputCheckbox from "../base-input/InputCheckbox.vue";
 
-interface IForm {
+interface LoginForm {
   email: string;
   password: string;
   stayLoggedIn: boolean;
 }
 
-const form: IForm = reactive({
+const form: LoginForm = reactive({
   email: "",
   password: "",
   stayLoggedIn: false,
@@ -22,7 +22,7 @@ const form: IForm = reactive({
 </script>
 
 <template>
-  <form :class="$style.wrap">
+  <form :class="$style.wrap" @submit.prevent>
     <FormHeader>Login</FormHeader>
     <FieldLabel label="Email" required />
     <InputText v-model="form.email" required />
@@ -36,7 +36,7 @@ const form: IForm = reactive({
     </div>
     <BaseAction>Forgot Password</BaseAction>
     <BaseButton :class="$style.btn">Login</BaseButton>
-    <p>
+    <p :class="$style.link">
       Don't have an account?
       <BaseAction>Create Account</BaseAction>
     </p>
@@ -62,7 +62,11 @@ const form: IForm = reactive({
 
   .btn {
     width: 100%;
-    margin: 10px 0 25px 0;
+    margin: 15px 0 25px 0;
+  }
+
+  .link {
+    text-align: center;
   }
 }
 </style>

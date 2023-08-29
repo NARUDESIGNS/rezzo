@@ -2,12 +2,13 @@
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { reactive } from "vue";
+import { validateForm } from "@/utils/validateForm";
+import { computed, reactive, ref } from "vue";
 import BaseAction from "../base-action/BaseAction.vue";
 import BaseButton from "../base-button/BaseButton.vue";
 import FormHeader from "../base-input/FormHeader.vue";
 
-interface IForm {
+interface SignupForm {
   firstName: string;
   lastName: string;
   email: string;
@@ -15,17 +16,25 @@ interface IForm {
   stayLoggedIn: boolean;
 }
 
-const form: IForm = reactive({
+const form: SignupForm = reactive({
   firstName: "",
   lastName: "",
   email: "",
   password: "",
   stayLoggedIn: false,
 });
+
+const confirmPassword = ref("");
+const requiredFields = ["firstName", "lastName", "email", "password"];
+
+const hasErrorField = ref(false);
+const isValidForm = computed(() =>
+  validateForm<SignupForm>(form, requiredFields, hasErrorField.value)
+);
 </script>
 
 <template>
-  <form :class="$style.wrap">
+  <form :class="$style.wrap" @submit.prevent>
     <FormHeader>Create Account</FormHeader>
     <FieldLabel label="First Name" required />
     <InputText v-model="form.firstName" required />
@@ -36,9 +45,13 @@ const form: IForm = reactive({
     <FieldLabel label="Password" required />
     <InputPassword v-model="form.password" required />
     <FieldLabel label="Confirm Password" required />
-    <InputPassword required />
-    <BaseButton :class="$style.btn">Login</BaseButton>
-    <p>
+    <InputPassword
+      v-model="confirmPassword"
+      required
+      @change="hasErrorField = form.password !== confirmPassword"
+    />
+    <BaseButton :class="$style.btn" :disabled="!isValidForm">Login</BaseButton>
+    <p :class="$style.link">
       Already have an account?
       <BaseAction>Login</BaseAction>
     </p>
@@ -53,7 +66,11 @@ const form: IForm = reactive({
 
   .btn {
     width: 100%;
-    margin: 25px 0;
+    margin: 30px 0 25px 0;
+  }
+
+  .link {
+    text-align: center;
   }
 }
 </style>
