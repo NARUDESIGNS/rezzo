@@ -53,7 +53,9 @@ const isValidForm = computed(() =>
     <BaseButton :class="$style.btn" :disabled="!isValidForm">Login</BaseButton>
     <p :class="$style.link">
       Already have an account?
-      <BaseAction>Login</BaseAction>
+      <RouterLink :to="{ name: 'login' }">
+        <BaseAction>Login</BaseAction>
+      </RouterLink>
     </p>
   </form>
 </template>

@@ -38,7 +38,9 @@ const form: LoginForm = reactive({
     <BaseButton :class="$style.btn">Login</BaseButton>
     <p :class="$style.link">
       Don't have an account?
-      <BaseAction>Create Account</BaseAction>
+      <RouterLink :to="{ name: 'signup' }">
+        <BaseAction>Create Account</BaseAction>
+      </RouterLink>
     </p>
   </form>
 </template>
