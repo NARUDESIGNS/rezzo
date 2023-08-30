@@ -1,4 +1,3 @@
-// imports up here...
 import HomeView from "@/views/HomeView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -11,8 +10,13 @@ const route = createRouter({
       component: HomeView,
     },
     {
-      path: "/login-signup",
-      name: "login-signup",
+      path: "/login",
+      name: "login",
+      component: () => import("@/views/LoginSignupView.vue"),
+    },
+    {
+      path: "/signup",
+      name: "signup",
       component: () => import("@/views/LoginSignupView.vue"),
     },
     {
