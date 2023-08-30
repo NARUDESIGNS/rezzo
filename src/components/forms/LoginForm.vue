@@ -59,6 +59,7 @@ const form: LoginForm = reactive({
 
     .checkbox_label {
       cursor: pointer;
+      user-select: none;
     }
   }
 
