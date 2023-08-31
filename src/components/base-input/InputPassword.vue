@@ -56,8 +56,9 @@ const hidePassword = () => (type.value = "password");
   .icon {
     position: absolute;
     right: 17px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 14px;
+    // top: 50%;
+    // transform: translateY(-50%);
     cursor: pointer;
   }
 

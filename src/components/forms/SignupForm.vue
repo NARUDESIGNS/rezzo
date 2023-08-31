@@ -31,6 +31,24 @@ const hasErrorField = ref(false);
 const isValidForm = computed(() =>
   validateForm<SignupForm>(form, requiredFields, hasErrorField.value)
 );
+
+const validateConfirmPassword = () => {
+  hasErrorField.value = form.password !== confirmPassword.value;
+};
+
+let error: { status: boolean; message: string } = reactive({
+  status: false,
+  message: "",
+});
+const showInputError = () => {
+  if (form.password !== confirmPassword.value) {
+    error.status = true;
+    error.message = "Passwords doesn't match!";
+  } else {
+    error.status = false;
+    error.message = "";
+  }
+};
 </script>
 
 <template>
@@ -43,14 +61,23 @@ const isValidForm = computed(() =>
     <FieldLabel label="Email" required />
     <InputText v-model="form.email" required />
     <FieldLabel label="Password" required />
-    <InputPassword v-model="form.password" required />
+    <InputPassword
+      v-model="form.password"
+      required
+      @input="validateConfirmPassword"
+    />
     <FieldLabel label="Confirm Password" required />
     <InputPassword
       v-model="confirmPassword"
       required
-      @change="hasErrorField = form.password !== confirmPassword"
+      @input="validateConfirmPassword"
+      :error="error.status"
+      :error-msg="error.message"
+      @change="showInputError"
     />
-    <BaseButton :class="$style.btn" :disabled="!isValidForm">Login</BaseButton>
+    <BaseButton :class="$style.btn" :disabled="!isValidForm"
+      >Create Account</BaseButton
+    >
     <p :class="$style.link">
       Already have an account?
       <RouterLink :to="{ name: 'login' }">
