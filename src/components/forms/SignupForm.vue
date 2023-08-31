@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import BaseAction from "@/components/base-action/BaseAction.vue";
+import BaseButton from "@/components/base-button/BaseButton.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
+import FormHeader from "@/components/base-input/FormHeader.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { validateForm } from "@/utils/validateForm";
 import { computed, reactive, ref } from "vue";
-import BaseAction from "../base-action/BaseAction.vue";
-import BaseButton from "../base-button/BaseButton.vue";
-import FormHeader from "../base-input/FormHeader.vue";
 
 interface SignupForm {
   firstName: string;
@@ -58,7 +58,7 @@ const showInputError = () => {
     <InputText v-model="form.firstName" required />
     <FieldLabel label="Last Name" required />
     <InputText v-model="form.lastName" required />
-    <FieldLabel label="Email" required />
+    <FieldLabel label="Email" type="email" required />
     <InputText v-model="form.email" required />
     <FieldLabel label="Password" required />
     <InputPassword
