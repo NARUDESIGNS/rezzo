@@ -13,7 +13,12 @@ export function validateForm<T extends object>(
 ) {
   if (hasErrorField) return false;
   for (const key of requiredFields) {
-    if (key in form && (key === "" || key === undefined)) return false;
+    if (
+      key in form &&
+      (form[key as keyof typeof form] === "" ||
+        form[key as keyof typeof form] === undefined)
+    )
+      return false;
   }
   return true;
 }
