@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import BaseAction from "@/components/base-action/BaseAction.vue";
+import BaseButton from "@/components/base-button/BaseButton.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
+import FormHeader from "@/components/base-input/FormHeader.vue";
+import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { reactive } from "vue";
-import BaseAction from "../base-action/BaseAction.vue";
-import BaseButton from "../base-button/BaseButton.vue";
-import FormHeader from "../base-input/FormHeader.vue";
-import InputCheckbox from "../base-input/InputCheckbox.vue";
+import { validateForm } from "@/utils/validateForm";
+import { computed, reactive, ref } from "vue";
 
 interface LoginForm {
   email: string;
@@ -19,13 +20,20 @@ const form: LoginForm = reactive({
   password: "",
   stayLoggedIn: false,
 });
+
+const requiredFields = ["email", "password"];
+
+const hasErrorField = ref(false);
+const isValidForm = computed(() =>
+  validateForm<LoginForm>(form, requiredFields, hasErrorField.value)
+);
 </script>
 
 <template>
   <form :class="$style.wrap" @submit.prevent>
     <FormHeader>Login</FormHeader>
     <FieldLabel label="Email" required />
-    <InputText v-model="form.email" required />
+    <InputText v-model="form.email" type="email" required />
     <FieldLabel label="Password" required />
     <InputPassword v-model="form.password" required />
     <div :class="$style.checkbox_wrap">
@@ -35,7 +43,7 @@ const form: LoginForm = reactive({
       </label>
     </div>
     <BaseAction>Forgot Password</BaseAction>
-    <BaseButton :class="$style.btn">Login</BaseButton>
+    <BaseButton :class="$style.btn" :disabled="!isValidForm">Login</BaseButton>
     <p :class="$style.link">
       Don't have an account?
       <RouterLink :to="{ name: 'signup' }">
