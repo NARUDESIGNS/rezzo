@@ -23,7 +23,7 @@ const isLoginPage = computed(() => route.path.includes("login"));
     <div :class="$style.illustration_wrap">
       <img
         :class="$style.illustration"
-        src="@/assets/images/team-bonding.svg"
+        src="@/assets/illustrations/team-bonding.svg"
         atl="illustration of people bonding"
       />
       <p :class="$style.msg">
