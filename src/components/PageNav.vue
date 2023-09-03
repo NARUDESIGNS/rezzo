@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import ArchiveIcon from "@/assets/ArchiveIcon.vue";
 import BlueLogo from "@/assets/BlueLogo.vue";
+import FileIcon from "@/assets/FileIcon.vue";
+import HardDriveIcon from "@/assets/HardDriveIcon.vue";
+import HashIcon from "@/assets/HashIcon.vue";
+import HomeIcon from "@/assets/HomeIcon.vue";
 import MenuIcon from "@/assets/MenuIcon.vue";
 import WhiteLogo from "@/assets/WhiteLogo.vue";
 import BaseModal from "@/components/base-modal/BaseModal.vue";
@@ -37,6 +42,24 @@ const navItems = reactive([
 ]);
 
 const showModal = ref(false);
+
+const getIcon = (item: string) => {
+  item = item.toLowerCase();
+  switch (item) {
+    case "home":
+      return HomeIcon;
+    case "create resume":
+      return FileIcon;
+    case "blogs":
+      return ArchiveIcon;
+    case "resources":
+      return HardDriveIcon;
+    case "about":
+      return HashIcon;
+    default:
+      return HomeIcon;
+  }
+};
 </script>
 
 <template>
@@ -59,7 +82,7 @@ const showModal = ref(false);
           :class="[
             $style.item,
             {
-              [$style.active]: item.caption.toLowerCase() == activeTab,
+              [$style.active]: item.route.name === activeTab,
             },
           ]"
         >
@@ -70,7 +93,28 @@ const showModal = ref(false);
       </ul>
     </nav>
   </div>
+  <!-- modal for mobile menu -->
   <BaseModal :visible="showModal" enable-close @close="showModal = false">
+    <ul :class="$style.mobile_nav_items">
+      <RouterLink
+        :to="item.route"
+        v-for="item in navItems"
+        :key="item.caption"
+        :class="[
+          $style.mobile_menu_item,
+          {
+            [$style.active]: item.route.name === activeTab,
+          },
+        ]"
+      >
+        <li :class="$style.mobile_item">
+          <span :class="$style.item_icon_wrap">
+            <Component :is="getIcon(item.caption)" />
+          </span>
+          <p :class="$style.item_caption">{{ item.caption }}</p>
+        </li>
+      </RouterLink>
+    </ul>
   </BaseModal>
 </template>
 
@@ -145,6 +189,54 @@ const showModal = ref(false);
       background: none;
       color: colors.use("dark-gray");
       cursor: pointer;
+    }
+  }
+
+  .mobile_menu_item {
+    color: colors.use("text");
+
+    &:global(.router-link-active) {
+      color: colors.use("primary");
+    }
+  }
+
+  .active {
+    display: block;
+    background-color: lighten($color: colors.use("light-gray"), $amount: 35);
+    border-radius: 8px;
+
+    & svg {
+      color: colors.use("primary");
+    }
+  }
+
+  .mobile_item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 0.85rem;
+
+    &:hover {
+      color: colors.use("primary");
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    &:focus {
+      outline: none;
+      color: colors.use("primary");
+    }
+
+    .item_icon_wrap {
+      display: flex;
+      justify-content: center;
+
+      svg {
+        height: 20px;
+        width: 20px;
+      }
     }
   }
 }
