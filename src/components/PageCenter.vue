@@ -20,7 +20,7 @@ defineProps<{
 
 .overall_container {
   color: colors.use("text");
-  min-height: 95vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 0 20px;

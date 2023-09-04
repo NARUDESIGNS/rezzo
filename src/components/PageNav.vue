@@ -176,6 +176,10 @@ const getIcon = (item: string) => {
 }
 
 @media screen and (max-width: 850px) {
+  @mixin focus-outline($state: "light-blue") {
+    box-shadow: 0 0 0 2px colors.use($state);
+    outline: none;
+  }
   .wrap {
     padding: 10px 20px;
     .nav {
@@ -194,9 +198,17 @@ const getIcon = (item: string) => {
 
   .mobile_menu_item {
     color: colors.use("text");
+    border-radius: 8px;
+    display: block;
+
+    &:focus,
+    &:hover {
+      @include focus-outline();
+    }
 
     &:global(.router-link-active) {
-      color: colors.use("primary");
+      color: colors.use("text-light");
+      background-color: colors.use("primary");
     }
   }
 
@@ -206,7 +218,7 @@ const getIcon = (item: string) => {
     border-radius: 8px;
 
     & svg {
-      color: colors.use("primary");
+      color: colors.use("text-light");
     }
   }
 
