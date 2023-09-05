@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import ResumeIllustration from "@/assets/illustrations/ResumeIllustration.vue";
 import PageCenter from "@/components/PageCenter.vue";
 </script>
 
 <template>
   <PageCenter>
     <div :class="$style.wrap">
-      <h1 :class="$style.header">RESUME</h1>
-      <p :class="$style.message">COMING SOON!</p>
-      <ResumeIllustration :class="$style.illustration" />
+      <h1 :class="$style.header">CREATE RESUME</h1>
+      <p :class="$style.message">
+        Creating your perfect resume requires attention and detailed
+        information. On this page, we require you to provide us with detailed
+        info as indicated by the various sections. Those details will be fine
+        tuned by the AI to craft your perfect resume.
+      </p>
     </div>
   </PageCenter>
 </template>
@@ -17,25 +20,27 @@ import PageCenter from "@/components/PageCenter.vue";
 @use "@/scss/colors";
 
 .wrap {
-  margin: auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  padding: 20px 50px;
 
   .header {
-    color: lighten($color: colors.use("light-gray"), $amount: 30);
+    text-align: center;
     font-weight: 900;
+    margin: 20px 0;
   }
 
   .message {
-    font-size: 2rem;
-    font-weight: 900;
+    line-height: 2;
+    // styles here...
   }
+}
 
-  .illustration {
-    width: 80%;
-    max-width: 350px;
+@media screen and (max-width: 1000px) {
+  .wrap {
+    padding: 10px;
+
+    .header {
+      font-size: 1.5rem;
+    }
   }
 }
 </style>
