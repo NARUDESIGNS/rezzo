@@ -31,7 +31,11 @@ import PageCenter from "@/components/PageCenter.vue";
           </p>
         </div>
       </div>
-      <BaseButton :class="$style.btn">Create my resume</BaseButton>
+      <BaseButton
+        :class="$style.btn"
+        @click="$router.push({ name: 'create-resume' })"
+        >Create my resume</BaseButton
+      >
     </div>
   </PageCenter>
 </template>
