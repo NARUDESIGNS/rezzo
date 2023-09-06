@@ -27,7 +27,7 @@ const styles = computed(() => ({
   [$style.error]: props.error,
 }));
 
-const items = ref<string[]>(["Vue", "React", "Nodejs"]);
+const items = ref<string[]>([]);
 const removeItem = (index: number) => items.value.splice(index, 1);
 
 const emitData = () => {
