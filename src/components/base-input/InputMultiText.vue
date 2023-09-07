@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import XIcon from "@/assets/XIcon.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
-import { capitalize, computed, ref, useCssModule } from "vue";
+import { capitalize, computed, useCssModule } from "vue";
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const props = defineProps<{
+  skills: string[];
   required?: boolean;
   error?: boolean;
   errorMsg?: string;
@@ -18,6 +19,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "items-added", data: string[]): void;
+  (e: "update:skills", data: string[]): void;
   (e: "input-removed", inputLabel: string): void;
 }>();
 
@@ -27,11 +29,11 @@ const styles = computed(() => ({
   [$style.error]: props.error,
 }));
 
-const items = ref<string[]>([]);
+const items = computed<string[]>(() => props.skills || []);
 const removeItem = (index: number) => items.value.splice(index, 1);
 
 const emitData = () => {
-  emit("items-added", items.value);
+  emit("update:skills", items.value);
 };
 </script>
 
