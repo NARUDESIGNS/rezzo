@@ -3,31 +3,49 @@ import PageCenter from "@/components/PageCenter.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { reactive } from "vue";
+import { ref } from "vue";
 
 // TODO: create proper types for each section — personal info, skills, experience, education. The type below should be used for custom section
 interface ResumeType {
-  [key: string]: PersonalInfo; //| Skills; //boolean | number | string | (string | number)[] | ResumeType;
+  [key: string]: PersonalInfo | Skills; //boolean | number | string | (string | number)[] | ResumeType;
 }
 
 type PersonalInfo = {
   [key: string]: string | number;
 };
 
-// type Skills = string[];
+type Skills = string[];
 
-const details: ResumeType = reactive({
-  personalInfo: {
-    fullName: "Paul Ibeabuchi",
-    email: "ibeabuchi@gmail.com",
-    phone: 2348160564736,
-    location: "Lagos Nigeria",
-    linkedIn: "https://www.linkedin.com/in/narudesigns",
+// // const details: ResumeType = reactive({
+// const details = reactive({
+//   personalInfo: {
+//     fullName: "Paul Ibeabuchi",
+//     email: "ibeabuchi@gmail.com",
+//     phone: 2348160564736,
+//     location: "Lagos Nigeria",
+//     linkedIn: "https://www.linkedin.com/in/narudesigns",
+//   },
+//   skills: ["Vue", "React"],
+//   // experience: {},
+//   // education: {},
+// });
+
+const resumeData = ref([
+  {
+    key: "personalInfo",
+    data: {
+      fullName: "Paul Ibeabuchi",
+      email: "ibeabuchi@gmail.com",
+      phone: 2348160564736,
+      location: "Lagos Nigeria",
+      linkedIn: "https://www.linkedin.com/in/narudesigns",
+    },
   },
-  // skills: ["Vue"],
-  // experience: {},
-  // education: {},
-});
+  {
+    key: "skills",
+    data: ["Vue", "React", "TypeScript"],
+  },
+]);
 </script>
 
 <template>
@@ -40,14 +58,15 @@ const details: ResumeType = reactive({
         info as indicated by the various sections. Those details will be fine
         tuned by the AI to craft your perfect resume.
       </p>
-
       <main :class="$style.details">
         <div
-          v-for="(data, property, index) in details"
+          v-for="(details, index) in resumeData"
           :key="index"
           :class="$style.personal_info"
         >
-          <template v-if="property === 'personalInfo'">
+          <template
+            v-if="details.key === 'personalInfo' && 'fullName' in details.data"
+          >
             <h3 :class="$style.sub_header">Personal Information</h3>
             <p :class="$style.description">
               Add your personal details which will be used. This will be at the
@@ -56,24 +75,28 @@ const details: ResumeType = reactive({
             </p>
             <div :class="$style.personal_info_form">
               <FieldLabel label="Full Name" required />
-              <InputText v-model="data.fullName" required />
+              <InputText v-model="details.data.fullName" required />
               <FieldLabel label="Email" required />
-              <InputText v-model="data.email" required />
+              <InputText v-model="details.data.email" required />
               <FieldLabel label="Phone" required />
-              <InputText v-model="data.phone" type="number" required />
+              <InputText v-model="details.data.phone" type="number" required />
               <FieldLabel label="Location" required />
-              <InputText v-model="data.location" required />
+              <InputText v-model="details.data.location" required />
               <FieldLabel label="LinkedIn" required />
-              <InputText v-model="data.linkedIn" required />
+              <InputText v-model="details.data.linkedIn" required />
             </div>
           </template>
 
-          <template v-else-if="property === 'skills'">
+          <template
+            v-else-if="
+              details.key === 'skills' && typeof details.data === 'object'
+            "
+          >
             <h3 :class="$style.sub_header">Skills</h3>
             <p :class="$style.description">
               Add your skills, separating them using commas.
             </p>
-            <InputMultiText />
+            <InputMultiText v-model:skills="data" />
           </template>
         </div>
       </main>
@@ -102,7 +125,7 @@ const details: ResumeType = reactive({
 
     .sub_header {
       color: colors.use("primary");
-      margin-bottom: 10px;
+      margin: 50px 0 10px 0;
     }
 
     .description {
