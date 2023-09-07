@@ -113,7 +113,7 @@ const emitData = () => {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 
   .item {
     display: flex;

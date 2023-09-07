@@ -19,11 +19,8 @@ defineProps<{
 .label {
   text-transform: capitalize;
   display: inline-block;
+  margin-top: 30px;
   margin-bottom: 10px;
-
-  &:not(:first-child) {
-    margin-top: 30px;
-  }
   .required_asterisk {
     color: colors.use("primary");
   }
