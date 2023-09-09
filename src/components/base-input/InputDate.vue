@@ -1,26 +1,28 @@
 <script setup lang="ts">
 import CalendarIcon from "@/assets/CalendarIcon.vue";
+import { stringToDate } from "@/utils/stringToDate";
 import DatePicker from "@vuepic/vue-datepicker";
 import InputText from "./InputText.vue";
 
 defineProps<{
-  modelValue?: Date;
+  modelValue: string;
   disabled?: boolean;
+  required?: boolean;
 }>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", modelValue: Date): void;
+  (e: "update:modelValue", modelValue: string): void;
 }>();
 
 const handleEmit = (value: Date) => {
-  emit("update:modelValue", value);
-  console.log(value);
+  emit("update:modelValue", value.toLocaleDateString());
+  console.log(value.toISOString());
 };
 </script>
 
 <template>
   <DatePicker
-    :model-value="modelValue"
+    :model-value="stringToDate(modelValue)"
     :enable-time-picker="false"
     format="dd/MM/yyyy"
     :disabled="disabled"
@@ -35,10 +37,10 @@ const handleEmit = (value: Date) => {
         <InputText
           autocomplete="off"
           :value="value"
-          :disabled="false"
+          :disabled="disabled"
           placeholder="DD/MM/YY"
           :class="$style.input"
-          :required="true"
+          :required="required"
           @input="onInput"
           @keydown.enter="onEnter"
           @keydown.tab="onTab"
