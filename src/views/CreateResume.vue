@@ -4,7 +4,8 @@ import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { parseISO } from "date-fns";
+// import { parseISO } from "date-fns";
+// import { stringToDate } from "@/utils/stringToDate";
 import { ref } from "vue";
 
 type PersonalInfo = {
@@ -13,7 +14,7 @@ type PersonalInfo = {
   phone: number;
   location: string;
   linkedIn: string;
-  [key: string]: string | number;
+  // [key: string]: string | number;
 };
 
 type Skills = string[];
@@ -21,9 +22,17 @@ type Skills = string[];
 type Experience = {
   company: string;
   position: string;
-  fromDate: Date | string;
-  toDate?: Date | string;
-  [key: string]: string | undefined | boolean | Date;
+  fromDate: string;
+  toDate: string;
+  // [key: string]: string | undefined | boolean | Date;
+};
+
+type Education = {
+  school: string;
+  degree: string;
+  course: string;
+  fromDate: string;
+  toDate: string;
 };
 
 const personalInfo = ref<PersonalInfo>({
@@ -34,17 +43,22 @@ const personalInfo = ref<PersonalInfo>({
   linkedIn: "https://www.linkedin.com/in/narudesigns",
 });
 
-const skills = ref<Skills>(["Vue", "React", "TypeScript"]);
+const skills = ref<Skills>(["Vue", "React", "TypeScript", "Nodejs"]);
 
 const experience = ref<Experience>({
   company: "Worklio",
   position: "Frontend Engineer",
-  fromDate: parseISO("05/03/2023"),
-  toDate: undefined,
+  fromDate: "08/03/2023",
+  toDate: "02/13/2024", //undefined,
 });
-//   // education: {},
 
-console.log(new Date("04-05-2024"));
+const education = ref<Education>({
+  school: "University of Port-Harcourt",
+  degree: "Bsc", // TODO: make a dropdown for this
+  course: "Computer Science",
+  fromDate: "08/03/2023",
+  toDate: "02/13/2024", //undefined,
+});
 </script>
 
 <template>
@@ -99,10 +113,40 @@ console.log(new Date("04-05-2024"));
             <FieldLabel label="Position" required />
             <InputText v-model="experience.position" required />
             <div :class="$style.experience_date">
-              <FieldLabel label="From" required />
-              <InputDate v-model="experience.fromDate" required />
-              <FieldLabel label="To" required />
-              <InputDate v-model="experience.toDate" required />
+              <div :class="$style.dateFrom">
+                <FieldLabel label="From" required />
+                <InputDate v-model="experience.fromDate" required />
+              </div>
+              <div :class="$style.dateTo">
+                <FieldLabel label="To" required />
+                <InputDate
+                  v-model="experience.toDate"
+                  :disabled="experience.toDate === undefined"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div :class="$style.section">
+            <h3 :class="$style.sub_header">Education</h3>
+            <p :class="$style.description">
+              Provide details of your educational background, including degrees,
+              certifications, and relevant coursework.
+            </p>
+            <FieldLabel label="School" />
+            <InputText v-model="education.school" />
+            <FieldLabel label="Degree" />
+            <InputText v-model="education.degree" />
+            <div :class="$style.experience_date">
+              <div :class="$style.dateFrom">
+                <FieldLabel label="From" />
+                <InputDate v-model="education.fromDate" />
+              </div>
+              <div :class="$style.dateTo">
+                <FieldLabel label="To" />
+                <InputDate v-model="education.toDate" />
+              </div>
             </div>
           </div>
         </div>
@@ -116,6 +160,7 @@ console.log(new Date("04-05-2024"));
 
 .resume {
   padding: 20px 50px;
+  margin-bottom: 50px;
 
   .header {
     text-align: center;
@@ -135,9 +180,16 @@ console.log(new Date("04-05-2024"));
       margin: 50px 0 10px 0;
     }
 
-    // .description {
-    //   margin-bottom: 20px;
-    // }
+    .experience_date {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .dateFrom,
+      .dateTo {
+        width: 100%;
+      }
+    }
   }
 }
 
