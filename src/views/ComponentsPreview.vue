@@ -27,8 +27,9 @@ const middleName = ref("Naru");
 const numbr = ref(10);
 const password = ref("Narudesigns!");
 const textarea = ref("Testing notes...");
-const date = ref(new Date());
+const date = ref(new Date().toLocaleDateString());
 const searchQuery = ref();
+const skills = ref(["Nodejs", "Vue", "React"]);
 
 const infoType = ref();
 const infoProps = computed(() => ({
@@ -191,6 +192,7 @@ const logItemData = (itemData: string[]) => console.log(itemData);
 
         <FieldLabel label="Skills" required />
         <InputMultiText
+          v-model:skills="skills"
           placeholder="add items clicking on the tab key"
           @items-added="(itemData) => logItemData(itemData)"
         />
