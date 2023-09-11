@@ -97,7 +97,7 @@ const education = ref<Education>({
             <p :class="$style.description">
               Add your skills, separating them using commas.
             </p>
-            <InputMultiText v-model:skills="skills" />
+            <InputMultiText v-model:data="skills" />
           </div>
 
           <div :class="$style.section">

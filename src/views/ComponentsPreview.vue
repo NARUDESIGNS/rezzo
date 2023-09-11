@@ -192,7 +192,7 @@ const logItemData = (itemData: string[]) => console.log(itemData);
 
         <FieldLabel label="Skills" required />
         <InputMultiText
-          v-model:skills="skills"
+          v-model:data="skills"
           placeholder="add items clicking on the tab key"
           @items-added="(itemData) => logItemData(itemData)"
         />

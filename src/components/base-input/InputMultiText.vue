@@ -8,7 +8,7 @@ defineOptions({
 });
 
 const props = defineProps<{
-  skills: string[];
+  data: string[];
   required?: boolean;
   error?: boolean;
   errorMsg?: string;
@@ -19,7 +19,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "items-added", data: string[]): void;
-  (e: "update:skills", data: string[]): void;
+  (e: "update:data", data: string[]): void;
   (e: "input-removed", inputLabel: string): void;
 }>();
 
@@ -29,11 +29,11 @@ const styles = computed(() => ({
   [$style.error]: props.error,
 }));
 
-const items = computed<string[]>(() => props.skills || []);
+const items = computed<string[]>(() => props.data || []);
 const removeItem = (index: number) => items.value.splice(index, 1);
 
 const emitData = () => {
-  emit("update:skills", items.value);
+  emit("update:data", items.value);
 };
 </script>
 
