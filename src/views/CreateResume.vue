@@ -100,7 +100,17 @@ const education = ref<Education>({
           <div :class="$style.section">
             <h3 :class="$style.sub_header">Skills</h3>
             <p :class="$style.description">
-              Add your skills, separating them using commas.
+              Add your skills, separate them using commas and hit the
+              <span
+                :style="{
+                  backgroundColor: '#f0f0f0',
+                  padding: '5px 10px',
+                  borderRadius: '5px',
+                  margin: '0 5px',
+                }"
+                >Enter</span
+              >
+              key to add.
             </p>
             <InputMultiText v-model:data="skills" />
           </div>
