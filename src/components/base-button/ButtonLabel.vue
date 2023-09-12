@@ -50,6 +50,7 @@ const size = computed(() => `${props.size}px`);
   background: none;
   color: colors.use("danger");
   cursor: pointer;
+  min-width: fit-content;
 
   svg {
     width: v-bind(size);

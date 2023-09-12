@@ -47,6 +47,7 @@ const styles = computed(() => ({
       :disabled="disabled"
       :placeholder="placeholder"
       v-bind="$attrs"
+      rows="4"
     />
     <template v-if="showButton">
       <ButtonLabel
@@ -106,6 +107,7 @@ const styles = computed(() => ({
   border-radius: 8px;
   border: 1px solid colors.use("border-light");
   width: 100%;
+  font-family: inherit;
   font-size: 1.1rem;
   width: 100% !important;
   min-width: 250px;
