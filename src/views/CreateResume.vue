@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import PageCenter from "@/components/PageCenter.vue";
+import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
+import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
+import InputTextArea from "@/components/base-input/InputTextArea.vue";
 // import { parseISO } from "date-fns";
 // import { stringToDate } from "@/utils/stringToDate";
 import { ref } from "vue";
@@ -51,6 +54,8 @@ const experience = ref<Experience>({
   fromDate: "08/03/2023",
   toDate: "02/13/2024", //undefined,
 });
+
+const currentJob = ref(false);
 
 const education = ref<Education>({
   school: "University of Port-Harcourt",
@@ -126,6 +131,34 @@ const education = ref<Education>({
                 />
               </div>
             </div>
+            <div :class="$style.checkbox_wrap">
+              <InputCheckbox id="currentJob" v-model="currentJob" filled />
+              <label :class="$style.checkbox_label" for="currentJob">
+                I currently work here
+              </label>
+            </div>
+            <FieldLabel label="List a task you worked on" required />
+            <InputTextArea
+              placeholder="In one sentence, state a task or an action you took at the company that benefited them"
+            />
+            <FieldLabel label="Skill(s), Tools or Technologies Used" required />
+            <InputText
+              placeholder="What skills, tools or technologies did you use for the above task?"
+              required
+            />
+            <FieldLabel label="How would you rate the impact" required />
+            <div :class="$style.impact_wrap">
+              <InputText
+                placeholder="Rate the impact on a scale of 1-10"
+                type="number"
+                min="1"
+                max="10"
+                required
+              />
+              <ButtonLabel label="Remove Task" minus />
+              <ButtonLabel label="Add New Task" plus />
+            </div>
+            <ButtonLabel label="Add New Experience" plus />
           </div>
 
           <div :class="$style.section">
@@ -189,6 +222,24 @@ const education = ref<Education>({
       .dateTo {
         width: 100%;
       }
+    }
+
+    .checkbox_wrap {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+
+      .checkbox_label {
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+
+    .impact_wrap {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
     }
   }
 }
