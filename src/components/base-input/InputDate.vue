@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const handleEmit = (value: Date) => {
   emit("update:modelValue", value.toLocaleDateString());
-  console.log(value.toISOString());
+  // TODO: remember to store date as ISO string in db -> value.toISOString()
 };
 </script>
 
