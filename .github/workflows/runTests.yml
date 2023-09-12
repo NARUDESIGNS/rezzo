@@ -1,9 +1,24 @@
 name: rezzo-tests
 on: [push]
+
 jobs:
-  run-tests:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo 'Hello world!'
-      - script: npm run test
-        displayName: "Running tests"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Run tests
+        run: npm run test
