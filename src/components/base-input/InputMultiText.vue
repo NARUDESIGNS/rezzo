@@ -43,13 +43,19 @@ const emitData = () => {
       <div :class="$style.item_wrap">
         <div v-for="(item, index) in items" :key="index" :class="$style.item">
           <span>{{ item }}</span>
-          <XIcon :class="$style.remove_icon" @click="removeItem(index)" />
+          <button
+            :class="$style.remove_btn"
+            @click="removeItem(index)"
+            tabindex="0"
+          >
+            <XIcon />
+          </button>
         </div>
       </div>
     </template>
     <input
       @change="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = '', emitData()}"
-      @keydown.tab.prevent="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = ''}"
+      @keydown.enter.prevent="(e) => {(e.target as HTMLInputElement).value && items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = ''}"
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
@@ -127,7 +133,10 @@ const emitData = () => {
     padding: 0 15px;
     width: fit-content;
 
-    .remove_icon {
+    .remove_btn {
+      background: none;
+      border: none;
+      color: colors.use("text-light");
       cursor: pointer;
     }
   }
