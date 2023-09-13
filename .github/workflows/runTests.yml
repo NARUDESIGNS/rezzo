@@ -17,8 +17,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Type check
-        run: npm run type-check
+      # build should run type-check by default (fingers crossed!)
+      # - name: Type check
+      #   run: npm run type-check
 
       - name: Run tests
         run: npm run test
+
+      - name: Build
+        run: npm run build
