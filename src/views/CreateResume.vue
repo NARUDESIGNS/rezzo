@@ -95,6 +95,10 @@ const education = ref<Education>({
             <InputText v-model="personalInfo.location" required />
             <FieldLabel label="LinkedIn" required />
             <InputText v-model="personalInfo.linkedIn" required />
+            <div :class="$style.btn_label">
+              <ButtonLabel label="Add New Field" plus />
+              <ButtonLabel label="Remove Fields" minus />
+            </div>
           </div>
 
           <div :class="$style.section">
@@ -221,6 +225,14 @@ const education = ref<Education>({
     .sub_header {
       color: colors.use("primary");
       margin: 50px 0 10px 0;
+    }
+
+    .btn_label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 30px;
+      margin-top: 30px;
     }
 
     .experience_date {
