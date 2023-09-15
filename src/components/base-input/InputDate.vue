@@ -29,6 +29,7 @@ const handleEmit = (value: Date) => {
     :month-change-on-scroll="false"
     text-input
     auto-apply
+    month-name-format="long"
     :clearable="false"
     @update:model-value="(value) => handleEmit(value)"
   >
