@@ -95,7 +95,7 @@ const education = ref<Education>({
             <InputText v-model="personalInfo.location" required />
             <FieldLabel label="LinkedIn" required />
             <InputText v-model="personalInfo.linkedIn" required />
-            <div :class="$style.btn_label">
+            <div :class="$style.btn_label_wrap">
               <ButtonLabel label="Add New Field" plus />
               <ButtonLabel label="Remove Fields" minus />
             </div>
@@ -169,8 +169,10 @@ const education = ref<Education>({
                 max="10"
                 required
               />
+              <!-- <div :class="$style.btn_label_wrap"> -->
               <ButtonLabel label="Remove Task" minus />
               <ButtonLabel label="Add New Task" plus />
+              <!-- </div> -->
             </div>
             <ButtonLabel label="Add New Experience" plus />
           </div>
@@ -227,7 +229,7 @@ const education = ref<Education>({
       margin: 50px 0 10px 0;
     }
 
-    .btn_label {
+    .btn_label_wrap {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -268,11 +270,31 @@ const education = ref<Education>({
 
 @media screen and (max-width: 1000px) {
   .resume {
-    padding: 10px;
+    padding: 0;
 
     .header {
       font-size: 1.5rem;
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .section {
+    .btn_label_wrap {
+      justify-content: flex-start !important;
+    }
+
+    .experience_date {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0 !important;
+    }
+  }
+
+  .impact_wrap {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
