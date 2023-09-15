@@ -169,10 +169,10 @@ const education = ref<Education>({
                 max="10"
                 required
               />
-              <!-- <div :class="$style.btn_label_wrap"> -->
-              <ButtonLabel label="Remove Task" minus />
-              <ButtonLabel label="Add New Task" plus />
-              <!-- </div> -->
+              <div :class="$style.task_action">
+                <ButtonLabel label="Remove Tasks" minus />
+                <ButtonLabel label="Add New Task" plus />
+              </div>
             </div>
             <ButtonLabel label="Add New Experience" plus />
           </div>
@@ -264,6 +264,13 @@ const education = ref<Education>({
       display: flex;
       gap: 20px;
       margin-bottom: 30px;
+
+      .task_action {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        width: 60%;
+      }
     }
   }
 }
@@ -295,6 +302,10 @@ const education = ref<Education>({
   .impact_wrap {
     display: flex;
     flex-direction: column;
+
+    .task_action {
+      justify-content: flex-start !important;
+    }
   }
 }
 </style>
