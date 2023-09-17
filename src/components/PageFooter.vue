@@ -47,4 +47,11 @@ defineProps<{
 .dark_mode:after {
   background-color: white;
 }
+
+@media screen and (max-width: 500px) {
+  .footer {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
 </style>
