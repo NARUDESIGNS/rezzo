@@ -31,7 +31,7 @@ const slideOut = () => {
     setTimeout(() => {
       modalElement.value && modalElement.value.classList.remove("slide-out"),
         emit("close");
-    }, 300);
+    }, 200);
   }
 };
 </script>
