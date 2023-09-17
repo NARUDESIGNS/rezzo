@@ -267,9 +267,8 @@ const education = ref<Education>({
 
       .task_action {
         display: flex;
-        justify-content: flex-end;
         gap: 20px;
-        width: 60%;
+        width: 100%;
       }
     }
   }
@@ -285,6 +284,20 @@ const education = ref<Education>({
   }
 }
 
+@media screen and (max-width: 715px) {
+  .impact_wrap {
+    display: flex;
+    flex-direction: column;
+
+    .task_action {
+      flex-wrap: wrap;
+    }
+  }
+  .btn_label_wrap {
+    flex-wrap: wrap;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .section {
     .btn_label_wrap {
@@ -296,15 +309,6 @@ const education = ref<Education>({
       flex-direction: column;
       justify-content: flex-start;
       gap: 0 !important;
-    }
-  }
-
-  .impact_wrap {
-    display: flex;
-    flex-direction: column;
-
-    .task_action {
-      justify-content: flex-start !important;
     }
   }
 }
