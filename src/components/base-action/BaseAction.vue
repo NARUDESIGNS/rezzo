@@ -37,9 +37,10 @@ const styles = computed(() => ({
 
 .action {
   color: colors.use("primary");
-  text-decoration: none;
-  display: inline-block;
   cursor: pointer;
+  display: inline-block;
+  outline: none;
+  text-decoration: none;
 }
 
 .action:hover {
@@ -59,7 +60,8 @@ const styles = computed(() => ({
   opacity: 0;
 }
 
-.action:hover::after {
+.action:hover::after,
+.action:focus::after {
   transform: scaleX(1);
   opacity: 1;
 }
