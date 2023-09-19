@@ -7,38 +7,14 @@ import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
-// import { parseISO } from "date-fns";
-// import { stringToDate } from "@/utils/stringToDate";
+import type { EducationType } from "@/types/EducationType";
+import type { ExperienceType } from "@/types/ExperienceType";
+import type { PersonalInfoType } from "@/types/PersonalInfoType";
 import { ref } from "vue";
-
-type PersonalInfo = {
-  fullName: string;
-  email: string;
-  phone: number;
-  location: string;
-  linkedIn: string;
-  // [key: string]: string | number;
-};
 
 type Skills = string[];
 
-type Experience = {
-  company: string;
-  position: string;
-  fromDate: string;
-  toDate: string;
-  // [key: string]: string | undefined | boolean | Date;
-};
-
-type Education = {
-  school: string;
-  degree: string;
-  course: string;
-  fromDate: string;
-  toDate: string;
-};
-
-const personalInfo = ref<PersonalInfo>({
+const personalInfo = ref<PersonalInfoType>({
   fullName: "Paul Ibeabuchi",
   email: "ibeabuchi@gmail.com",
   phone: 2348160564736,
@@ -48,7 +24,7 @@ const personalInfo = ref<PersonalInfo>({
 
 const skills = ref<Skills>(["Vue", "React", "TypeScript", "Nodejs"]);
 
-const experience = ref<Experience>({
+const experience = ref<ExperienceType>({
   company: "Worklio",
   position: "Frontend Engineer",
   fromDate: "08/03/2023",
@@ -57,7 +33,7 @@ const experience = ref<Experience>({
 
 const currentJob = ref(false);
 
-const education = ref<Education>({
+const education = ref<EducationType>({
   school: "University of Port-Harcourt",
   degree: "Bsc", // TODO: make a dropdown for this
   course: "Computer Science",
