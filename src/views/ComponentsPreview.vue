@@ -11,6 +11,7 @@ import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
+import InputSwitch from "@/components/base-input/InputSwitch.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
@@ -18,6 +19,7 @@ import BaseSearch from "@/components/base-search/BaseSearch.vue";
 import { computed, ref } from "vue";
 
 const checkbox = ref(true);
+const switchCheck = ref(false);
 const checkboxFilled = ref(true);
 
 const email = ref("narudesigns@mail");
@@ -128,6 +130,7 @@ const logItemData = (itemData: string[]) => console.log(itemData);
 
       <h2 :class="$style.header">Checkboxes</h2>
       <div :class="$style.content">
+        <InputSwitch v-model="switchCheck" />
         <InputCheckbox v-model="checkbox" />
         <InputCheckbox v-model="checkboxFilled" filled />
         <InputCheckbox :size="20" />
