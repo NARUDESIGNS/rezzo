@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  modelValue: boolean;
+  modelValue?: boolean;
   id?: string;
   disabled?: boolean;
 }>();
