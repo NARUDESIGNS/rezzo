@@ -11,7 +11,6 @@ defineProps<{
     :class="$style.input"
     type="checkbox"
     :id="id"
-    ref="input"
     :checked="modelValue"
     @change="
       $emit(
@@ -28,8 +27,8 @@ defineProps<{
 
 .input {
   vertical-align: middle;
-  width: 40px;
-  height: 20px;
+  width: 55px;
+  height: 30px;
   appearance: none;
   -webkit-appearance: none;
   background-color: #e4e4e4;
@@ -43,12 +42,12 @@ defineProps<{
 .input:before {
   content: "";
   display: block;
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   background-color: hsl(225, 100%, 98%);
   border-radius: 50%;
   position: absolute;
-  left: 3px;
+  left: 5px;
   top: 50%;
   transform: translateY(-50%);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -60,7 +59,7 @@ defineProps<{
 }
 
 .input:checked::before {
-  left: 22px;
+  left: 30px;
 }
 
 .input:disabled {
