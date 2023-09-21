@@ -131,6 +131,7 @@ const logItemData = (itemData: string[]) => console.log(itemData);
       <h2 :class="$style.header">Checkboxes</h2>
       <div :class="$style.content">
         <InputSwitch v-model="switchCheck" />
+        <InputSwitch disabled />
         <InputCheckbox v-model="checkbox" />
         <InputCheckbox v-model="checkboxFilled" filled />
         <InputCheckbox :size="20" />
