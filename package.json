@@ -17,6 +17,7 @@
     "@vuepic/vue-datepicker": "^5.4.0",
     "@vueuse/core": "^10.2.1",
     "date-fns": "^2.30.0",
+    "html2pdf.js": "^0.10.1",
     "lodash-es": "^4.17.21",
     "pinia": "^2.1.4",
     "vue": "^3.2.47",
