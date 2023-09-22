@@ -51,7 +51,7 @@ defineProps<{
   top: 50%;
   transform: translateY(-50%);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: ease 0.3s;
+  transition: ease 0.2s;
 }
 
 .input:checked {
