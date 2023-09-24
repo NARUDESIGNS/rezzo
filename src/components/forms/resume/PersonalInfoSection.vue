@@ -60,4 +60,18 @@ const personalInfo = ref<PersonalInfoType>({
     margin-top: 30px;
   }
 }
+
+@media screen and (max-width: 715px) {
+  .btn_label_wrap {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .section {
+    .btn_label_wrap {
+      justify-content: flex-start !important;
+    }
+  }
+}
 </style>
