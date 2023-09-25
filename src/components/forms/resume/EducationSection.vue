@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
@@ -35,6 +36,10 @@ const education = ref<EducationType>({
         <InputDate v-model="education.toDate" />
       </div>
     </div>
+    <div :class="$style.btn_label_wrap">
+      <ButtonLabel label="Add Education" plus />
+      <ButtonLabel label="Remove Education" minus />
+    </div>
   </div>
 </template>
 
@@ -59,14 +64,29 @@ const education = ref<EducationType>({
       width: 100%;
     }
   }
+
+  .btn_label_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+    margin-top: 30px;
+  }
 }
 
 @media screen and (max-width: 500px) {
-  .date_wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 0 !important;
+  .section {
+    .date_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0 !important;
+    }
+
+    .btn_label_wrap {
+      justify-content: flex-start !important;
+      flex-wrap: wrap;
+    }
   }
 }
 </style>
