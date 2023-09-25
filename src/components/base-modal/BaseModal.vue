@@ -38,7 +38,7 @@ const slideOut = () => {
 
 <template>
   <div v-if="visible" :class="$style.modal_wrap">
-    <BaseBackdrop @click="clickAnywhere && $emit('close')" visible />
+    <BaseBackdrop @click="clickAnywhere && slideOut()" visible />
     <div :class="[$style.modal, 'slide-in']" ref="modalElement">
       <div :class="$style.header">
         <button
