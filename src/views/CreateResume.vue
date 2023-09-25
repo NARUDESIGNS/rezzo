@@ -47,22 +47,6 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
 
   .section {
     margin-top: 35px;
-
-    .sub_header {
-      color: colors.use("primary");
-      margin: 50px 0 10px 0;
-    }
-
-    .experience_date {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-
-      .dateFrom,
-      .dateTo {
-        width: 100%;
-      }
-    }
   }
 }
 
@@ -72,35 +56,6 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
 
     .header {
       font-size: 1.5rem;
-    }
-  }
-}
-
-@media screen and (max-width: 715px) {
-  .impact_wrap {
-    display: flex;
-    flex-direction: column;
-
-    .task_action {
-      flex-wrap: wrap;
-    }
-  }
-  .btn_label_wrap {
-    flex-wrap: wrap;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .section {
-    .btn_label_wrap {
-      justify-content: flex-start !important;
-    }
-
-    .experience_date {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 0 !important;
     }
   }
 }
