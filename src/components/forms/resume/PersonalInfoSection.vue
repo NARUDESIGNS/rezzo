@@ -71,6 +71,7 @@ const personalInfo = ref<PersonalInfoType>({
   .section {
     .btn_label_wrap {
       justify-content: flex-start !important;
+      flex-wrap: wrap;
     }
   }
 }
