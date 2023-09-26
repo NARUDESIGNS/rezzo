@@ -15,6 +15,7 @@ import InputSwitch from "@/components/base-input/InputSwitch.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
+import BaseModal from "@/components/base-modal/BaseModal.vue";
 import BaseSearch from "@/components/base-search/BaseSearch.vue";
 import { computed, ref } from "vue";
 
@@ -47,6 +48,8 @@ const logDetails = (info?: string) => {
 };
 
 const logItemData = (itemData: string[]) => console.log(itemData);
+
+const showModal = ref(false);
 </script>
 
 <template>
@@ -209,6 +212,26 @@ const logItemData = (itemData: string[]) => console.log(itemData);
           :visible="showBackdrop"
           @click.self="showBackdrop = false"
         />
+        <BaseButton @click="showModal = true">Open Modal</BaseButton>
+        <BaseModal
+          :visible="showModal"
+          @close="showModal = false"
+          enable-close
+          click-anywhere
+        >
+          <template #header> <h1>Modal Header</h1> </template>
+          <p :style="{ lineHeight: 2 }">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Consequuntur maxime dolore facere! Nemo nostrum commodi deleniti
+            numquam, eveniet nesciunt fugit officiis quod aliquam sed velit.
+            Incidunt dolorum, repellat hic quo aliquam magnam quia harum quasi
+            optio dignissimos doloremque nisi id error quis omnis totam esse
+            placeat aut nulla velit vitae! Veritatis minus, dolorum consequuntur
+            maxime saepe ullam libero voluptatum. Sequi libero ea adipisci.
+            Sapiente quaerat alias eum ex similique, praesentium nostrum
+            voluptatem quia minima at illum eligendi!
+          </p>
+        </BaseModal>
       </div>
     </div>
   </PageCenter>
@@ -228,6 +251,7 @@ const logItemData = (itemData: string[]) => console.log(itemData);
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  flex-wrap: wrap;
 
   .info_option {
     padding: 3px 10px;

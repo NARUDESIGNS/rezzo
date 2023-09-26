@@ -40,7 +40,7 @@ const slideOut = () => {
   <div v-if="visible" :class="$style.modal_wrap">
     <BaseBackdrop @click="clickAnywhere && slideOut()" visible />
     <div :class="[$style.modal, 'slide-in']" ref="modalElement">
-      <div :class="$style.header">
+      <div :class="[$style.header, { [$style.divider]: !!$slots.header }]">
         <button
           v-show="enableClose"
           :class="$style.close_btn"
@@ -79,7 +79,7 @@ const slideOut = () => {
       padding: 20px;
       position: sticky;
       top: 0;
-      // box-shadow: 5px 0 30px rgba(0, 0, 0, 0.116);
+      border-radius: 10px 10px 0 0;
 
       .close_btn {
         padding: 10px;
@@ -115,6 +115,9 @@ const slideOut = () => {
           margin: auto 0;
         }
       }
+    }
+    .divider {
+      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.116);
     }
 
     .main {
