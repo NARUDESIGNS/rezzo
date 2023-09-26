@@ -32,9 +32,9 @@ const visible = ref(false);
         :class="$style.close_icon"
         @click="$emit('close'), (visible = true)"
       />
-      <InfoIcon :class="$style.info_icon" />
       <div :class="$style.content">
         <header :class="$style.header">
+          <InfoIcon :class="$style.info_icon" />
           <slot name="header" />
         </header>
         <slot />
@@ -59,10 +59,12 @@ const visible = ref(false);
 
   .header {
     margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
   }
 
   .info_icon {
-    width: 35px;
+    min-width: 35px;
   }
 
   .close_icon {
