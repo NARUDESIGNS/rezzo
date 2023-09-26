@@ -20,7 +20,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "items-added", data: string[]): void;
   (e: "update:data", data: string[]): void;
-  (e: "input-removed", inputLabel: string): void;
+  (e: "input-removed"): void;
 }>();
 
 const $style = useCssModule();
@@ -138,6 +138,7 @@ const emitData = () => {
       border: none;
       color: colors.use("text-light");
       cursor: pointer;
+      display: flex;
     }
   }
 }
