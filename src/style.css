@@ -43,6 +43,20 @@ a:hover {
   font-size: 14px;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  max-height: 10px;
+  background: rgb(193, 193, 193);
+}
+
 /* Animations */
 .slide-in {
   animation: slide-in 0.3s ease forwards;
