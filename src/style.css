@@ -40,7 +40,7 @@ a:hover {
 }
 
 ::placeholder {
-  font-size: 14px;
+  word-break: break-word;
 }
 
 ::-webkit-scrollbar {
