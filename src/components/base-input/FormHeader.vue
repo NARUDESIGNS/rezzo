@@ -16,7 +16,7 @@
   text-transform: uppercase;
   line-height: 1.2;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 560px) {
     font-size: 1.4rem;
   }
 }

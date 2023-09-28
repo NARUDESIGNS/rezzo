@@ -122,7 +122,7 @@ import PageCenter from "@/components/PageCenter.vue";
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 560px) {
   .home_view {
     .btn {
       width: 100%;

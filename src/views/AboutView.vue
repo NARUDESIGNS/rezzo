@@ -163,7 +163,7 @@ const navigate = () =>
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 560px) {
   .wrap {
     .btn {
       width: 100%;

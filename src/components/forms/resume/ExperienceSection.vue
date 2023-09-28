@@ -136,7 +136,7 @@ const currentJob = ref(false);
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 560px) {
   .section {
     .experience_date {
       display: flex;

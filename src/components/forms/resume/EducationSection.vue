@@ -74,7 +74,7 @@ const education = ref<EducationType>({
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 560px) {
   .section {
     .date_wrap {
       display: flex;

@@ -67,7 +67,7 @@ const personalInfo = ref<PersonalInfoType>({
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 560px) {
   .section {
     .btn_label_wrap {
       justify-content: flex-start !important;

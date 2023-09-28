@@ -48,7 +48,7 @@ defineProps<{
   background-color: white;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 560px) {
   .footer {
     flex-wrap: wrap;
     text-align: center;
