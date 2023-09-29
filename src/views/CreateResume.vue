@@ -34,15 +34,12 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
 .resume {
   padding: 20px 50px;
   margin-bottom: 50px;
+  line-height: 2;
 
   .header {
     text-align: center;
     font-weight: 900;
     margin: 20px 0;
-  }
-
-  .description {
-    line-height: 2;
   }
 
   .section {

@@ -23,7 +23,7 @@ const props = withDefaults(
 
 defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
-  (e: "input-removed", inputLabel: string): void;
+  (e: "input-removed"): void;
 }>();
 
 const $style = useCssModule();
