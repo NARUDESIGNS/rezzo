@@ -16,6 +16,7 @@ import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import BaseModal from "@/components/base-modal/BaseModal.vue";
+import BasePopup from "@/components/base-popup/BasePopup.vue";
 import BaseSearch from "@/components/base-search/BaseSearch.vue";
 import { computed, ref } from "vue";
 
@@ -50,6 +51,7 @@ const logDetails = (info?: string) => {
 const logItemData = (itemData: string[]) => console.log(itemData);
 
 const showModal = ref(false);
+const showPopup = ref(false);
 </script>
 
 <template>
@@ -232,6 +234,8 @@ const showModal = ref(false);
             voluptatem quia minima at illum eligendi!
           </p>
         </BaseModal>
+        <BaseButton @click="showPopup = true">Open Popup</BaseButton>
+        <BasePopup v-model="showPopup" />
       </div>
     </div>
   </PageCenter>

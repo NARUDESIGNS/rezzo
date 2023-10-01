@@ -2,27 +2,36 @@
 import XIcon from "@/assets/XIcon.vue";
 import BaseBackdrop from "../base-backdrop/BaseBackdrop.vue";
 
-// defineProps<{
-//   modelValue: boolean;
-// }>();
+defineProps<{
+  modelValue: boolean;
+}>();
+
+defineEmits<{
+  (e: "update:modelValue"): void;
+}>();
 </script>
 
 <template>
-  <BaseBackdrop />
-  <div :class="$style.wrap">
-    <XIcon />
-    <slot />
+  <div v-if="modelValue">
+    <BaseBackdrop visible />
+    <div :class="$style.content_wrap">
+      <XIcon />
+      <slot />
+    </div>
   </div>
 </template>
 
 <style module lang="scss">
 @use "@/scss/colors";
 
-.wrap {
+.content_wrap {
   border-radius: 10px;
+  border: 1px solid blue;
   background-color: colors.use("background-light");
-  width: 300px;
+  width: 600px;
   height: 300px;
   padding: 20px;
+  z-index: 10;
+  position: relative;
 }
 </style>
