@@ -47,6 +47,7 @@ a:hover {
 
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -55,7 +56,8 @@ a:hover {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 15px;
-  max-height: 10px;
+  max-height: 5px;
+  max-width: 5px;
   background: rgb(193, 193, 193);
 }
 
