@@ -235,7 +235,7 @@ const showPopup = ref(false);
           </p>
         </BaseModal>
         <BaseButton @click="showPopup = true">Open Popup</BaseButton>
-        <BasePopup v-model="showPopup" />
+        <BasePopup v-model="showPopup" @close="showPopup = false" />
       </div>
     </div>
   </PageCenter>

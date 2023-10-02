@@ -8,6 +8,7 @@ defineProps<{
 
 defineEmits<{
   (e: "update:modelValue"): void;
+  (e: "close"): void;
 }>();
 </script>
 
@@ -15,8 +16,13 @@ defineEmits<{
   <div v-if="modelValue">
     <BaseBackdrop visible />
     <div :class="$style.content_wrap">
-      <XIcon />
+      <span :class="$style.close_icon" @click="$emit('close')">
+        <XIcon />
+      </span>
       <slot />
+      <div :class="$style.btns">
+        <slot name="buttons" />
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +38,26 @@ defineEmits<{
   height: 300px;
   padding: 20px;
   z-index: 10;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .close_icon {
+    padding: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: colors.use("primary");
+    }
+  }
+
+  .btns {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
 </style>
