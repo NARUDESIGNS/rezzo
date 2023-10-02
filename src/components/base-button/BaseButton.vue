@@ -110,4 +110,10 @@ const width = computed(() => (props.width ? `${props.width}px` : "250px"));
   cursor: not-allowed;
   opacity: 0.3;
 }
+
+@media screen and (max-width: 550px) {
+  .btn {
+    width: 100%;
+  }
+}
 </style>
