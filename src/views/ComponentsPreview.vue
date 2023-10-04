@@ -4,6 +4,7 @@ import BaseAction from "@/components/base-action/BaseAction.vue";
 import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
+import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import BaseInfo from "@/components/base-info/BaseInfo.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
@@ -16,7 +17,6 @@ import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import BaseModal from "@/components/base-modal/BaseModal.vue";
-import BasePopup from "@/components/base-popup/BasePopup.vue";
 import BaseSearch from "@/components/base-search/BaseSearch.vue";
 import { computed, ref } from "vue";
 
@@ -235,7 +235,22 @@ const showPopup = ref(false);
           </p>
         </BaseModal>
         <BaseButton @click="showPopup = true">Open Popup</BaseButton>
-        <BasePopup v-model="showPopup" @close="showPopup = false" />
+        <BaseDialog v-model="showPopup" @close="showPopup = false">
+          <template #header>
+            <h3>Cancel Subscription</h3>
+          </template>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Architecto, quibusdam, soluta optio cupiditate alias magni natus
+            ducimus odio quo deleniti hic nisi sed repudiandae excepturi.
+          </p>
+          <template #buttons>
+            <BaseButton @click="showPopup = false" danger> Cancel </BaseButton>
+            <BaseButton @click="showPopup = false" outline>
+              Discard
+            </BaseButton>
+          </template>
+        </BaseDialog>
       </div>
     </div>
   </PageCenter>
