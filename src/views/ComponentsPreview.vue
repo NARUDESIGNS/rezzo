@@ -215,12 +215,7 @@ const showPopup = ref(false);
           @click.self="showBackdrop = false"
         />
         <BaseButton @click="showModal = true">Open Modal</BaseButton>
-        <BaseModal
-          :visible="showModal"
-          @close="showModal = false"
-          enable-close
-          click-anywhere
-        >
+        <BaseModal v-model="showModal" enable-close click-anywhere>
           <template #header> <h1>Modal Header</h1> </template>
           <p :style="{ lineHeight: 2 }">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -235,7 +230,7 @@ const showPopup = ref(false);
           </p>
         </BaseModal>
         <BaseButton @click="showPopup = true">Open Popup</BaseButton>
-        <BaseDialog v-model="showPopup" @close="showPopup = false">
+        <BaseDialog v-model="showPopup">
           <template #header>
             <h3>Cancel Subscription</h3>
           </template>
