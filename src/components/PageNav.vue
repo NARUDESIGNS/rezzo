@@ -94,7 +94,7 @@ const getIcon = (item: string) => {
     </nav>
   </div>
   <!-- modal for mobile menu -->
-  <BaseModal :visible="showModal" enable-close @close="showModal = false">
+  <BaseModal v-model="showModal" enable-close>
     <ul :class="$style.mobile_nav_items">
       <RouterLink
         :to="item.route"

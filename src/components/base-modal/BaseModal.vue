@@ -6,7 +6,7 @@ import BaseBackdrop from "../base-backdrop/BaseBackdrop.vue";
 withDefaults(
   defineProps<{
     /** Show or hide modal */
-    visible?: boolean;
+    modelValue?: boolean;
     /** Permit or prevent close */
     enableClose?: boolean;
     /** Slide-in animation for modal */
@@ -15,13 +15,13 @@ withDefaults(
     clickAnywhere?: boolean;
   }>(),
   {
-    visible: false,
+    modelValue: false,
     slideFrom: "right",
   }
 );
 
 const emit = defineEmits<{
-  (e: "close"): void;
+  (e: "update:modelValue", value: boolean): void;
 }>();
 
 const modalElement = ref<HTMLElement>();
@@ -30,14 +30,14 @@ const slideOut = () => {
     modalElement.value.classList.add("slide-out");
     setTimeout(() => {
       modalElement.value && modalElement.value.classList.remove("slide-out"),
-        emit("close");
+        emit("update:modelValue", false);
     }, 200);
   }
 };
 </script>
 
 <template>
-  <div v-if="visible" :class="$style.modal_wrap">
+  <div v-if="modelValue" :class="$style.modal_wrap">
     <BaseBackdrop @click="clickAnywhere && slideOut()" visible />
     <div :class="[$style.modal, 'slide-in']" ref="modalElement">
       <div :class="[$style.header, { [$style.divider]: !!$slots.header }]">
