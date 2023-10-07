@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import XIcon from "@/assets/XIcon.vue";
-import BaseBackdrop from "../base-backdrop/BaseBackdrop.vue";
+import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 
 defineProps<{
   modelValue: boolean;
 }>();
 
 defineEmits<{
-  (e: "update:modelValue"): void;
-  (e: "close"): void;
+  (e: "update:modelValue", value: boolean): void;
 }>();
 </script>
 
@@ -16,7 +15,11 @@ defineEmits<{
   <div :class="$style.wrap" v-if="modelValue">
     <BaseBackdrop visible />
     <div :class="$style.content_wrap">
-      <span :class="$style.close_icon" tabIndex="0" @click="$emit('close')">
+      <span
+        :class="$style.close_icon"
+        tabIndex="0"
+        @click="$emit('update:modelValue', false)"
+      >
         <XIcon />
       </span>
       <div :class="$style.header">
