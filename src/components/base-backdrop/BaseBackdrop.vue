@@ -17,5 +17,6 @@ defineProps<{
   left: 0;
   background: black;
   opacity: 0.6;
+  z-index: 1;
 }
 </style>

@@ -4,6 +4,7 @@ import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 
 defineProps<{
   modelValue: boolean;
+  disableClose?: boolean;
 }>();
 
 defineEmits<{
@@ -16,6 +17,7 @@ defineEmits<{
     <BaseBackdrop visible />
     <div :class="$style.content_wrap">
       <span
+        v-if="!disableClose"
         :class="$style.close_icon"
         tabIndex="0"
         @click="$emit('update:modelValue', false)"
