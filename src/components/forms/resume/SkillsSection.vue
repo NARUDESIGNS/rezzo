@@ -22,7 +22,7 @@ const skills = ref<Skills>(["Vue", "React", "TypeScript", "Nodejs"]);
       >
       key to add.
     </p>
-    <InputMultiText v-model:data="skills" />
+    <InputMultiText v-model:data="skills" label="Skills" required />
   </div>
 </template>
 

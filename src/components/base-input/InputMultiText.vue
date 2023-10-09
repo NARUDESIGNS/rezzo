@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import XIcon from "@/assets/XIcon.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
+import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import { capitalize, computed, useCssModule } from "vue";
 
 defineOptions({
@@ -9,6 +10,7 @@ defineOptions({
 
 const props = defineProps<{
   data: string[];
+  label?: string;
   required?: boolean;
   error?: boolean;
   errorMsg?: string;
@@ -53,6 +55,12 @@ const emitData = () => {
         </div>
       </div>
     </template>
+    <FieldLabel
+      :class="$style.label"
+      v-if="label"
+      :label="label"
+      :required="required"
+    />
     <input
       @change="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = '', emitData()}"
       @keydown.enter.prevent="(e) => {(e.target as HTMLInputElement).value && items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = ''}"
@@ -86,6 +94,10 @@ const emitData = () => {
 .container {
   min-width: fit-content;
   width: 100%;
+
+  .label {
+    margin-top: 0;
+  }
 
   &:hover .minus_btn {
     visibility: visible;
