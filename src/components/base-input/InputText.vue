@@ -75,24 +75,8 @@ const styles = computed(() => ({
   width: 100%;
   min-width: fit-content;
 
-  &:hover .minus_btn {
-    visibility: visible;
-    animation: fade 0.2s linear forwards;
-
-    @keyframes fade {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  }
-
   .minus_btn {
     margin-left: 10px;
-    visibility: hidden;
-    opacity: 0;
   }
 
   .hide_minus_btn {
