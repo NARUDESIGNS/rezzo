@@ -4,6 +4,7 @@ import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import type { PersonalInfoType } from "@/types/PersonalInfoType";
 import { ref } from "vue";
+import AddPersonalInfo from "../new-fields/AddPersonalInfo.vue";
 
 const personalInfo = ref<PersonalInfoType>({
   fullName: "Paul Ibeabuchi",
@@ -12,6 +13,8 @@ const personalInfo = ref<PersonalInfoType>({
   location: "Lagos Nigeria",
   linkedIn: "https://www.linkedin.com/in/narudesigns",
 });
+
+const openNewInfoModal = ref(false);
 </script>
 
 <template>
@@ -34,10 +37,19 @@ const personalInfo = ref<PersonalInfoType>({
       <FieldLabel label="LinkedIn" required />
       <InputText v-model="personalInfo.linkedIn" required />
       <div :class="$style.btn_label_wrap">
-        <ButtonLabel label="Add New Field" plus />
+        <ButtonLabel
+          label="Add New Field"
+          plus
+          @click="openNewInfoModal = true"
+        />
         <ButtonLabel label="Remove Fields" minus />
       </div>
     </div>
+
+    <AddPersonalInfo
+      :visible="openNewInfoModal"
+      @close="openNewInfoModal = false"
+    />
   </div>
 </template>
 
