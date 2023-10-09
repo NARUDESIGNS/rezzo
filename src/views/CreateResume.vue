@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PageCenter from "@/components/PageCenter.vue";
+import Button from "@/components/base-button/BaseButton.vue";
 import EducationSection from "@/components/forms/resume/EducationSection.vue";
 import ExperienceSection from "@/components/forms/resume/ExperienceSection.vue";
 import PersonalInfoSection from "@/components/forms/resume/PersonalInfoSection.vue";
@@ -23,6 +24,7 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
           <SkillsSection />
           <EducationSection />
         </div>
+        <Button>Create Resume</Button>
       </main>
     </div>
   </PageCenter>
@@ -42,14 +44,18 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
     margin: 20px 0;
   }
 
-  .section {
-    margin-top: 35px;
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .resume {
     padding: 0;
+    margin-top: 30px;
 
     .header {
       font-size: 1.5rem;

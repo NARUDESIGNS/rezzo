@@ -73,6 +73,7 @@ const slideOut = () => {
     bottom: 20px;
     border-radius: 10px;
     overflow-y: scroll;
+    z-index: 1;
 
     .header {
       background-color: colors.use("background-light");
