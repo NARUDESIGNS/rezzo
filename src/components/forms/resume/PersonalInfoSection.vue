@@ -1,20 +1,39 @@
 <script setup lang="ts">
+import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import type { PersonalInfoType } from "@/types/PersonalInfoType";
+import { NewPersonalInfoType } from "@/types/PersonalInfoType";
 import { ref } from "vue";
 import AddPersonalInfo from "../new-fields/AddPersonalInfo.vue";
 
-const personalInfo = ref<PersonalInfoType>({
-  fullName: "Paul Ibeabuchi",
-  email: "ibeabuchi@gmail.com",
-  phone: 2348160564736,
-  location: "Lagos Nigeria",
-  linkedIn: "https://www.linkedin.com/in/narudesigns",
-});
+const personalInfoData = ref<PersonalInfoType[]>([
+  { title: "Full Name", value: "Paul Ibeabuchi", required: true },
+  { title: "Email", value: "ibeabuchi@gmail.com", required: true },
+  { title: "Phone", value: 2348160564736, required: false },
+  { title: "Location", value: "Lagos Nigeria", required: true },
+  {
+    title: "LinkedIn",
+    value: "https://www.linkedin.com/in/narudesigns",
+    required: false,
+  },
+]);
+
+const canRemoveFields = ref(false);
 
 const openNewInfoModal = ref(false);
+const addNewField = (data: NewPersonalInfoType) => {
+  personalInfoData.value.push({
+    title: data.title,
+    value: data.value,
+    required: false,
+  });
+};
+
+const removeField = (index: number) => {
+  personalInfoData.value.splice(index, 1);
+};
 </script>
 
 <template>
@@ -26,28 +45,39 @@ const openNewInfoModal = ref(false);
       can reach you.
     </p>
     <div :class="$style.personal_info_form">
-      <FieldLabel label="Full Name" required />
-      <InputText v-model="personalInfo.fullName" required />
-      <FieldLabel label="Email" required />
-      <InputText v-model="personalInfo.email" required />
-      <FieldLabel label="Phone" required />
-      <InputText v-model="personalInfo.phone" type="number" required />
-      <FieldLabel label="Location" required />
-      <InputText v-model="personalInfo.location" required />
-      <FieldLabel label="LinkedIn" required />
-      <InputText v-model="personalInfo.linkedIn" required />
-      <div :class="$style.btn_label_wrap">
-        <ButtonLabel
-          label="Add New Field"
-          plus
-          @click="openNewInfoModal = true"
+      <template v-for="(data, index) in personalInfoData">
+        <FieldLabel :label="data.title" :required="data.required" />
+        <InputText
+          v-model="data.value"
+          :required="data.required"
+          :show-button="canRemoveFields"
+          @input-removed="removeField(index)"
         />
-        <ButtonLabel label="Remove Fields" minus />
+      </template>
+      <div :class="$style.btn_label_wrap">
+        <template v-if="!canRemoveFields">
+          <ButtonLabel
+            label="Add New Field"
+            plus
+            @click="openNewInfoModal = true"
+          />
+          <ButtonLabel
+            @click="canRemoveFields = true"
+            label="Remove Fields"
+            minus
+          />
+        </template>
+        <template v-else>
+          <BaseButton @click="canRemoveFields = false" outline>
+            Done
+          </BaseButton>
+        </template>
       </div>
     </div>
 
     <AddPersonalInfo
       :visible="openNewInfoModal"
+      @add-field="(data) => addNewField(data)"
       @close="openNewInfoModal = false"
     />
   </div>
@@ -56,21 +86,17 @@ const openNewInfoModal = ref(false);
 <style module lang="scss">
 @use "@/scss/colors";
 
-.section {
-  margin-top: 35px;
+.sub_header {
+  color: colors.use("primary");
+  margin: 50px 0 10px 0;
+}
 
-  .sub_header {
-    color: colors.use("primary");
-    margin: 50px 0 10px 0;
-  }
-
-  .btn_label_wrap {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 30px;
-    margin-top: 30px;
-  }
+.btn_label_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 715px) {
@@ -80,11 +106,9 @@ const openNewInfoModal = ref(false);
 }
 
 @media screen and (max-width: 560px) {
-  .section {
-    .btn_label_wrap {
-      justify-content: flex-start !important;
-      flex-wrap: wrap;
-    }
+  .btn_label_wrap {
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
   }
 }
 </style>
