@@ -1,7 +1,10 @@
 export type PersonalInfoType = {
-  fullName: string;
-  email: string;
-  phone: number;
-  location: string;
-  linkedIn: string;
+  title: string;
+  value: string | number;
+  required: boolean;
+};
+
+export type NewPersonalInfoType = {
+  title: string;
+  value: string;
 };
