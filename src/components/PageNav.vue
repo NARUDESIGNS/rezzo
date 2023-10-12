@@ -232,7 +232,6 @@ const getIcon = (item: string) => {
     font-size: 0.85rem;
 
     &:hover {
-      color: colors.use("primary");
       cursor: pointer;
       transition: 0.2s ease;
     }
