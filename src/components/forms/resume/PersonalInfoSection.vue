@@ -3,12 +3,12 @@ import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import type { PersonalInfoType } from "@/types/PersonalInfoType";
+import type { FieldType } from "@/types/FieldType";
 import { NewPersonalInfoType } from "@/types/PersonalInfoType";
 import { ref } from "vue";
 import AddPersonalInfo from "../new-fields/AddPersonalInfo.vue";
 
-const personalInfoData = ref<PersonalInfoType[]>([
+const personalInfoData = ref<FieldType[]>([
   { title: "Full Name", value: "Paul Ibeabuchi", required: true },
   { title: "Email", value: "ibeabuchi@gmail.com", required: true },
   { title: "Phone", value: 2348160564736, required: false },
