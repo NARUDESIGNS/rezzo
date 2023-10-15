@@ -15,21 +15,23 @@ defineEmits<{
 <template>
   <div :class="$style.wrap" v-if="modelValue">
     <BaseBackdrop visible />
-    <div :class="$style.content_wrap">
-      <span
-        v-if="!disableClose"
-        :class="$style.close_icon"
-        tabIndex="0"
-        @click="$emit('update:modelValue', false)"
-      >
-        <XIcon />
-      </span>
-      <div :class="$style.header">
-        <slot name="header" />
-      </div>
-      <slot />
-      <div :class="$style.btns">
-        <slot name="buttons" />
+    <div :class="$style.modal_wrap">
+      <div :class="$style.content_wrap">
+        <span
+          v-if="!disableClose"
+          :class="$style.close_icon"
+          tabIndex="0"
+          @click="$emit('update:modelValue', false)"
+        >
+          <XIcon />
+        </span>
+        <div :class="$style.header">
+          <slot name="header" />
+        </div>
+        <slot />
+        <div :class="$style.btns">
+          <slot name="buttons" />
+        </div>
       </div>
     </div>
   </div>
@@ -38,6 +40,17 @@ defineEmits<{
 <style module lang="scss">
 @use "@/scss/colors";
 
+.modal_wrap {
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // position: fixed;
+  // z-index: 1;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+}
 .content_wrap {
   border-radius: 10px;
   background-color: colors.use("background-light");
