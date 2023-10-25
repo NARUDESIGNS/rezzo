@@ -4,7 +4,7 @@ import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { NewEducationType } from "@/types/EducationType";
+import { EducationType } from "@/types/EducationType";
 import { computed, ref } from "vue";
 
 const props = defineProps<{
@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "close"): void;
-  (e: "addField", data: NewEducationType): void;
+  (e: "addField", data: EducationType): void;
 }>();
 
 const showModal = computed({
@@ -21,7 +21,7 @@ const showModal = computed({
   set: () => emit("close"),
 });
 
-const data = ref<NewEducationType>({
+const data = ref<EducationType>({
   school: "",
   degree: "",
   startDate: "",
