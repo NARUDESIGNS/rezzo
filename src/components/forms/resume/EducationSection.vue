@@ -3,24 +3,23 @@ import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { NewEducationType } from "@/types/EducationType";
-import type { FieldType } from "@/types/FieldType";
+import { EducationType, NewEducationType } from "@/types/EducationType";
 import { ref } from "vue";
 import AddEducation from "../new-fields/AddEducation.vue";
 
-const educationData = ref<FieldType[][]>([
-  [
-    { title: "School", value: "University of Port-Harcourt", required: true },
-    { title: "Degree", value: "Bsc Computer Science", required: true }, // TODO: make a dropdown for this
-    { title: "From", value: "08/03/2023", required: true },
-    { title: "To", value: "02/13/2024", required: true },
-  ],
-  [
-    { title: "School", value: "University of Benin", required: false },
-    { title: "Degree", value: "Law", required: false }, // TODO: make a dropdown for this
-    { title: "From", value: "04/06/2023", required: true },
-    { title: "To", value: "02/23/2025", required: true },
-  ],
+const educationData = ref<EducationType[]>([
+  {
+    school: "University of Port-Harcourt",
+    degree: "Bsc Computer Science",
+    fromDate: "08/03/2023",
+    toDate: "02/13/2024",
+  },
+  {
+    school: "University of Port-Harcourt",
+    degree: "Bsc Computer Science",
+    fromDate: "08/03/2023",
+    toDate: "02/13/2024",
+  },
 ]);
 
 const openNewEducationModal = ref(false);
@@ -43,20 +42,18 @@ const addNewField = (data: NewEducationType) => {
       :key="index"
       :class="$style.education"
     >
-      <div v-for="(data, _index) in education" :key="_index">
-        <template v-if="data.title !== 'From' && data.title !== 'To'">
-          <FieldLabel :label="data.title" :required="data.required" />
-          <InputText v-model="data.value" :required="data.required" />
-        </template>
-        <div :class="$style.date_wrap">
-          <div v-if="data.title === 'From'" :class="$style.dateFrom">
-            <FieldLabel :label="data.title" :required="data.required" />
-            <InputDate v-model="data.value" :required="data.required" />
-          </div>
-          <div v-else-if="data.title === 'To'" :class="$style.dateTo">
-            <FieldLabel :label="data.title" :required="data.required" />
-            <InputDate v-model="data.value" :required="data.required" />
-          </div>
+      <FieldLabel label="School" required />
+      <InputText v-model="education.school" required />
+      <FieldLabel label="Degree" required />
+      <InputText v-model="education.degree" required />
+      <div :class="$style.date_wrap">
+        <div :class="$style.fromDate">
+          <FieldLabel label="From" required />
+          <InputDate v-model="education.fromDate" required />
+        </div>
+        <div :class="$style.toDate">
+          <FieldLabel label="To" required />
+          <InputDate v-model="education.toDate" required />
         </div>
       </div>
     </div>
@@ -98,8 +95,8 @@ const addNewField = (data: NewEducationType) => {
     align-items: center;
     gap: 20px;
 
-    .dateFrom,
-    .dateTo {
+    .fromDate,
+    .toDate {
       width: 100%;
     }
   }
