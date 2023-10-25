@@ -3,30 +3,29 @@ import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
-import { EducationType, NewEducationType } from "@/types/EducationType";
+import { EducationType } from "@/types/EducationType";
 import { ref } from "vue";
 import AddEducation from "../new-fields/AddEducation.vue";
 
 const educationData = ref<EducationType[]>([
   {
-    school: "University of Port-Harcourt",
-    degree: "Bsc Computer Science",
-    fromDate: "08/03/2023",
-    toDate: "02/13/2024",
-  },
-  {
-    school: "University of Port-Harcourt",
-    degree: "Bsc Computer Science",
-    fromDate: "08/03/2023",
-    toDate: "02/13/2024",
+    school: "",
+    degree: "",
+    startDate: "",
+    endDate: "",
   },
 ]);
 
 const openNewEducationModal = ref(false);
 
-const addNewField = (data: NewEducationType) => {
-  // educationData.value.push()
-  console.log(data);
+const addNewField = (data: EducationType) => {
+  const newEducationData = {
+    school: data.school,
+    degree: data.degree,
+    startDate: data.startDate,
+    endDate: data.endDate,
+  };
+  educationData.value.push(newEducationData);
 };
 </script>
 
@@ -42,18 +41,24 @@ const addNewField = (data: NewEducationType) => {
       :key="index"
       :class="$style.education"
     >
-      <FieldLabel label="School" required />
-      <InputText v-model="education.school" required />
-      <FieldLabel label="Degree" required />
-      <InputText v-model="education.degree" required />
+      <FieldLabel label="School" />
+      <InputText v-model="education.school" />
+      <FieldLabel label="Degree" />
+      <InputText v-model="education.degree" />
       <div :class="$style.date_wrap">
-        <div :class="$style.fromDate">
-          <FieldLabel label="From" required />
-          <InputDate v-model="education.fromDate" required />
+        <div :class="$style.startDate">
+          <FieldLabel label="From" :required="!!education.school" />
+          <InputDate
+            v-model="education.startDate"
+            :required="!!education.school"
+          />
         </div>
-        <div :class="$style.toDate">
-          <FieldLabel label="To" required />
-          <InputDate v-model="education.toDate" required />
+        <div :class="$style.endDate">
+          <FieldLabel label="To" :required="!!education.school" />
+          <InputDate
+            v-model="education.endDate"
+            :required="!!education.school"
+          />
         </div>
       </div>
     </div>
@@ -95,8 +100,8 @@ const addNewField = (data: NewEducationType) => {
     align-items: center;
     gap: 20px;
 
-    .fromDate,
-    .toDate {
+    .startDate,
+    .endDate {
       width: 100%;
     }
   }
