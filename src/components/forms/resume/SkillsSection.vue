@@ -3,7 +3,7 @@ import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import { ref } from "vue";
 
 type Skills = string[];
-const skills = ref<Skills>(["Vue", "React", "TypeScript", "Nodejs"]);
+const skills = ref<Skills>([]);
 </script>
 
 <template>
