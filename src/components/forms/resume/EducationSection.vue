@@ -43,8 +43,8 @@ const addNewField = (data: EducationType) => {
     >
       <FieldLabel label="School" />
       <InputText v-model="education.school" />
-      <FieldLabel label="Degree" />
-      <InputText v-model="education.degree" />
+      <FieldLabel label="Degree" :required="!!education.school" />
+      <InputText v-model="education.degree" :required="!!education.school" />
       <div :class="$style.date_wrap">
         <div :class="$style.startDate">
           <FieldLabel label="From" :required="!!education.school" />
