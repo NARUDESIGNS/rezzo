@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
+import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
+import InputCheckboxLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { EducationType } from "@/types/EducationType";
@@ -27,6 +29,9 @@ const addNewField = (data: EducationType) => {
   };
   educationData.value.push(newEducationData);
 };
+
+const showRemovalModal = ref(false);
+const test = ref(false);
 </script>
 
 <template>
@@ -69,7 +74,11 @@ const addNewField = (data: EducationType) => {
         @click="openNewEducationModal = true"
         plus
       />
-      <ButtonLabel label="Remove Education" minus />
+      <ButtonLabel
+        label="Remove Education"
+        minus
+        @click="showRemovalModal = true"
+      />
     </div>
 
     <AddEducation
@@ -77,6 +86,10 @@ const addNewField = (data: EducationType) => {
       @add-field="(data) => addNewField(data)"
       @close="openNewEducationModal = false"
     />
+
+    <BaseDialog v-model="showRemovalModal">
+      <InputCheckboxLabel v-model="test"> Testing Checkbox </InputCheckboxLabel>
+    </BaseDialog>
   </div>
 </template>
 
