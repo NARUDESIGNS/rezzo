@@ -6,7 +6,7 @@ import InputCheckboxLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { EducationType } from "@/types/EducationType";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import AddEducation from "../new-fields/AddEducation.vue";
 
 const educationData = ref<EducationType[]>([
@@ -31,7 +31,13 @@ const addNewField = (data: EducationType) => {
 };
 
 const showRemovalModal = ref(false);
-const test = ref(false);
+const allEducations = computed(() => {
+  const data: { [key: string]: boolean } = {};
+  educationData.value.map((item) => {
+    data[item.school] = true;
+  });
+  return data;
+});
 </script>
 
 <template>
@@ -88,7 +94,15 @@ const test = ref(false);
     />
 
     <BaseDialog v-model="showRemovalModal">
-      <InputCheckboxLabel v-model="test"> Testing Checkbox </InputCheckboxLabel>
+      Please select the school you'd like to remove:
+      <InputCheckboxLabel
+        v-for="(education, index) in educationData"
+        :key="index"
+        v-model="allEducations[education.school as keyof typeof allEducations]"
+      >
+        {{ education.school }}
+      </InputCheckboxLabel>
+      {{ allEducations }}
     </BaseDialog>
   </div>
 </template>
