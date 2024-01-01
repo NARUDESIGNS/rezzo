@@ -57,6 +57,8 @@ defineEmits<{
   max-width: 650px;
   width: 90%;
   min-height: 200px;
+  max-height: 95dvh;
+  overflow-y: scroll;
   padding: 30px;
   z-index: 10;
   position: fixed;
@@ -75,7 +77,6 @@ defineEmits<{
   }
 
   .close_icon {
-    // padding: 5px;
     padding: 10px;
     background-color: lighten($color: colors.use("light-gray"), $amount: 35);
     border: 1px solid transparent;
@@ -112,6 +113,19 @@ defineEmits<{
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .content_wrap {
+    padding: 20px;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .content_wrap::-webkit-scrollbar {
+    display: none;
   }
 }
 </style>
