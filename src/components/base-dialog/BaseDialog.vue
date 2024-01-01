@@ -40,17 +40,6 @@ defineEmits<{
 <style module lang="scss">
 @use "@/scss/colors";
 
-.modal_wrap {
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // bottom: 0;
-  // position: fixed;
-  // z-index: 1;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-}
 .content_wrap {
   border-radius: 10px;
   background-color: colors.use("background-light");
