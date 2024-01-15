@@ -46,8 +46,6 @@ defineEmits<{
   max-width: 650px;
   width: 90%;
   min-height: 200px;
-  max-height: 95dvh;
-  overflow-y: scroll;
   padding: 30px;
   z-index: 10;
   position: fixed;
@@ -108,6 +106,8 @@ defineEmits<{
 @media screen and (max-width: 560px) {
   .content_wrap {
     padding: 20px;
+    max-height: 95dvh;
+    overflow-y: scroll;
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
