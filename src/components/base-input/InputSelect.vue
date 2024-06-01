@@ -1,11 +1,99 @@
 <script setup lang="ts">
-// code here...
+import ChevronDown from "@/assets/ChevronDown.vue";
+import { computed, ref, useCssModule } from "vue";
+
+const props = defineProps<{
+  items: string[];
+  name?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  error?: boolean;
+  errorMsg?: string;
+  modelValue?: string;
+}>();
+
+defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
+
+const $style = useCssModule();
+const styles = computed(() => ({
+  [$style.disabled]: props.disabled,
+  [$style.error]: props.error,
+}));
+
+const selectInput = ref(null);
+console.log(selectInput.value);
 </script>
 
 <template>
-  <!-- component here... -->
+  <div :class="$style.el">
+    <select
+      @change="
+        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+      "
+      :name="name"
+      :class="[$style.select, styles]"
+      ref="selectInput"
+      :disabled="disabled"
+    >
+      <option disabled value="">{{ placeholder || "Select an option" }}</option>
+      <option v-for="item in items" :key="item" :value="item">
+        {{ item }}
+      </option>
+    </select>
+    <ChevronDown :class="$style.select_icon" />
+  </div>
 </template>
 
 <style module lang="scss">
-// styles here...
+@use "@/scss/colors";
+
+.el {
+  position: relative;
+}
+
+.select {
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid colors.use("border-light");
+  min-width: 250px;
+  width: 100%;
+  font-size: 1.1rem;
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border: 1px solid colors.use("border");
+  }
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.error {
+  border: 1px solid colors.use("danger");
+}
+
+.error_msg {
+  color: colors.use("danger");
+  margin-top: 5px;
+}
+
+.select_icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: colors.use(dark-gray);
+}
+
+@media screen and (max-width: 400px) {
+  .input {
+    padding: 15px;
+  }
+}
 </style>
