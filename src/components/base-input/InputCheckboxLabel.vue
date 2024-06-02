@@ -7,7 +7,7 @@ defineProps<{
   label?: string;
 }>();
 
-const emit = defineEmits<{
+defineEmits<{
   (e: "update:modelValue", value: boolean): void;
 }>();
 

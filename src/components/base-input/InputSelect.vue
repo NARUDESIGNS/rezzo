@@ -29,13 +29,13 @@ console.log(selectInput.value);
 <template>
   <div :class="$style.el">
     <select
+      ref="selectInput"
+      :name="name"
+      :class="[$style.select, styles]"
+      :disabled="disabled"
       @change="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
-      :name="name"
-      :class="[$style.select, styles]"
-      ref="selectInput"
-      :disabled="disabled"
     >
       <option disabled value="">{{ placeholder || "Select an option" }}</option>
       <option v-for="item in items" :key="item" :value="item">
@@ -89,11 +89,5 @@ console.log(selectInput.value);
   top: 50%;
   transform: translateY(-50%);
   color: colors.use(dark-gray);
-}
-
-@media screen and (max-width: 400px) {
-  .input {
-    padding: 15px;
-  }
 }
 </style>
