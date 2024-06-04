@@ -36,10 +36,15 @@ const selectInput = ref(null);
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
     >
-      <option disabled selected value="">
+      <option disabled :selected="!modelValue" value="">
         {{ placeholder || "Select an option" }}
       </option>
-      <option v-for="item in items" :key="item" :value="item">
+      <option
+        v-for="item in items"
+        :key="item"
+        :value="item"
+        :selected="modelValue === item"
+      >
         {{ item }}
       </option>
     </select>
