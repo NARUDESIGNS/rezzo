@@ -180,16 +180,16 @@ const showPopup = ref(false);
         <FieldLabel label="Password" required />
         <InputPassword
           v-model="password"
-          @input-removed="() => logDetails()"
           required
+          @input-removed="() => logDetails()"
         />
 
         <FieldLabel label="Number" />
         <InputNumber
           v-model="numbr"
-          @input-removed="() => logDetails()"
           :min="1"
           :max="10"
+          @input-removed="() => logDetails()"
         />
 
         <FieldLabel label="Text Area" required />
@@ -250,8 +250,8 @@ const showPopup = ref(false);
             ducimus odio quo deleniti hic nisi sed repudiandae excepturi.
           </p>
           <template #buttons>
-            <BaseButton @click="showPopup = false" danger> Cancel </BaseButton>
-            <BaseButton @click="showPopup = false" outline>
+            <BaseButton danger @click="showPopup = false"> Cancel </BaseButton>
+            <BaseButton outline @click="showPopup = false">
               Discard
             </BaseButton>
           </template>
