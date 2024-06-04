@@ -11,16 +11,7 @@ const skills = ref<Skills>([]);
     <h3 :class="$style.sub_header">Skills</h3>
     <p :class="$style.description">
       Add your skills, separate them using commas and hit the
-      <span
-        :style="{
-          backgroundColor: '#f0f0f0',
-          padding: '5px 10px',
-          borderRadius: '5px',
-          margin: '0 5px',
-        }"
-      >
-        Enter
-      </span>
+      <span :class="$style.enterMarkdown"> Enter </span>
       key to add.
     </p>
     <InputMultiText v-model:data="skills" label="Skills" required />
@@ -34,8 +25,15 @@ const skills = ref<Skills>([]);
   margin-top: 35px;
 
   .sub_header {
-    color: colors.use("primary");
+    color: colors.use(primary);
     margin: 50px 0 10px 0;
   }
+}
+
+.enterMarkdown {
+  background-color: colors.use(light-gray);
+  padding: 5px 5px 5px 10px;
+  border-radius: 5px;
+  margin: 0 7px 5px 5px;
 }
 </style>
