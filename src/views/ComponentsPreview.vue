@@ -12,6 +12,7 @@ import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputPassword from "@/components/base-input/InputPassword.vue";
+import InputSelect from "@/components/base-input/InputSelect.vue";
 import InputSwitch from "@/components/base-input/InputSwitch.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
@@ -34,6 +35,7 @@ const textarea = ref("Testing notes...");
 const date = ref(new Date().toLocaleDateString());
 const searchQuery = ref();
 const skills = ref(["Nodejs", "Vue", "React"]);
+const selected = ref("Item C");
 
 const infoType = ref();
 const infoProps = computed(() => ({
@@ -137,13 +139,14 @@ const showPopup = ref(false);
       <div :class="$style.content">
         <InputSwitch v-model="switchCheck" />
         <InputSwitch disabled />
+        {{ checkbox }}
         <InputCheckbox v-model="checkbox" />
         <InputCheckbox v-model="checkboxFilled" filled />
         <InputCheckbox :size="20" />
         <InputCheckbox :size="20" filled />
         <InputCheckbox checked disabled />
         <InputCheckbox id="checkBox" filled />
-        <label for="checkBox">Remember Me</label>
+        <label for="checkBox" :style="{ cursor: 'pointer' }">Remember Me</label>
       </div>
 
       <h2 :class="$style.header">Input Fields</h2>
@@ -198,6 +201,13 @@ const showPopup = ref(false);
 
         <FieldLabel label="Date" required />
         <InputDate v-model="date" />
+
+        <FieldLabel label="Select Option" required />
+        {{ selected }}
+        <InputSelect
+          v-model="selected"
+          :items="['Item A', 'Item B', 'Item C']"
+        />
 
         <FieldLabel label="Skills" required />
         <InputMultiText
