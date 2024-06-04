@@ -4,6 +4,7 @@ import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckboxLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
+import InputSelect from "@/components/base-input/InputSelect.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { EducationType } from "@/types/EducationType";
 import { computed, ref } from "vue";
@@ -12,6 +13,7 @@ import AddEducation from "../new-fields/AddEducation.vue";
 const educationData = ref<EducationType[]>([
   {
     school: "",
+    course: "",
     degree: "",
     startDate: "",
     endDate: "",
@@ -23,6 +25,7 @@ const openNewEducationModal = ref(false);
 const addNewField = (data: EducationType) => {
   const newEducationData = {
     school: data.school,
+    course: data.course,
     degree: data.degree,
     startDate: data.startDate,
     endDate: data.endDate,
@@ -38,6 +41,60 @@ const allEducations = computed(() => {
   });
   return data;
 });
+
+const degrees = [
+  "Associate of Arts (AA)",
+  "Associate of Science (AS)",
+  "Associate of Applied Science (AAS)",
+  "Bachelor of Arts (BA)",
+  "Bachelor of Science (BS)",
+  "Bachelor of Fine Arts (BFA)",
+  "Bachelor of Business Administration (BBA)",
+  "Bachelor of Engineering (BEng)",
+  "Bachelor of Architecture (BArch)",
+  "Bachelor of Laws (LLB)",
+  "Bachelor of Education (BEd)",
+  "Master of Arts (MA)",
+  "Master of Science (MS)",
+  "Master of Business Administration (MBA)",
+  "Master of Fine Arts (MFA)",
+  "Master of Public Administration (MPA)",
+  "Master of Social Work (MSW)",
+  "Master of Education (MEd)",
+  "Master of Engineering (MEng)",
+  "Master of Architecture (MArch)",
+  "Master of Public Health (MPH)",
+  "Master of Information Technology (MIT)",
+  "Master of Laws (LLM)",
+  "Doctor of Philosophy (Ph.D.)",
+  "Doctor of Education (Ed.D.)",
+  "Doctor of Medicine (MD)",
+  "Doctor of Dental Medicine (DMD)",
+  "Doctor of Veterinary Medicine (DVM)",
+  "Doctor of Psychology (Psy.D.)",
+  "Doctor of Business Administration (DBA)",
+  "Doctor of Juridical Science (SJD)",
+  "Juris Doctor (JD)",
+  "Doctor of Pharmacy (Pharm.D.)",
+  "Bachelor of Nursing (BSN)",
+  "Bachelor of Social Work (BSW)",
+  "Bachelor of Computer Science (BCS)",
+  "Bachelor of Information Technology (BIT)",
+  "Bachelor of Environmental Science (BES)",
+  "Bachelor of Music (BM)",
+  "Bachelor of Fine Arts in Film (BFA)",
+  "Graduate Certificate",
+  "Postgraduate Diploma",
+  "Professional Certificate",
+  "Advanced Diploma",
+  "Diploma",
+  "Online Bachelor's Degrees",
+  "Online Master's Degrees",
+  "Online Doctoral Degrees",
+  "Honorary Doctorate",
+  "Joint Bachelor's-Master's Programs",
+  "Joint Degrees in Law and Business",
+];
 </script>
 
 <template>
@@ -52,24 +109,25 @@ const allEducations = computed(() => {
       :key="index"
       :class="$style.education"
     >
-      <FieldLabel label="School" />
-      <InputText v-model="education.school" />
-      <FieldLabel label="Degree" :required="!!education.school" />
-      <InputText v-model="education.degree" :required="!!education.school" />
+      <div :class="$style.divider" />
+      <FieldLabel label="School" :required="index === 0" />
+      <InputText v-model="education.school" :required="index === 0" />
+      <FieldLabel label="Course" :required="index === 0" />
+      <InputText v-model="education.course" :required="index === 0" />
+      <FieldLabel label="Degree" :required="index === 0" />
+      <InputSelect
+        v-model="education.degree"
+        :items="degrees"
+        :required="index === 0"
+      />
       <div :class="$style.date_wrap">
         <div :class="$style.startDate">
-          <FieldLabel label="From" :required="!!education.school" />
-          <InputDate
-            v-model="education.startDate"
-            :required="!!education.school"
-          />
+          <FieldLabel label="From" required />
+          <InputDate v-model="education.startDate" required />
         </div>
         <div :class="$style.endDate">
-          <FieldLabel label="To" :required="!!education.school" />
-          <InputDate
-            v-model="education.endDate"
-            :required="!!education.school"
-          />
+          <FieldLabel label="To" required />
+          <InputDate v-model="education.endDate" required />
         </div>
       </div>
     </div>
@@ -77,8 +135,8 @@ const allEducations = computed(() => {
     <div :class="$style.btn_label_wrap">
       <ButtonLabel
         label="Add Education"
-        @click="openNewEducationModal = true"
         plus
+        @click="openNewEducationModal = true"
       />
       <ButtonLabel
         label="Remove Education"
@@ -89,7 +147,7 @@ const allEducations = computed(() => {
 
     <AddEducation
       :visible="openNewEducationModal"
-      @add-field="(data) => addNewField(data)"
+      @add-education="(data) => addNewField(data)"
       @close="openNewEducationModal = false"
     />
 
@@ -118,10 +176,6 @@ const allEducations = computed(() => {
     margin: 50px 0 10px 0;
   }
 
-  .education:not(:last-of-type) {
-    margin-bottom: 50px;
-  }
-
   .date_wrap {
     display: flex;
     align-items: center;
@@ -131,6 +185,11 @@ const allEducations = computed(() => {
     .endDate {
       width: 100%;
     }
+  }
+
+  .education:not(:first-of-type) .divider {
+    border: 1px dashed colors.use(light-gray);
+    margin-top: 50px;
   }
 
   .btn_label_wrap {

@@ -24,6 +24,7 @@ const showModal = computed({
 
 const data = ref<EducationType>({
   school: "",
+  course: "",
   degree: "",
   startDate: "",
   endDate: "",
@@ -31,6 +32,7 @@ const data = ref<EducationType>({
 
 const addEducation = () => {
   emit("addEducation", data.value);
+  // clear form
   data.value.school = "";
   data.value.degree = "";
   data.value.startDate = "";
@@ -106,6 +108,8 @@ const degrees = [
       <div :class="$style.form">
         <FieldLabel label="School" required />
         <InputText v-model="data.school" required />
+        <FieldLabel label="Course" required />
+        <InputText v-model="data.course" required />
         <FieldLabel label="Degree" required />
         <InputSelect v-model="data.degree" :items="degrees" />
         <FieldLabel label="From" required />
