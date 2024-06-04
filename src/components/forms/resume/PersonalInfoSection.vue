@@ -45,7 +45,7 @@ const removeField = (index: number) => {
       can reach you.
     </p>
     <div :class="$style.personal_info_form">
-      <template v-for="(data, index) in personalInfoData">
+      <template v-for="(data, index) in personalInfoData" :key="index">
         <FieldLabel :label="data.title" :required="data.required" />
         <InputText
           v-model="data.value"
@@ -62,13 +62,13 @@ const removeField = (index: number) => {
             @click="openNewInfoModal = true"
           />
           <ButtonLabel
-            @click="canRemoveFields = true"
             label="Remove Fields"
             minus
+            @click="canRemoveFields = true"
           />
         </template>
         <template v-else>
-          <BaseButton @click="canRemoveFields = false" outline>
+          <BaseButton outline @click="canRemoveFields = false">
             Done
           </BaseButton>
         </template>

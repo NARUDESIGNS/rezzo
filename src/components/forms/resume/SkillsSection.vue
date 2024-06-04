@@ -18,8 +18,9 @@ const skills = ref<Skills>([]);
           borderRadius: '5px',
           margin: '0 5px',
         }"
-        >Enter</span
       >
+        Enter
+      </span>
       key to add.
     </p>
     <InputMultiText v-model:data="skills" label="Skills" required />
