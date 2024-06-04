@@ -23,7 +23,6 @@ const styles = computed(() => ({
 }));
 
 const selectInput = ref(null);
-console.log(selectInput.value);
 </script>
 
 <template>
@@ -37,7 +36,9 @@ console.log(selectInput.value);
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
     >
-      <option disabled value="">{{ placeholder || "Select an option" }}</option>
+      <option disabled selected value="">
+        {{ placeholder || "Select an option" }}
+      </option>
       <option v-for="item in items" :key="item" :value="item">
         {{ item }}
       </option>
