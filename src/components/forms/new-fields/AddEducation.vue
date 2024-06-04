@@ -14,7 +14,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "close"): void;
-  (e: "addField", data: EducationType): void;
+  (e: "addEducation", data: EducationType): void;
 }>();
 
 const showModal = computed({
@@ -29,8 +29,8 @@ const data = ref<EducationType>({
   endDate: "",
 });
 
-const addField = () => {
-  emit("addField", data.value);
+const addEducation = () => {
+  emit("addEducation", data.value);
   data.value.school = "";
   data.value.degree = "";
   data.value.startDate = "";
@@ -98,7 +98,7 @@ const degrees = [
 </script>
 
 <template>
-  <div @keyup.enter="addField">
+  <div @keyup.enter="addEducation">
     <BaseDialog v-model="showModal" disable-close>
       <template #header>
         <h3>Add New Education</h3>
@@ -115,8 +115,8 @@ const degrees = [
       </div>
       <template #buttons>
         <BaseButton danger @click="$emit('close')"> Cancel </BaseButton>
-        <BaseButton @click="addField" :disabled="someFieldsAreEmpty">
-          Add Field
+        <BaseButton :disabled="someFieldsAreEmpty" @click="addEducation">
+          Add Education
         </BaseButton>
       </template>
     </BaseDialog>
