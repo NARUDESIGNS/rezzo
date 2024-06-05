@@ -1,30 +1,27 @@
 <script setup lang="ts">
+import { useVModel } from "@vueuse/core";
 import { ref } from "vue";
 import InputCheckbox from "./InputCheckbox.vue";
 
-defineProps<{
+const props = defineProps<{
   modelValue?: boolean;
   label?: string;
 }>();
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "update:modelValue", value: boolean): void;
 }>();
 
-const value = ref();
+const value = useVModel(props, "modelValue", emit);
 const generateID = () => new Date().getTime().toString() + Math.random();
 const uniqueID = ref(generateID());
 </script>
 
 <template>
   <div :class="$style.checkbox_wrap">
-    <InputCheckbox
-      :id="uniqueID"
-      v-model="value"
-      @update:model-vaue="(value) => $emit('update:modelValue', value)"
-    />
+    <InputCheckbox :id="uniqueID" v-model="value" />
     <label :class="$style.checkbox_label" :for="uniqueID">
-      <slot> {{ label }} </slot> {{ modelValue }}
+      <slot> {{ label }} </slot>
     </label>
   </div>
 </template>

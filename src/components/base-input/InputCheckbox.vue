@@ -11,11 +11,14 @@ const props = withDefaults(
     size?: number;
   }>(),
   {
-    modelValue: false,
     color: "#1967ff",
     size: 32,
   }
 );
+
+defineEmits<{
+  (e: "update:modelValue", value: boolean): void;
+}>();
 
 const input = ref(null as unknown as HTMLElement);
 
@@ -39,9 +42,9 @@ const styles = computed(() => ({
 
 <template>
   <input
+    ref="input"
     :class="[$style.input, styles]"
     type="checkbox"
-    ref="input"
     :disabled="disabled"
     :checked="modelValue"
     @change="
