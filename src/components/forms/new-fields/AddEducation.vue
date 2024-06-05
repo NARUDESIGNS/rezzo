@@ -34,6 +34,7 @@ const addEducation = () => {
   emit("addEducation", data.value);
   // clear form
   data.value.school = "";
+  data.value.course = "";
   data.value.degree = "";
   data.value.startDate = "";
   data.value.endDate = "";
