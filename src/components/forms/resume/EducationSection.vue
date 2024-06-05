@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
@@ -7,7 +8,7 @@ import InputDate from "@/components/base-input/InputDate.vue";
 import InputSelect from "@/components/base-input/InputSelect.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { EducationType } from "@/types/EducationType";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import AddEducation from "../new-fields/AddEducation.vue";
 
 const educationData = ref<EducationType[]>([
@@ -34,12 +35,9 @@ const addNewField = (data: EducationType) => {
 };
 
 const showRemovalModal = ref(false);
-const allEducations = computed(() => {
-  const data: { [key: string]: boolean } = {};
-  educationData.value.map((item) => {
-    data[item.school] = true;
-  });
-  return data;
+const allSchools = ref<{ [key: string]: boolean }>({});
+educationData.value.map((item, index) => {
+  if (index > 0) allSchools.value[item.school] = false;
 });
 
 const degrees = [
@@ -95,6 +93,15 @@ const degrees = [
   "Joint Bachelor's-Master's Programs",
   "Joint Degrees in Law and Business",
 ];
+
+function removeEducation() {
+  educationData.value.forEach((item, index) => {
+    if (item.school in allSchools.value && allSchools.value[item.school]) {
+      educationData.value.splice(index, 1);
+    }
+  });
+  showRemovalModal.value = false;
+}
 </script>
 
 <template>
@@ -139,6 +146,7 @@ const degrees = [
         @click="openNewEducationModal = true"
       />
       <ButtonLabel
+        :disabled="!(educationData.length > 1)"
         label="Remove Education"
         minus
         @click="showRemovalModal = true"
@@ -152,15 +160,22 @@ const degrees = [
     />
 
     <BaseDialog v-model="showRemovalModal">
-      Please select the school you'd like to remove:
-      <InputCheckboxLabel
-        v-for="(education, index) in educationData"
-        :key="index"
-        v-model="allEducations[education.school as keyof typeof allEducations]"
-      >
-        {{ education.school }}
-      </InputCheckboxLabel>
-      {{ allEducations }}
+      <template #header>
+        <h3>Remove Education</h3>
+      </template>
+      Please select the school(s) you'd like to remove:
+      <template v-for="(education, index) in educationData" :key="index">
+        <InputCheckboxLabel
+          v-if="index > 0"
+          v-model="allSchools[education.school]"
+          :label="education.school"
+        />
+      </template>
+      <template #buttons>
+        <BaseButton danger @click="removeEducation">
+          Remove Education
+        </BaseButton>
+      </template>
     </BaseDialog>
   </div>
 </template>
