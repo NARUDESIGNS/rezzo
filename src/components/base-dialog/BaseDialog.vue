@@ -13,7 +13,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div :class="$style.wrap" v-if="modelValue">
+  <div v-if="modelValue" :class="$style.wrap">
     <BaseBackdrop visible />
     <div :class="$style.modal_wrap">
       <div :class="$style.content_wrap">
