@@ -69,12 +69,15 @@ const currentJob = ref(false);
         max="10"
         required
       />
-      <div :class="$style.task_action">
+      <div :class="$style.taskAction">
         <ButtonLabel label="Remove Tasks" minus />
         <ButtonLabel label="Add New Task" plus />
       </div>
     </div>
-    <ButtonLabel label="Add New Experience" plus />
+    <div :class="$style.experienceAction">
+      <ButtonLabel label="Add New Experience" plus />
+      <ButtonLabel label="Remove Experience" minus />
+    </div>
   </div>
 </template>
 
@@ -88,41 +91,43 @@ const currentJob = ref(false);
     color: colors.use("primary");
     margin: 50px 0 10px 0;
   }
+}
+.experience_date {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 
-  .experience_date {
+  .dateFrom,
+  .dateTo {
+    width: 100%;
+  }
+}
+.checkbox_wrap {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+
+  .checkbox_label {
+    cursor: pointer;
+    user-select: none;
+  }
+}
+.impact_wrap {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+
+  .taskAction {
     display: flex;
-    align-items: center;
     gap: 20px;
-
-    .dateFrom,
-    .dateTo {
-      width: 100%;
-    }
+    width: 100%;
   }
+}
 
-  .checkbox_wrap {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-
-    .checkbox_label {
-      cursor: pointer;
-      user-select: none;
-    }
-  }
-
-  .impact_wrap {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-
-    .task_action {
-      display: flex;
-      gap: 20px;
-      width: 100%;
-    }
-  }
+.experienceAction {
+  display: flex;
+  gap: 20px;
 }
 
 @media screen and (max-width: 715px) {
@@ -130,7 +135,7 @@ const currentJob = ref(false);
     display: flex;
     flex-direction: column;
 
-    .task_action {
+    .taskAction {
       flex-wrap: wrap;
     }
   }
@@ -138,11 +143,17 @@ const currentJob = ref(false);
 
 @media screen and (max-width: 560px) {
   .section {
-    .experience_date {
+    .experience_date,
+    .experienceAction {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       gap: 0 !important;
+    }
+
+    .experienceAction {
+      gap: 10px !important;
+      align-items: flex-start;
     }
   }
 }
