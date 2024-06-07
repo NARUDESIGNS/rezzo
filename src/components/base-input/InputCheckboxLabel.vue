@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
+import { nanoid } from "nanoid";
 import { ref } from "vue";
 import InputCheckbox from "./InputCheckbox.vue";
 
@@ -13,8 +14,7 @@ const emit = defineEmits<{
 }>();
 
 const value = useVModel(props, "modelValue", emit);
-const generateID = () => new Date().getTime().toString() + Math.random();
-const uniqueID = ref(generateID());
+const uniqueID = ref(nanoid());
 </script>
 
 <template>
