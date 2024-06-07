@@ -2,10 +2,6 @@
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import { computed, useCssModule } from "vue";
 
-defineOptions({
-  inheritAttrs: false,
-});
-
 const props = withDefaults(
   defineProps<{
     modelValue?: string | number;
@@ -18,6 +14,8 @@ const props = withDefaults(
   }>(),
   {
     modelValue: undefined,
+    errorMsg: undefined,
+    placeholder: undefined,
   }
 );
 
@@ -25,6 +23,10 @@ defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
   (e: "input-removed", inputLabel: string): void;
 }>();
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const $style = useCssModule();
 const styles = computed(() => ({
@@ -37,17 +39,17 @@ const styles = computed(() => ({
   <div :class="[$style.container]">
     <textarea
       :value="modelValue"
+      rows="4"
+      :class="[$style.input, styles, $attrs.class]"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      v-bind="$attrs"
       @input="
         $emit(
           'update:modelValue',
           ($event.target as HTMLInputElement).value.trim()
         )
       "
-      :class="[$style.input, styles, $attrs.class]"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      v-bind="$attrs"
-      rows="4"
     />
     <template v-if="showButton">
       <ButtonLabel
