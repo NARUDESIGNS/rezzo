@@ -1,15 +1,24 @@
 <script setup lang="ts">
 import XIcon from "@/assets/XIcon.vue";
 import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
+import { watch } from "vue";
 
-defineProps<{
+const props = defineProps<{
   modelValue: boolean;
   disableClose?: boolean;
 }>();
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "update:modelValue", value: boolean): void;
+  (e: "close"): void;
 }>();
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!props.modelValue) emit("close");
+  }
+);
 </script>
 
 <template>
@@ -23,7 +32,7 @@ defineEmits<{
           tabIndex="0"
           @click="$emit('update:modelValue', false)"
         >
-          <XIcon />
+          <XIcon @click="$emit('close')" />
         </span>
         <div :class="$style.header">
           <slot name="header" />

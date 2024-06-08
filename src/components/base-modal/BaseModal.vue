@@ -15,13 +15,13 @@ withDefaults(
     clickAnywhere?: boolean;
   }>(),
   {
-    modelValue: false,
     slideFrom: "right",
   }
 );
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: boolean): void;
+  (e: "close"): void;
 }>();
 
 const modalElement = ref<HTMLElement>();
@@ -38,15 +38,16 @@ const slideOut = () => {
 
 <template>
   <div v-if="modelValue" :class="$style.modal_wrap">
-    <BaseBackdrop @click="clickAnywhere && slideOut()" visible />
-    <div :class="[$style.modal, 'slide-in']" ref="modalElement">
+    <BaseBackdrop visible @click="clickAnywhere && slideOut()" />
+    <div ref="modalElement" :class="[$style.modal, 'slide-in']">
       <div :class="[$style.header, { [$style.divider]: !!$slots.header }]">
         <button
           v-show="enableClose"
           :class="$style.close_btn"
+          type="button"
           @click="slideOut"
         >
-          <XIcon :class="$style.close_icon" />
+          <XIcon :class="$style.close_icon" @click="$emit('close')" />
         </button>
         <slot name="header" />
       </div>
