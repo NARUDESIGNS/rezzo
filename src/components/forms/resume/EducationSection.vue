@@ -8,6 +8,7 @@ import InputDate from "@/components/base-input/InputDate.vue";
 import InputSelect from "@/components/base-input/InputSelect.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { EducationType } from "@/types/EducationType";
+import { parse } from "date-fns";
 import { ref } from "vue";
 import AddEducation from "../new-fields/AddEducation.vue";
 
@@ -102,6 +103,14 @@ function removeEducation() {
   });
   showRemovalModal.value = false;
 }
+
+function clearRemovalSelections() {
+  for (let selection in allSchools.value) {
+    if (Object.hasOwn(allSchools.value, selection)) {
+      allSchools.value[selection] = false;
+    }
+  }
+}
 </script>
 
 <template>
@@ -117,30 +126,40 @@ function removeEducation() {
       :class="$style.education"
     >
       <div :class="$style.divider" />
-      <FieldLabel label="School" :required="index === 0" />
-      <InputText v-model="education.school" :required="index === 0" />
-      <FieldLabel label="Course" :required="index === 0" />
-      <InputText v-model="education.course" :required="index === 0" />
-      <FieldLabel label="Degree" :required="index === 0" />
+      <FieldLabel label="School" />
+      <InputText v-model="education.school" />
+      <FieldLabel label="Course" :required="!!education.school" />
+      <InputText v-model="education.course" :required="!!education.school" />
+      <FieldLabel label="Degree" :required="!!education.school" />
       <InputSelect
         v-model="education.degree"
         :items="degrees"
-        :required="index === 0"
+        :required="!!education.school"
       />
       <div :class="$style.date_wrap">
         <div :class="$style.startDate">
-          <FieldLabel label="From" required />
-          <InputDate v-model="education.startDate" required />
+          <FieldLabel label="From" :required="!!education.school" />
+          <InputDate
+            v-model="education.startDate"
+            :max="new Date()"
+            :required="!!education.school"
+          />
         </div>
         <div :class="$style.endDate">
-          <FieldLabel label="To" required />
-          <InputDate v-model="education.endDate" required />
+          <FieldLabel label="To" :required="!!education.school" />
+          <InputDate
+            v-model="education.endDate"
+            :min="parse(education.startDate, 'dd/MM/yyyy', new Date())"
+            :disabled="!education.startDate"
+            :required="!!education.school"
+          />
         </div>
       </div>
     </div>
 
     <div :class="$style.btn_label_wrap">
       <ButtonLabel
+        :disabled="!educationData[educationData.length - 1].school"
         label="Add Education"
         plus
         @click="openNewEducationModal = true"
@@ -159,7 +178,7 @@ function removeEducation() {
       @close="openNewEducationModal = false"
     />
 
-    <BaseDialog v-model="showRemovalModal">
+    <BaseDialog v-model="showRemovalModal" @close="clearRemovalSelections">
       <template #header>
         <h3>Remove Education</h3>
       </template>
@@ -204,7 +223,7 @@ function removeEducation() {
 
   .education:not(:first-of-type) .divider {
     border: 1px dashed colors.use(light-gray);
-    margin-top: 50px;
+    margin: 50px 0;
   }
 
   .btn_label_wrap {
