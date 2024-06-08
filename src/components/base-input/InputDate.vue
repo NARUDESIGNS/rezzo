@@ -8,6 +8,8 @@ defineProps<{
   modelValue: string;
   disabled?: boolean;
   required?: boolean;
+  min?: Date | string;
+  max?: Date | string;
 }>();
 
 const emit = defineEmits<{
@@ -27,6 +29,8 @@ const handleEmit = (value: Date) => {
     format="dd/MM/yyyy"
     :disabled="disabled"
     :month-change-on-scroll="false"
+    :min-date="min"
+    :max-date="max"
     text-input
     auto-apply
     month-name-format="long"
