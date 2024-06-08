@@ -6,6 +6,7 @@ import InputDate from "@/components/base-input/InputDate.vue";
 import InputSelect from "@/components/base-input/InputSelect.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { EducationType } from "@/types/EducationType";
+import { parse } from "date-fns";
 import { computed, ref } from "vue";
 
 const props = defineProps<{
@@ -32,12 +33,6 @@ const data = ref<EducationType>({
 
 const addEducation = () => {
   emit("addEducation", data.value);
-  // clear form
-  data.value.school = "";
-  data.value.course = "";
-  data.value.degree = "";
-  data.value.startDate = "";
-  data.value.endDate = "";
   emit("close");
 };
 
@@ -98,11 +93,20 @@ const degrees = [
   "Joint Bachelor's-Master's Programs",
   "Joint Degrees in Law and Business",
 ];
+
+// clear form
+function clearForm() {
+  data.value.school = "";
+  data.value.course = "";
+  data.value.degree = "";
+  data.value.startDate = "";
+  data.value.endDate = "";
+}
 </script>
 
 <template>
   <div @keyup.enter="addEducation">
-    <BaseDialog v-model="showModal" disable-close>
+    <BaseDialog v-model="showModal" disable-close @close="clearForm">
       <template #header>
         <h3>Add New Education</h3>
       </template>
@@ -114,9 +118,14 @@ const degrees = [
         <FieldLabel label="Degree" required />
         <InputSelect v-model="data.degree" :items="degrees" />
         <FieldLabel label="From" required />
-        <InputDate v-model="data.startDate" required />
+        <InputDate v-model="data.startDate" :max="new Date()" required />
         <FieldLabel label="To" required />
-        <InputDate v-model="data.endDate" required />
+        <InputDate
+          v-model="data.endDate"
+          :min="parse(data.startDate, 'dd/MM/yyyy', new Date())"
+          :disabled="!data.startDate"
+          required
+        />
       </div>
       <template #buttons>
         <BaseButton danger @click="$emit('close')"> Cancel </BaseButton>
