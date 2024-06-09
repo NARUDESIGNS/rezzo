@@ -20,7 +20,7 @@ const currentJob = ref(false);
 
 <template>
   <div :class="$style.section">
-    <h3 :class="$style.sub_header">Experience</h3>
+    <h3 :class="$style.header">Experience</h3>
     <p :class="$style.description">
       Include relevant details such as job titles, company names, dates, and
       concise descriptions of your experiences. Carefully include the tasks you
@@ -51,7 +51,8 @@ const currentJob = ref(false);
         I currently work here
       </label>
     </div>
-    <FieldLabel label="List a task you worked on" required />
+    <h4 :class="$style.subHeader">Tasks</h4>
+    <FieldLabel label="List a task you worked on" required no-margin="top" />
     <InputTextArea
       placeholder="In one sentence, state a task or an action you took at the company that benefited them"
     />
@@ -87,7 +88,11 @@ const currentJob = ref(false);
 .section {
   margin-top: 35px;
 
-  .sub_header {
+  .header {
+    color: colors.use("primary");
+    margin: 50px 0 10px 0;
+  }
+  .subHeader {
     color: colors.use("primary");
     margin: 50px 0 10px 0;
   }
