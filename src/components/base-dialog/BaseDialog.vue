@@ -4,7 +4,9 @@ import BaseBackdrop from "@/components/base-backdrop/BaseBackdrop.vue";
 import { watch } from "vue";
 
 const props = defineProps<{
+  /** Model value */
   modelValue: boolean;
+  /** Disable close button */
   disableClose?: boolean;
 }>();
 

@@ -12,6 +12,7 @@ import { reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 
 defineProps<{
+  /** Dark Mode */
   darkMode?: boolean;
 }>();
 
@@ -76,9 +77,9 @@ const getIcon = (item: string) => {
     <nav :class="$style.nav">
       <ul :class="$style.nav_items">
         <RouterLink
-          :to="item.route"
           v-for="(item, index) in navItems"
           :key="index"
+          :to="item.route"
           :class="[
             $style.item,
             {
@@ -97,9 +98,9 @@ const getIcon = (item: string) => {
   <BaseModal v-model="showModal" enable-close>
     <ul :class="$style.mobile_nav_items">
       <RouterLink
-        :to="item.route"
         v-for="item in navItems"
         :key="item.caption"
+        :to="item.route"
         :class="[
           $style.mobile_menu_item,
           {

@@ -20,7 +20,8 @@ const props = withDefaults(
     outline?: boolean;
   }>(),
   {
-    disabled: false,
+    value: undefined,
+    width: undefined,
   }
 );
 

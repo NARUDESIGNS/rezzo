@@ -1,11 +1,12 @@
 <script setup lang="ts">
 defineProps<{
+  /** Visibility */
   visible?: boolean;
 }>();
 </script>
 
 <template>
-  <div v-if="visible" :class="$style.backdrop"></div>
+  <div v-if="visible" :class="$style.backdrop" />
 </template>
 
 <style module lang="scss">

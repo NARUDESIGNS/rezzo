@@ -2,12 +2,19 @@
 import { computed, useCssModule } from "vue";
 
 const props = defineProps<{
+  /** Label */
   label?: string;
+  /** Action */
   action?: () => void;
+  /** Href link */
   href?: string;
+  /** Disable action */
   disabled?: boolean;
+  /** Danger */
   danger?: boolean;
+  /** Warning */
   warning?: boolean;
+  /** Open new page */
   newPage?: boolean;
 }>();
 
@@ -23,8 +30,8 @@ const styles = computed(() => ({
   <a
     :href="href"
     :target="newPage ? '_blank' : ''"
-    @click="action"
     :class="[$style.action, styles]"
+    @click="action"
   >
     <slot>
       {{ label }}

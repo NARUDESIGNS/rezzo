@@ -2,6 +2,7 @@
 import BaseAction from "./base-action/BaseAction.vue";
 
 defineProps<{
+  /** Dark Mode */
   darkMode?: boolean;
 }>();
 </script>

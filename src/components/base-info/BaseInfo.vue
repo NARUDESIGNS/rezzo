@@ -4,9 +4,13 @@ import XIcon from "@/assets/XIcon.vue";
 import { computed, ref, useCssModule } from "vue";
 
 const props = defineProps<{
-  enableClose?: boolean;
+  /** Disable close button */
+  disableClose?: boolean;
+  /** Primary */
   primary?: boolean;
+  /** Danger */
   danger?: boolean;
+  /** Warning */
   warning?: boolean;
 }>();
 
@@ -28,7 +32,7 @@ const visible = ref(false);
   <Transition name="fade">
     <div v-if="!visible" :class="[$style.wrap, styles]">
       <XIcon
-        v-if="enableClose"
+        v-if="!disableClose"
         :class="$style.close_icon"
         @click="$emit('close'), (visible = true)"
       />

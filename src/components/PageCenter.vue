@@ -3,6 +3,7 @@ import PageFooter from "@/components/PageFooter.vue";
 import PageNav from "@/components/PageNav.vue";
 
 defineProps<{
+  /** Hide Navigation */
   hideNav?: boolean;
 }>();
 </script>

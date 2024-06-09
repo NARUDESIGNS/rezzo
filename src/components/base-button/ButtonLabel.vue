@@ -5,14 +5,20 @@ import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
+    /** Minus button */
     minus?: boolean;
+    /** Plus button */
     plus?: boolean;
+    /** Label */
     label?: string;
+    /** Size */
     size?: number;
+    /** Disabled */
     disabled?: boolean;
   }>(),
   {
     size: 32,
+    label: undefined,
   }
 );
 
@@ -28,8 +34,8 @@ const size = computed(() => `${props.size}px`);
     ]"
     :disabled="disabled"
   >
-    <MinusCircleIcon :class="$style.icon_minus" v-if="minus" />
-    <PlusCircleIcon :class="$style.icon_plus" v-else />
+    <MinusCircleIcon v-if="minus" :class="$style.icon_minus" />
+    <PlusCircleIcon v-else :class="$style.icon_plus" />
 
     <p :class="$style.label">
       <slot>
