@@ -2,31 +2,32 @@
 import SearchIcon from "@/assets/SearchIcon.vue";
 import InputText from "@/components/base-input/InputText.vue";
 
-defineOptions({
-  inheritAttrs: false,
-});
-
 defineProps<{
+  /** Model value */
   modelValue?: string;
 }>();
 
 defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
 }>();
+
+defineOptions({
+  inheritAttrs: false,
+});
 </script>
 
 <template>
   <div :class="[$style.container, $attrs.class]">
     <InputText
       :value="modelValue"
+      v-bind="$attrs"
+      :class="$style.input"
       @input="
         $emit(
           'update:modelValue',
           ($event.target as HTMLInputElement).value.trim()
         )
       "
-      v-bind="$attrs"
-      :class="$style.input"
     />
     <SearchIcon :class="$style.icon" />
   </div>

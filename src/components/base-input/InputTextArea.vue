@@ -4,12 +4,19 @@ import { computed, useCssModule } from "vue";
 
 const props = withDefaults(
   defineProps<{
+    /** Model value */
     modelValue?: string | number;
+    /** Required field */
     required?: boolean;
+    /** Error */
     error?: boolean;
+    /** Error message */
     errorMsg?: string;
+    /** Disabled */
     disabled?: boolean;
+    /** Placeholder */
     placeholder?: string;
+    /** Show remove button */
     showButton?: boolean;
   }>(),
   {

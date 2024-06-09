@@ -3,11 +3,17 @@ import { computed, onMounted, ref, useCssModule } from "vue";
 
 const props = withDefaults(
   defineProps<{
+    /** Model Value */
     modelValue?: boolean;
+    /** Checkbox with background color */
     filled?: boolean;
+    /** Disabled */
     disabled?: boolean;
+    /** Color */
     color?: string;
+    /** Checkbox with error */
     error?: boolean;
+    /** size */
     size?: number;
   }>(),
   {
@@ -35,7 +41,7 @@ const size = computed(() => {
 
 const $style = useCssModule();
 const styles = computed(() => ({
-  [$style.filled_style]: props.filled,
+  [$style.filledStyle]: props.filled,
   [$style.error]: props.error,
 }));
 </script>
@@ -113,11 +119,11 @@ const styles = computed(() => ({
   cursor: not-allowed;
 }
 
-.filled_style:checked:after {
+.filledStyle:checked:after {
   border-color: white;
   visibility: visible;
 }
-.filled_style:checked:before {
+.filledStyle:checked:before {
   border: 1px solid transparent;
   background-color: var(--inputCheckbox);
 }

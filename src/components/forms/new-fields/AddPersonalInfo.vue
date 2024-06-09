@@ -7,6 +7,7 @@ import { NewPersonalInfoType } from "@/types/PersonalInfoType";
 import { computed, ref } from "vue";
 
 const props = defineProps<{
+  /** Toggle visibility */
   visible: boolean;
 }>();
 
@@ -47,7 +48,7 @@ const addField = () => {
       </div>
       <template #buttons>
         <BaseButton danger @click="$emit('close')"> Cancel </BaseButton>
-        <BaseButton @click="addField" :disabled="!data.title || !data.value">
+        <BaseButton :disabled="!data.title || !data.value" @click="addField">
           Add Field
         </BaseButton>
       </template>

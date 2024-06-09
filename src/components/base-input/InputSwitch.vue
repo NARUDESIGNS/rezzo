@@ -1,24 +1,31 @@
 <script setup lang="ts">
 defineProps<{
+  /** Model value */
   modelValue?: boolean;
+  /** Input ID */
   id?: string;
+  /** Disabled */
   disabled?: boolean;
+}>();
+
+defineEmits<{
+  "update:modelValue": [value: boolean]; // vue v3.3+ more succint emit syntax
 }>();
 </script>
 
 <template>
   <input
+    :id="id"
     :class="$style.input"
     type="checkbox"
-    :id="id"
     :checked="modelValue"
+    :disabled="disabled"
     @change="
       $emit(
         'update:modelValue',
         ($event.target as unknown as HTMLInputElement).checked
       )
     "
-    :disabled="disabled"
   />
 </template>
 

@@ -4,17 +4,18 @@ import EyeOpenIcon from "@/assets/EyeOpenIcon.vue";
 import { ref } from "vue";
 import InputText from "./InputText.vue";
 
-defineOptions({
-  inheritAttrs: false,
-});
-
 defineProps<{
+  /** Model value */
   modelValue?: string;
 }>();
 
 defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
 }>();
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const type = ref("password");
 const showPassword = () => (type.value = "text");
@@ -26,24 +27,24 @@ const hidePassword = () => (type.value = "password");
     <InputText
       :type="type"
       :value="modelValue"
+      v-bind="$attrs"
+      :class="$style.input"
       @input="
         $emit(
           'update:modelValue',
           ($event.target as HTMLInputElement).value.trim()
         )
       "
-      v-bind="$attrs"
-      :class="$style.input"
     />
     <EyeCloseIcon
       v-if="type === 'password'"
-      @click="showPassword"
       :class="$style.icon"
+      @click="showPassword"
     />
     <EyeOpenIcon
       v-if="type === 'text'"
-      @click="hidePassword"
       :class="$style.icon"
+      @click="hidePassword"
     />
   </div>
 </template>

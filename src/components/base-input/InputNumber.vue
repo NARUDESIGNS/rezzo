@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import InputText from "./InputText.vue";
 defineProps<{
+  /** Minimum number */
   min?: number;
+  /** Maximum number */
   max?: number;
 }>();
 </script>

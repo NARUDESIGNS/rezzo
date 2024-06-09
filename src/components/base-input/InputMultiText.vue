@@ -4,18 +4,22 @@ import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import { capitalize, computed, useCssModule } from "vue";
 
-defineOptions({
-  inheritAttrs: false,
-});
-
 const props = defineProps<{
+  /** Data */
   data: string[];
+  /** Label */
   label?: string;
+  /** Required */
   required?: boolean;
+  /** Error */
   error?: boolean;
+  /** Error message */
   errorMsg?: string;
+  /** Disabled */
   disabled?: boolean;
+  /** Placeholder */
   placeholder?: string;
+  /** Show remove button  */
   showButton?: boolean;
 }>();
 
@@ -24,6 +28,10 @@ const emit = defineEmits<{
   (e: "update:data", data: string[]): void;
   (e: "input-removed"): void;
 }>();
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const $style = useCssModule();
 const styles = computed(() => ({
@@ -47,8 +55,9 @@ const emitData = () => {
           <span>{{ item }}</span>
           <button
             :class="$style.remove_btn"
-            @click="removeItem(index)"
             tabindex="0"
+            type="button"
+            @click="removeItem(index)"
           >
             <XIcon />
           </button>
@@ -56,18 +65,30 @@ const emitData = () => {
       </div>
     </template>
     <FieldLabel
-      :class="$style.label"
       v-if="label"
+      :class="$style.label"
       :label="label"
       :required="required"
     />
     <input
-      @change="(e) => {items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = '', emitData()}"
-      @keydown.enter.prevent="(e) => {(e.target as HTMLInputElement).value && items.push(capitalize((e.target as HTMLInputElement).value)), (e.target as HTMLInputElement).value = ''}"
+      v-bind="$attrs"
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
-      v-bind="$attrs"
+      @change="
+        (e) => {
+          items.push(capitalize((e.target as HTMLInputElement).value)),
+            ((e.target as HTMLInputElement).value = ''),
+            emitData();
+        }
+      "
+      @keydown.enter.prevent="
+        (e) => {
+          (e.target as HTMLInputElement).value &&
+            items.push(capitalize((e.target as HTMLInputElement).value)),
+            ((e.target as HTMLInputElement).value = '');
+        }
+      "
     />
     <template v-if="showButton">
       <ButtonLabel

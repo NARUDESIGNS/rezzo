@@ -10,6 +10,7 @@ import { parse } from "date-fns";
 import { computed, ref } from "vue";
 
 const props = defineProps<{
+  /** Toggle visibility */
   visible: boolean;
 }>();
 

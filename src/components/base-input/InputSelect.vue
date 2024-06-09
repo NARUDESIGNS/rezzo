@@ -3,12 +3,19 @@ import ChevronDown from "@/assets/ChevronDown.vue";
 import { computed, ref, useCssModule } from "vue";
 
 const props = defineProps<{
+  /** Select items */
   items: string[];
+  /** Name */
   name?: string;
+  /** Placeholder */
   placeholder?: string;
+  /** Disabled */
   disabled?: boolean;
+  /** Error */
   error?: boolean;
+  /** Error message */
   errorMsg?: string;
+  /** Model value */
   modelValue?: string;
 }>();
 

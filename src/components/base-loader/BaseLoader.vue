@@ -3,8 +3,11 @@ import { computed, useCssModule } from "vue";
 
 const props = withDefaults(
   defineProps<{
+    /** Loader size in pixels (default: 24px) */
     size?: number;
+    /** Primary */
     primary?: boolean;
+    /** Loader with light colored border */
     light?: boolean;
   }>(),
   {
@@ -21,7 +24,7 @@ const style = computed(() => ({
 </script>
 
 <template>
-  <span :class="[$style.loader, style]"></span>
+  <span :class="[$style.loader, style]" />
 </template>
 
 <style module lang="scss">

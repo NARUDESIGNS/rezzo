@@ -5,10 +5,15 @@ import DatePicker from "@vuepic/vue-datepicker";
 import InputText from "./InputText.vue";
 
 defineProps<{
+  /** Model value */
   modelValue: string;
+  /** Disabled */
   disabled?: boolean;
+  /** Required */
   required?: boolean;
+  /** Minimum date */
   min?: Date | string;
+  /** Maximum date */
   max?: Date | string;
 }>();
 

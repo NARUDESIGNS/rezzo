@@ -2,9 +2,13 @@
 import { computed, useCssModule } from "vue";
 
 const props = defineProps<{
+  /** Required field */
   required?: boolean;
+  /** Field label */
   label: string;
+  /** Disabled */
   disabled?: boolean;
+  /** Hide margin */
   noMargin?: "top" | "bottom" | "both";
 }>();
 

@@ -2,22 +2,27 @@
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import { computed, useCssModule } from "vue";
 
-defineOptions({
-  inheritAttrs: false,
-});
-
 const props = withDefaults(
   defineProps<{
+    /** Model value */
     modelValue?: string | number;
+    /** Required field */
     required?: boolean;
+    /** Error */
     error?: boolean;
+    /** Error message */
     errorMsg?: string;
+    /** Disabled */
     disabled?: boolean;
+    /** Placeholder */
     placeholder?: string;
+    /** Show remove button */
     showButton?: boolean;
   }>(),
   {
     modelValue: undefined,
+    errorMsg: undefined,
+    placeholder: undefined,
   }
 );
 
@@ -25,6 +30,10 @@ defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
   (e: "input-removed"): void;
 }>();
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const $style = useCssModule();
 const styles = computed(() => ({
@@ -36,17 +45,17 @@ const styles = computed(() => ({
 <template>
   <div :class="[$style.container]">
     <input
+      v-bind="$attrs"
       :value="modelValue"
+      :class="[$style.input, styles, $attrs.class]"
+      :disabled="disabled"
+      :placeholder="placeholder"
       @input="
         $emit(
           'update:modelValue',
           ($event.target as HTMLInputElement).value.trim()
         )
       "
-      :class="[$style.input, styles, $attrs.class]"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      v-bind="$attrs"
     />
     <template v-if="showButton">
       <ButtonLabel

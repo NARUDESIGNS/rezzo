@@ -5,7 +5,9 @@ import { ref } from "vue";
 import InputCheckbox from "./InputCheckbox.vue";
 
 const props = defineProps<{
+  /** Model value */
   modelValue?: boolean;
+  /** Label */
   label?: string;
 }>();
 
