@@ -1,13 +1,23 @@
 <script setup lang="ts">
-defineProps<{
+import { computed, useCssModule } from "vue";
+
+const props = defineProps<{
   required?: boolean;
   label: string;
   disabled?: boolean;
+  noMargin?: "top" | "bottom" | "both";
 }>();
+
+const $style = useCssModule();
+const marginStyles = computed(() => ({
+  [$style.noMarginTop]: props?.noMargin === "top",
+  [$style.noMarginBottom]: props?.noMargin === "bottom",
+  [$style.noMargin]: props?.noMargin === "both",
+}));
 </script>
 
 <template>
-  <label :class="[$style.label, { [$style.disabled]: disabled }]">
+  <label :class="[$style.label, { [$style.disabled]: disabled }, marginStyles]">
     {{ label }}
     <span v-if="required" :class="$style.required_asterisk">*</span>
   </label>
@@ -29,5 +39,15 @@ defineProps<{
 .disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.noMarginTop {
+  margin-top: 0;
+}
+.noMarginBottom {
+  margin-bottom: 0;
+}
+.noMargin {
+  margin: 0;
 }
 </style>
