@@ -7,6 +7,6 @@ export interface ExperienceType {
   tasks: Array<{
     summary: string;
     skills: string[];
-    impact: number;
+    impact?: number;
   }>;
 }
