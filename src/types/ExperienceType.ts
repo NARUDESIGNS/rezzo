@@ -1,6 +1,12 @@
-export type ExperienceType = {
+export interface ExperienceType {
   company: string;
   position: string;
+  isCurrentPosition: boolean;
   fromDate: string;
-  toDate: string;
-};
+  toDate?: string;
+  tasks: Array<{
+    summary: string;
+    skills: string[];
+    impact: number;
+  }>;
+}
