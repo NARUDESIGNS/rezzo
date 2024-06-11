@@ -8,14 +8,22 @@ import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import type { ExperienceType } from "@/types/ExperienceType";
 import { ref } from "vue";
 
-const experience = ref<ExperienceType>({
-  company: "Worklio",
-  position: "Frontend Engineer",
-  fromDate: "08/03/2023",
-  toDate: "02/13/2024", //undefined,
-});
-
-const currentJob = ref(false);
+const experienceData = ref<ExperienceType[]>([
+  {
+    company: "",
+    position: "",
+    isCurrentPosition: false,
+    fromDate: "",
+    toDate: "",
+    tasks: [
+      {
+        summary: "",
+        skills: [],
+        impact: undefined,
+      },
+    ],
+  },
+]);
 </script>
 
 <template>
@@ -27,52 +35,58 @@ const currentJob = ref(false);
       worked on, the tools or technologies you used and how it impacted the
       organization.
     </p>
-    <FieldLabel label="Company" required />
-    <InputText v-model="experience.company" required />
-    <FieldLabel label="Position" required />
-    <InputText v-model="experience.position" required />
-    <div :class="$style.experience_date">
-      <div :class="$style.dateFrom">
-        <FieldLabel label="From" required />
-        <InputDate v-model="experience.fromDate" required />
+    <div v-for="(experience, index) in experienceData" :key="index">
+      <FieldLabel label="Company" required />
+      <InputText v-model="experience.company" required />
+      <FieldLabel label="Position" required />
+      <InputText v-model="experience.position" required />
+      <div :class="$style.experience_date">
+        <div :class="$style.dateFrom">
+          <FieldLabel label="From" required />
+          <InputDate v-model="experience.fromDate" required />
+        </div>
+        <div :class="$style.dateTo">
+          <FieldLabel label="To" required />
+          <InputDate
+            v-model="experience.toDate"
+            :disabled="experience.toDate === undefined"
+            required
+          />
+        </div>
       </div>
-      <div :class="$style.dateTo">
-        <FieldLabel label="To" required />
-        <InputDate
-          v-model="experience.toDate"
-          :disabled="experience.toDate === undefined"
-          required
+      <div :class="$style.checkbox_wrap">
+        <InputCheckbox
+          id="currentJob"
+          v-model="experience.isCurrentPosition"
+          filled
         />
+        <label :class="$style.checkbox_label" for="currentJob">
+          I currently work here
+        </label>
       </div>
-    </div>
-    <div :class="$style.checkbox_wrap">
-      <InputCheckbox id="currentJob" v-model="currentJob" filled />
-      <label :class="$style.checkbox_label" for="currentJob">
-        I currently work here
-      </label>
-    </div>
-    <h4 :class="$style.subHeader">Tasks</h4>
-    <FieldLabel label="List a task you worked on" required no-margin="top" />
-    <InputTextArea
-      placeholder="In one sentence, state a task or an action you took at the company that benefited them"
-    />
-    <FieldLabel label="Skill(s), Tools or Technologies Used" required />
-    <InputText
-      placeholder="What skills, tools or technologies did you use for the above task?"
-      required
-    />
-    <FieldLabel label="How would you rate the impact" required />
-    <div :class="$style.impact_wrap">
+      <h4 :class="$style.subHeader">Tasks</h4>
+      <FieldLabel label="List a task you worked on" required no-margin="top" />
+      <InputTextArea
+        placeholder="In one sentence, state a task or an action you took at the company that benefited them"
+      />
+      <FieldLabel label="Skill(s), Tools or Technologies Used" required />
       <InputText
-        placeholder="Rate the impact on a scale of 1-10"
-        type="number"
-        min="1"
-        max="10"
+        placeholder="What skills, tools or technologies did you use for the above task?"
         required
       />
-      <div :class="$style.taskAction">
-        <ButtonLabel label="Remove Tasks" minus />
-        <ButtonLabel label="Add New Task" plus />
+      <FieldLabel label="How would you rate the impact" required />
+      <div :class="$style.impact_wrap">
+        <InputText
+          placeholder="Rate the impact on a scale of 1-10"
+          type="number"
+          min="1"
+          max="10"
+          required
+        />
+        <div :class="$style.taskAction">
+          <ButtonLabel label="Remove Tasks" minus />
+          <ButtonLabel label="Add New Task" plus />
+        </div>
       </div>
     </div>
     <div :class="$style.experienceAction">

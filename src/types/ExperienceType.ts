@@ -3,7 +3,7 @@ export interface ExperienceType {
   position: string;
   isCurrentPosition: boolean;
   fromDate: string;
-  toDate?: string;
+  toDate: string;
   tasks: Array<{
     summary: string;
     skills: string[];
