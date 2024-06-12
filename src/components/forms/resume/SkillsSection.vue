@@ -14,7 +14,12 @@ const skills = ref<Skills>([]);
       <span :class="$style.enterMarkdown"> Enter </span>
       key to add.
     </p>
-    <InputMultiText v-model:data="skills" label="Skills" required />
+    <InputMultiText
+      v-model:data="skills"
+      label="Skills"
+      placeholder="e.g Nodejs, Kubernetes, React"
+      required
+    />
   </div>
 </template>
 
