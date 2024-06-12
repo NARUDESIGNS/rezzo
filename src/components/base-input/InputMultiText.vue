@@ -45,6 +45,12 @@ const removeItem = (index: number) => items.value.splice(index, 1);
 const emitData = () => {
   emit("update:data", items.value);
 };
+
+function addNewItem(e: Event) {
+  (e.target as HTMLInputElement).value &&
+    items.value.push(capitalize((e.target as HTMLInputElement).value).trim()),
+    ((e.target as HTMLInputElement).value = "");
+}
 </script>
 
 <template>
@@ -75,20 +81,8 @@ const emitData = () => {
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
-      @change="
-        (e) => {
-          items.push(capitalize((e.target as HTMLInputElement).value)),
-            ((e.target as HTMLInputElement).value = ''),
-            emitData();
-        }
-      "
-      @keydown.enter.prevent="
-        (e) => {
-          (e.target as HTMLInputElement).value &&
-            items.push(capitalize((e.target as HTMLInputElement).value)),
-            ((e.target as HTMLInputElement).value = '');
-        }
-      "
+      @change="emitData()"
+      @keydown.enter.prevent="(event) => addNewItem(event)"
     />
     <template v-if="showButton">
       <ButtonLabel
