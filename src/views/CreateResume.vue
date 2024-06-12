@@ -55,7 +55,6 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
 @media screen and (max-width: 1000px) {
   .resume {
     padding: 0;
-    margin-top: 30px;
 
     .header {
       font-size: 1.5rem;

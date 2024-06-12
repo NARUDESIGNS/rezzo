@@ -29,6 +29,10 @@ const skills = ref<Skills>([]);
 .section {
   margin-top: 35px;
 
+  .description {
+    margin-bottom: 10px;
+  }
+
   .sub_header {
     color: colors.use(primary);
     margin: 50px 0 10px 0;
