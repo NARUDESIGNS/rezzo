@@ -3,6 +3,7 @@ import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
+import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import type { ExperienceType } from "@/types/ExperienceType";
@@ -65,27 +66,40 @@ const experienceData = ref<ExperienceType[]>([
         </label>
       </div>
       <h4 :class="$style.subHeader">Tasks</h4>
-      <FieldLabel label="List a task you worked on" required no-margin="top" />
-      <InputTextArea
-        placeholder="In one sentence, state a task or an action you took at the company that benefited them"
-      />
-      <FieldLabel label="Skill(s), Tools or Technologies Used" required />
-      <InputText
-        placeholder="What skills, tools or technologies did you use for the above task?"
-        required
-      />
-      <FieldLabel label="How would you rate the impact" required />
-      <div :class="$style.impact_wrap">
-        <InputText
-          placeholder="Rate the impact on a scale of 1-10"
-          type="number"
-          min="1"
-          max="10"
+      <div v-for="(task, key) in experience.tasks" :key="key">
+        <FieldLabel
+          label="List a task you worked on"
+          required
+          no-margin="top"
+        />
+        <InputTextArea
+          v-model="task.summary"
+          placeholder="In one sentence, state a task or an action you took at the company that benefited them"
+        />
+        <FieldLabel
+          label="Skill(s), Tools or Technologies Used"
+          required
+          no-margin="bottom"
+        />
+        <InputMultiText
+          v-model:data="task.skills"
+          placeholder="Add skills using the Enter or Return key"
           required
         />
-        <div :class="$style.taskAction">
-          <ButtonLabel label="Remove Tasks" minus />
-          <ButtonLabel label="Add New Task" plus />
+        <FieldLabel label="How would you rate the impact" required />
+        <div :class="$style.impact_wrap">
+          <InputText
+            v-model="task.impact"
+            placeholder="Rate the impact on a scale of 1-10"
+            type="number"
+            min="1"
+            max="10"
+            required
+          />
+          <div :class="$style.taskAction">
+            <ButtonLabel label="Remove Tasks" minus />
+            <ButtonLabel label="Add New Task" plus />
+          </div>
         </div>
       </div>
     </div>
