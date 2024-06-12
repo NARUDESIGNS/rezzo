@@ -52,7 +52,6 @@ function clearForm() {
 <template>
   <div>
     <BaseDialog v-model="showModal" disable-close @close="clearForm">
-      {{ someFieldsAreEmpty }}
       <template #header>
         <h3>Add New Task</h3>
       </template>
