@@ -8,6 +8,7 @@ import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import type { ExperienceType } from "@/types/ExperienceType";
 import { ref } from "vue";
+import AddExperienceTask from "../new-fields/AddExperienceTask.vue";
 
 const experienceData = ref<ExperienceType[]>([
   {
@@ -25,6 +26,10 @@ const experienceData = ref<ExperienceType[]>([
     ],
   },
 ]);
+const isVisibleNewTask = ref(false);
+function addNewTask(data: ExperienceType["tasks"][0]) {
+  console.log(data);
+}
 </script>
 
 <template>
@@ -98,7 +103,11 @@ const experienceData = ref<ExperienceType[]>([
           />
           <div :class="$style.taskAction">
             <ButtonLabel label="Remove Tasks" minus />
-            <ButtonLabel label="Add New Task" plus />
+            <ButtonLabel
+              label="Add New Task"
+              plus
+              @click="isVisibleNewTask = true"
+            />
           </div>
         </div>
       </div>
@@ -107,6 +116,12 @@ const experienceData = ref<ExperienceType[]>([
       <ButtonLabel label="Add New Experience" plus />
       <ButtonLabel label="Remove Experience" minus />
     </div>
+
+    <AddExperienceTask
+      :visible="isVisibleNewTask"
+      @add-task="(data) => addNewTask(data)"
+      @close="isVisibleNewTask = false"
+    />
   </div>
 </template>
 
