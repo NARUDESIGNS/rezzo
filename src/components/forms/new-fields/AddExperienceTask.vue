@@ -55,7 +55,7 @@ function clearForm() {
       <template #header>
         <h3>Add New Task</h3>
       </template>
-      <div :class="$style.form">
+      <form :class="$style.form">
         <FieldLabel
           label="List a task you worked on"
           required
@@ -82,7 +82,7 @@ function clearForm() {
             required
           />
         </div>
-      </div>
+      </form>
       <template #buttons>
         <BaseButton danger @click="$emit('close')"> Cancel </BaseButton>
         <BaseButton :disabled="someFieldsAreEmpty" @click="addTask">
@@ -94,7 +94,5 @@ function clearForm() {
 </template>
 
 <style lang="scss" module>
-.form :first-child {
-  margin-top: 0;
-}
+// styles here...
 </style>
