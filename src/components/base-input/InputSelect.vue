@@ -37,15 +37,23 @@ const selectInput = ref(null);
     <select
       ref="selectInput"
       :name="name"
-      :class="[$style.select, styles]"
+      :class="[
+        $style.select,
+        styles,
+        { [$style.defaultSelection]: !modelValue },
+      ]"
       :disabled="disabled"
       @change="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
     >
-      <option disabled :selected="!modelValue" value="">
-        {{ placeholder || "Select an option" }}
-      </option>
+      <option
+        disabled
+        :selected="!modelValue"
+        value=""
+        :label="placeholder || 'Select one option'"
+        :class="$style.defaultSelection"
+      />
       <option
         v-for="item in items"
         :key="item"
@@ -80,6 +88,11 @@ const selectInput = ref(null);
     outline: none;
     border: 1px solid colors.use("border");
   }
+}
+
+.defaultSelection {
+  font-style: italic;
+  color: colors.use("gray");
 }
 
 .disabled {
