@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import { computed, useCssModule } from "vue";
-
 const props = withDefaults(
   defineProps<{
     /** Model value */
@@ -45,11 +44,11 @@ const styles = computed(() => ({
 <template>
   <div :class="[$style.container]">
     <input
-      v-bind="$attrs"
       :value="modelValue"
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
+      v-bind="$attrs"
       @input="
         $emit(
           'update:modelValue',
