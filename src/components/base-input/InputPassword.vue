@@ -58,8 +58,6 @@ const hidePassword = () => (type.value = "password");
     position: absolute;
     right: 17px;
     top: 14px;
-    // top: 50%;
-    // transform: translateY(-50%);
     cursor: pointer;
   }
 
