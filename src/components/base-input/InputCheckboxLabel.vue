@@ -9,6 +9,8 @@ const props = defineProps<{
   modelValue?: boolean;
   /** Label */
   label?: string;
+  /** filled */
+  filled?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -21,7 +23,7 @@ const uniqueID = ref(nanoid());
 
 <template>
   <div :class="$style.checkbox_wrap">
-    <InputCheckbox :id="uniqueID" v-model="value" />
+    <InputCheckbox :id="uniqueID" v-model="value" :filled="filled" />
     <label :class="$style.checkbox_label" :for="uniqueID">
       <slot> {{ label }} </slot>
     </label>
