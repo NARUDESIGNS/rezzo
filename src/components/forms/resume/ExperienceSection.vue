@@ -53,11 +53,13 @@ function addNewTask(data: ExperienceType["tasks"][0]) {
           <InputDate v-model="experience.fromDate" required />
         </div>
         <div :class="$style.dateTo">
-          <FieldLabel label="To" required />
+          <FieldLabel label="To" :required="!experience.isCurrentPosition" />
           <InputDate
             v-model="experience.toDate"
-            :disabled="experience.toDate === undefined"
-            required
+            :disabled="
+              experience.toDate === undefined || experience.isCurrentPosition
+            "
+            :required="!experience.isCurrentPosition"
           />
         </div>
       </div>
