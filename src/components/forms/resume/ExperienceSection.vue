@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
-import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
+// import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
+import InputCheckboxWithLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
@@ -61,14 +62,11 @@ function addNewTask(data: ExperienceType["tasks"][0]) {
         </div>
       </div>
       <div :class="$style.checkbox_wrap">
-        <InputCheckbox
-          id="currentJob"
+        <InputCheckboxWithLabel
           v-model="experience.isCurrentPosition"
+          label="I currently work here"
           filled
         />
-        <label :class="$style.checkbox_label" for="currentJob">
-          I currently work here
-        </label>
       </div>
       <h4 :class="$style.subHeader">Tasks</h4>
       <div v-for="(task, key) in experience.tasks" :key="key">
