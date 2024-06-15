@@ -26,18 +26,16 @@ defineProps<{
 .footer {
   margin-top: auto; // push footer to bottom of page
   margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 .content {
   width: fit-content;
 }
 .darkMode {
   color: white !important;
-}
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
 }
 
 .dark_mode,
