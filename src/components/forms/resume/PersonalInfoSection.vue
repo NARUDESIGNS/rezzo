@@ -3,10 +3,10 @@ import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputText from "@/components/base-input/InputText.vue";
+import AddPersonalInfoModal from "@/components/forms/modals/AddPersonalInfoModal.vue";
 import type { FieldType } from "@/types/FieldType";
 import { NewPersonalInfoType } from "@/types/PersonalInfoType";
 import { ref } from "vue";
-import AddPersonalInfo from "../new-fields/AddPersonalInfo.vue";
 
 const personalInfoData = ref<FieldType[]>([
   { title: "Full Name", value: "Paul Ibeabuchi", required: true },
@@ -75,7 +75,7 @@ const removeField = (index: number) => {
       </div>
     </div>
 
-    <AddPersonalInfo
+    <AddPersonalInfoModal
       :visible="openNewInfoModal"
       @add-field="(data) => addNewField(data)"
       @close="openNewInfoModal = false"
