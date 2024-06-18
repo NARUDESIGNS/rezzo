@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
-// import InputCheckbox from "@/components/base-input/InputCheckbox.vue";
 import InputCheckboxWithLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
+import AddExperienceTaskModal from "@/components/forms/modals/AddExperienceTaskModal.vue";
 import type { ExperienceType } from "@/types/ExperienceType";
 import { ref } from "vue";
-import AddExperienceTask from "../new-fields/AddExperienceTask.vue";
 
 const experienceData = ref<ExperienceType[]>([
   {
@@ -27,9 +26,22 @@ const experienceData = ref<ExperienceType[]>([
     ],
   },
 ]);
+
+const currentModifyingTaskIndex = ref(-1);
 const isVisibleNewTask = ref(false);
-function addNewTask(data: ExperienceType["tasks"][0]) {
-  console.log(data);
+function addTask(data: ExperienceType["tasks"][0]) {
+  experienceData.value[currentModifyingTaskIndex.value].tasks.push({
+    summary: data.summary,
+    skills: data.skills,
+    impact: data.impact,
+  });
+}
+
+function removeTask(removeIndex: number) {
+  experienceData.value[currentModifyingTaskIndex.value].tasks.splice(
+    removeIndex,
+    1
+  );
 }
 </script>
 
@@ -71,7 +83,7 @@ function addNewTask(data: ExperienceType["tasks"][0]) {
         />
       </div>
       <h4 :class="$style.subHeader">Tasks</h4>
-      <div v-for="(task, key) in experience.tasks" :key="key">
+      <div v-for="(task, taskIndex) in experience.tasks" :key="taskIndex">
         <FieldLabel
           label="List a task you worked on"
           required
@@ -101,25 +113,38 @@ function addNewTask(data: ExperienceType["tasks"][0]) {
             max="10"
             required
           />
-          <div :class="$style.taskAction">
-            <ButtonLabel label="Remove Tasks" minus />
-            <ButtonLabel
-              label="Add New Task"
-              plus
-              @click="isVisibleNewTask = true"
-            />
-          </div>
+
+          <ButtonLabel
+            v-if="taskIndex > 0"
+            :class="$style.removeTaskBtn"
+            label="Remove Task"
+            minus
+            @click="
+              () => {
+                currentModifyingTaskIndex = index;
+                removeTask(taskIndex);
+              }
+            "
+          />
         </div>
       </div>
+      <ButtonLabel
+        :class="$style.addTaskBtn"
+        label="Add New Task"
+        plus
+        @click="
+          () => ((isVisibleNewTask = true), (currentModifyingTaskIndex = index))
+        "
+      />
     </div>
     <div :class="$style.experienceAction">
       <ButtonLabel label="Add New Experience" plus />
       <ButtonLabel label="Remove Experience" minus />
     </div>
 
-    <AddExperienceTask
+    <AddExperienceTaskModal
       :visible="isVisibleNewTask"
-      @add-task="(data) => addNewTask(data)"
+      @add-task="(data) => addTask(data)"
       @close="isVisibleNewTask = false"
     />
   </div>
@@ -166,11 +191,14 @@ function addNewTask(data: ExperienceType["tasks"][0]) {
   gap: 20px;
   margin-bottom: 30px;
 
-  .taskAction {
+  .removeTaskBtn {
     display: flex;
-    gap: 20px;
     width: 100%;
+    justify-content: flex-start;
   }
+}
+.addTaskBtn {
+  margin-bottom: 35px;
 }
 
 .experienceAction {
@@ -183,8 +211,10 @@ function addNewTask(data: ExperienceType["tasks"][0]) {
     display: flex;
     flex-direction: column;
 
-    .taskAction {
-      flex-wrap: wrap;
+    .removeTaskBtn {
+      display: flex;
+      width: 100%;
+      justify-content: flex-start;
     }
   }
 }
