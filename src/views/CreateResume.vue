@@ -14,7 +14,7 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
       <p :class="$style.description">
         Creating your perfect resume requires attention and detailed
         information. On this page, we require you to provide us with detailed
-        info as indicated by the various sections. Those details will be fine
+        info as indicated by the various sections. These details will be fine
         tuned by the AI to craft your perfect resume.
       </p>
       <main :class="$style.details">

@@ -81,7 +81,7 @@ function addNewItem(e: Event) {
       :class="[$style.input, styles, $attrs.class]"
       :disabled="disabled"
       :placeholder="placeholder"
-      @change="emitData()"
+      @change="(event) => (addNewItem(event), emitData())"
       @keydown.enter.prevent="(event) => addNewItem(event)"
     />
     <template v-if="showButton">
