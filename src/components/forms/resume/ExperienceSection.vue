@@ -83,7 +83,11 @@ function removeTask(removeIndex: number) {
         />
       </div>
       <h4 :class="$style.subHeader">Tasks</h4>
-      <div v-for="(task, taskIndex) in experience.tasks" :key="taskIndex">
+      <div
+        v-for="(task, taskIndex) in experience.tasks"
+        :key="taskIndex"
+        :class="{ [$style.taskSection]: experience.tasks.length > 1 }"
+      >
         <FieldLabel
           label="List a task you worked on"
           required
@@ -115,7 +119,7 @@ function removeTask(removeIndex: number) {
           />
 
           <ButtonLabel
-            v-if="taskIndex > 0"
+            v-if="experience.tasks.length > 1"
             :class="$style.removeTaskBtn"
             label="Remove Task"
             minus
@@ -155,6 +159,7 @@ function removeTask(removeIndex: number) {
 
 .section {
   margin-top: 35px;
+  // border: 1px solid red;
 
   .header {
     color: colors.use("primary");
@@ -162,7 +167,14 @@ function removeTask(removeIndex: number) {
   }
   .subHeader {
     color: colors.use("primary");
-    margin: 50px 0 10px 0;
+    margin: 30px 0 10px 0;
+  }
+
+  .taskSection {
+    border: 1px solid colors.use("primary");
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
   }
 }
 .experience_date {
