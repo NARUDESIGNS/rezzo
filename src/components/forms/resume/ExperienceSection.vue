@@ -4,6 +4,7 @@ import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckboxWithLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
+import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import AddExperienceTaskModal from "@/components/forms/modals/AddExperienceTaskModal.vue";
@@ -109,12 +110,11 @@ function removeTask(removeIndex: number) {
         />
         <FieldLabel label="How would you rate the impact" required />
         <div :class="$style.impact_wrap">
-          <InputText
+          <InputNumber
             v-model="task.impact"
             placeholder="Rate the impact on a scale of 1-10"
-            type="number"
-            min="1"
-            max="10"
+            :min="1"
+            :max="10"
             required
           />
 
