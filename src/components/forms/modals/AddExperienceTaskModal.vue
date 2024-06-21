@@ -71,14 +71,11 @@ function clearForm() {
           placeholder="Add skills using the Enter or Return key"
           required
         />
-        <FieldLabel label="How would you rate the impact" required />
+        <FieldLabel label="How would you describe the impact" required />
         <div :class="$style.impact_wrap">
           <InputText
             v-model="data.impact"
-            placeholder="Rate the impact on a scale of 1-10"
-            type="number"
-            min="1"
-            max="10"
+            placeholder="Describe or rate the impact on a scale of 1-10"
             required
           />
         </div>
