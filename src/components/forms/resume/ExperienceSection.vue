@@ -4,7 +4,6 @@ import FieldLabel from "@/components/base-input/FieldLabel.vue";
 import InputCheckboxWithLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
-import InputNumber from "@/components/base-input/InputNumber.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import AddExperienceTaskModal from "@/components/forms/modals/AddExperienceTaskModal.vue";
@@ -108,13 +107,11 @@ function removeTask(removeIndex: number) {
           placeholder="Add skills using the Enter or Return key"
           required
         />
-        <FieldLabel label="How would you rate the impact" required />
+        <FieldLabel label="How would you describe the impact" required />
         <div :class="$style.impact_wrap">
-          <InputNumber
+          <InputText
             v-model="task.impact"
-            placeholder="Rate the impact on a scale of 1-10"
-            :min="1"
-            :max="10"
+            placeholder="Describe or rate the impact on a scale of 1-10"
             required
           />
 
@@ -159,19 +156,18 @@ function removeTask(removeIndex: number) {
 
 .section {
   margin-top: 35px;
-  // border: 1px solid red;
 
   .header {
     color: colors.use("primary");
     margin: 50px 0 10px 0;
   }
   .subHeader {
-    color: colors.use("primary");
+    color: colors.use(primary);
     margin: 30px 0 10px 0;
   }
 
   .taskSection {
-    border: 1px solid colors.use("primary");
+    border: 1px solid colors.use(light-gray);
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 30px;
@@ -239,6 +235,11 @@ function removeTask(removeIndex: number) {
       flex-direction: column;
       justify-content: flex-start;
       gap: 0 !important;
+    }
+
+    .taskSection {
+      padding: 10px;
+      border-radius: 7px;
     }
 
     .experienceAction {
