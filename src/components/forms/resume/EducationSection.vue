@@ -37,6 +37,7 @@ const addNewField = (data: EducationType) => {
 };
 
 const showRemovalModal = ref(false);
+// all schools for v-model for checking schools to remove. E.g { "University of Florida": false }
 const allSchools = ref<{ [key: string]: boolean }>({});
 educationData.value.map((item, index) => {
   if (index > 0) allSchools.value[item.school] = false;

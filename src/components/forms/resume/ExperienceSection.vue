@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import BaseButton from "@/components/base-button/BaseButton.vue";
 import ButtonLabel from "@/components/base-button/ButtonLabel.vue";
+import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
-import InputCheckboxWithLabel from "@/components/base-input/InputCheckboxLabel.vue";
+import {
+  default as InputCheckboxLabel,
+  default as InputCheckboxWithLabel,
+} from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
 import InputText from "@/components/base-input/InputText.vue";
@@ -9,6 +14,7 @@ import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import AddExperienceTaskModal from "@/components/forms/modals/AddExperienceTaskModal.vue";
 import type { ExperienceType } from "@/types/ExperienceType";
 import { ref } from "vue";
+import AddExperienceModal from "../modals/AddExperienceModal.vue";
 
 const experienceData = ref<ExperienceType[]>([
   {
@@ -27,6 +33,8 @@ const experienceData = ref<ExperienceType[]>([
   },
 ]);
 
+const isVisibleAddExperienceModal = ref(false);
+
 const currentModifyingTaskIndex = ref(-1);
 const isVisibleNewTask = ref(false);
 function addTask(data: ExperienceType["tasks"][0]) {
@@ -42,6 +50,46 @@ function removeTask(removeIndex: number) {
     removeIndex,
     1
   );
+}
+
+function addExperience(data: Omit<ExperienceType, "tasks">) {
+  experienceData.value.push({
+    ...data,
+    tasks: [
+      {
+        summary: "",
+        skills: [],
+        impact: undefined,
+      },
+    ],
+  });
+}
+
+const showRemovalModal = ref(false);
+// all schools for v-model for checking schools to remove. E.g { "University of Florida": false }
+const allCompanies = ref<{ [key: string]: boolean }>({});
+experienceData.value.map((item, index) => {
+  if (index > 0) allCompanies.value[item.company] = false;
+});
+
+function removeEducation() {
+  experienceData.value.forEach((item, index) => {
+    if (
+      item.company in allCompanies.value &&
+      allCompanies.value[item.company]
+    ) {
+      experienceData.value.splice(index, 1);
+    }
+  });
+  showRemovalModal.value = false;
+}
+
+function clearRemovalSelections() {
+  for (let selection in allCompanies.value) {
+    if (Object.hasOwn(allCompanies.value, selection)) {
+      allCompanies.value[selection] = false;
+    }
+  }
 }
 </script>
 
@@ -138,16 +186,50 @@ function removeTask(removeIndex: number) {
         "
       />
     </div>
-    <div :class="$style.experienceAction">
-      <ButtonLabel label="Add New Experience" plus />
-      <ButtonLabel label="Remove Experience" minus />
-    </div>
 
     <AddExperienceTaskModal
       :visible="isVisibleNewTask"
       @add-task="(data) => addTask(data)"
       @close="isVisibleNewTask = false"
     />
+
+    <div :class="$style.experienceAction">
+      <ButtonLabel
+        label="Add New Experience"
+        plus
+        @click="isVisibleAddExperienceModal = true"
+      />
+      <ButtonLabel
+        label="Remove Experience"
+        minus
+        @click="showRemovalModal = true"
+      />
+
+      <AddExperienceModal
+        :visible="isVisibleAddExperienceModal"
+        @add-experience="(data) => addExperience(data)"
+        @close="isVisibleAddExperienceModal = false"
+      />
+    </div>
+
+    <BaseDialog v-model="showRemovalModal" @close="clearRemovalSelections">
+      <template #header>
+        <h3>Remove Experience</h3>
+      </template>
+      Please select the experience(s) you'd like to remove:
+      <template v-for="(experience, index) in experienceData" :key="index">
+        <InputCheckboxLabel
+          v-if="index > 0"
+          v-model="allCompanies[experience.company]"
+          :label="experience.company"
+        />
+      </template>
+      <template #buttons>
+        <BaseButton danger @click="removeEducation">
+          Remove Experience
+        </BaseButton>
+      </template>
+    </BaseDialog>
   </div>
 </template>
 
