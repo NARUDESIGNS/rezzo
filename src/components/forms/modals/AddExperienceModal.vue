@@ -2,6 +2,7 @@
 import BaseButton from "@/components/base-button/BaseButton.vue";
 import BaseDialog from "@/components/base-dialog/BaseDialog.vue";
 import FieldLabel from "@/components/base-input/FieldLabel.vue";
+import InputCheckboxWithLabel from "@/components/base-input/InputCheckboxLabel.vue";
 import InputDate from "@/components/base-input/InputDate.vue";
 import InputText from "@/components/base-input/InputText.vue";
 import { ExperienceType } from "@/types/ExperienceType";
@@ -14,7 +15,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "close"): void;
-  (e: "addExperience", data: Omit<ExperienceType, "tasks">): void;
+  (e: "add-experience", data: Omit<ExperienceType, "tasks">): void;
 }>();
 
 const showModal = computed({
@@ -31,14 +32,18 @@ const data = ref<Omit<ExperienceType, "tasks">>({
 });
 
 const addExperience = () => {
-  emit("addExperience", data.value);
+  emit("add-experience", data.value);
   emit("close");
 };
 
+type DataKey = keyof typeof data.value;
 const someFieldsAreEmpty = computed(() => {
-  return Object.values(data.value).some((item) => {
-    if (Array.isArray(item)) return !item.length;
-    return item === "" || item === undefined;
+  return Object.keys(data.value).some((item) => {
+    if (data.value.isCurrentPosition && item === "toDate") return false;
+    return (
+      data.value[item as DataKey] === "" ||
+      data.value[item as DataKey] === undefined
+    );
   });
 });
 
