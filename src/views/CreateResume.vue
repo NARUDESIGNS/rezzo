@@ -18,7 +18,7 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
         tuned by the AI to craft your perfect resume.
       </p>
       <main :class="$style.details">
-        <div :class="$style.section">
+        <div :class="$style.sections">
           <PersonalInfoSection />
           <ExperienceSection />
           <SkillsSection />
@@ -43,12 +43,18 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
     font-weight: 900;
     margin: 20px 0;
   }
+}
 
-  .details {
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+
+  .sections {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 50px;
+    gap: 30px;
   }
 }
 
