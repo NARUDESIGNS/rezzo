@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Eye OPen Icon",
+  name: "EyeOPenIcon",
 };
 </script>
 
@@ -17,7 +17,7 @@ export default {
     stroke-linejoin="round"
     class="feather feather-eye"
   >
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+    <circle cx="12" cy="12" r="3" />
   </svg>
 </template>

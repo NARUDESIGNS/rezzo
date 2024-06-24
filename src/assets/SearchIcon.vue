@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Search Icon",
+  name: "SearchIcon",
 };
 </script>
 
@@ -17,7 +17,7 @@ export default {
     stroke-linejoin="round"
     class="feather feather-search"
   >
-    <circle cx="11" cy="11" r="8"></circle>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Chevron Left",
+  name: "ChevronLeft",
 };
 </script>
 
@@ -17,6 +17,6 @@ export default {
     stroke-linejoin="round"
     class="feather feather-chevron-left"
   >
-    <polyline points="15 18 9 12 15 6"></polyline>
+    <polyline points="15 18 9 12 15 6" />
   </svg>
 </template>
