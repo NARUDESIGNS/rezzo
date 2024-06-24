@@ -93,7 +93,7 @@ function clearForm() {
       <template #buttons>
         <BaseButton danger @click="$emit('close')"> Cancel </BaseButton>
         <BaseButton :disabled="someFieldsAreEmpty" @click="addExperience">
-          Add Task
+          Add Experience
         </BaseButton>
       </template>
     </BaseDialog>
