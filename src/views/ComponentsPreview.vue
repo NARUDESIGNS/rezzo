@@ -19,6 +19,7 @@ import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import BaseLoader from "@/components/base-loader/BaseLoader.vue";
 import BaseModal from "@/components/base-modal/BaseModal.vue";
 import BaseSearch from "@/components/base-search/BaseSearch.vue";
+import BaseSteps from "@/components/base-steps/BaseSteps.vue";
 import { computed, ref } from "vue";
 
 const checkbox = ref(true);
@@ -43,6 +44,9 @@ const infoProps = computed(() => ({
   warning: infoType.value === "warning",
   danger: infoType.value === "danger",
 }));
+
+const totalSteps = ref(5);
+const currentStep = ref(3);
 
 const showBackdrop = ref();
 
@@ -217,6 +221,26 @@ const showPopup = ref(false);
         />
       </div>
 
+      <h2 :class="$style.header">Others</h2>
+      <div :class="[$style.content, $style.stepsWrap]">
+        <BaseSteps
+          :steps="totalSteps"
+          :current-step="currentStep"
+          :style="{ width: '60%' }"
+          @step-clicked="(value) => logDetails(value)"
+        />
+        <div :class="$style.stepsProps">
+          <InputNumber
+            v-model="totalSteps"
+            placeholer="enter number of steps e.g 7"
+          />
+          <InputNumber
+            v-model="currentStep"
+            placeholer="enter number of steps e.g 7"
+          />
+        </div>
+      </div>
+
       <h2 :class="$style.header">Actions</h2>
       <div :class="$style.content">
         <BaseButton @click="showBackdrop = true"> Show Backdrop</BaseButton>
@@ -304,6 +328,16 @@ const showPopup = ref(false);
   align-items: flex-start;
   flex-direction: column;
   gap: 0;
+}
+
+.stepsWrap {
+  flex-direction: column;
+  align-items: flex-start;
+
+  .stepsProps {
+    display: flex;
+    gap: 20px;
+  }
 }
 
 @media screen and (max-width: 400px) {
