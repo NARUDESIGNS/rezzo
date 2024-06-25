@@ -230,14 +230,20 @@ const showPopup = ref(false);
           @step-clicked="(value) => logDetails(value)"
         />
         <div :class="$style.stepsProps">
-          <InputNumber
-            v-model="totalSteps"
-            placeholer="enter number of steps e.g 7"
-          />
-          <InputNumber
-            v-model="currentStep"
-            placeholer="enter number of steps e.g 7"
-          />
+          <div>
+            <FieldLabel label="Steps" no-margin="top" />
+            <InputNumber
+              v-model="totalSteps"
+              placeholer="enter number of steps e.g 7"
+            />
+          </div>
+          <div>
+            <FieldLabel label="Current Step" no-margin="top" />
+            <InputNumber
+              v-model="currentStep"
+              placeholer="enter number of steps e.g 7"
+            />
+          </div>
         </div>
       </div>
 
