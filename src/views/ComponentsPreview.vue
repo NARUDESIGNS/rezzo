@@ -50,7 +50,7 @@ const currentStep = ref(3);
 
 const showBackdrop = ref();
 
-const logDetails = (info?: string) => {
+const logDetails = (info?: string | number) => {
   alert(info ?? "input filed will be removed when this button is clicked");
 };
 
