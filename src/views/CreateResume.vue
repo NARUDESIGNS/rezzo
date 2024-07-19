@@ -52,7 +52,7 @@ const steps = ref(["personal", "experience", "skills", "education"]);
             >Back</BaseButton
           >
           <BaseButton :class="$style.actionBtn" @click="currentStep++">{{
-            currentStep < steps.length ? "Next" : "Create Resume"
+            currentStep + 1 < steps.length ? "Next" : "Create Resume"
           }}</BaseButton>
         </div>
       </main>
@@ -96,7 +96,9 @@ const steps = ref(["personal", "experience", "skills", "education"]);
   .actionBtnsWrap {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    width: 100%;
   }
 
   .actionBtn {
