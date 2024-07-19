@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import PageCenter from "@/components/PageCenter.vue";
-import Button from "@/components/base-button/BaseButton.vue";
+import BaseButton from "@/components/base-button/BaseButton.vue";
+import BaseSteps from "@/components/base-steps/BaseSteps.vue";
 import EducationSection from "@/components/forms/resume/EducationSection.vue";
 import ExperienceSection from "@/components/forms/resume/ExperienceSection.vue";
 import PersonalInfoSection from "@/components/forms/resume/PersonalInfoSection.vue";
 import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
+import { ref } from "vue";
+
+enum CurrentStep {
+  Personal,
+  Experience,
+  Skills,
+  Education,
+}
+
+const currentStep = ref(0);
+const steps = ref(["personal", "experience", "skills", "education"]);
 </script>
 
 <template>
@@ -18,13 +30,31 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
         tuned by the AI to craft your perfect resume.
       </p>
       <main :class="$style.details">
+        <BaseSteps
+          :steps="steps.length"
+          :current-step="currentStep"
+          :class="$style.steps"
+        />
         <div :class="$style.sections">
-          <PersonalInfoSection />
-          <ExperienceSection />
-          <SkillsSection />
-          <EducationSection />
+          <PersonalInfoSection v-if="currentStep === CurrentStep.Personal" />
+          <ExperienceSection
+            v-else-if="currentStep === CurrentStep.Experience"
+          />
+          <SkillsSection v-else-if="currentStep === CurrentStep.Skills" />
+          <EducationSection v-else-if="currentStep === CurrentStep.Education" />
         </div>
-        <Button>Create Resume</Button>
+        <div :class="$style.actionBtnsWrap">
+          <BaseButton
+            v-if="currentStep > 0"
+            :class="$style.actionBtn"
+            outline
+            @click="currentStep--"
+            >Back</BaseButton
+          >
+          <BaseButton :class="$style.actionBtn" @click="currentStep++">{{
+            currentStep < steps.length ? "Next" : "Create Resume"
+          }}</BaseButton>
+        </div>
       </main>
     </div>
   </PageCenter>
@@ -49,12 +79,28 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
+
+  .steps {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 50px;
+    flex: none;
+  }
 
   .sections {
     display: flex;
     flex-direction: column;
     gap: 30px;
+  }
+
+  .actionBtnsWrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .actionBtn {
+    margin-top: 50px;
   }
 }
 
