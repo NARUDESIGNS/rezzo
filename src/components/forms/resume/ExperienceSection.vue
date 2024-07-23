@@ -200,6 +200,7 @@ function clearRemovalSelections() {
         @click="isVisibleAddExperienceModal = true"
       />
       <ButtonLabel
+        :disabled="!!experienceData.length"
         label="Remove Experience"
         minus
         @click="showRemovalModal = true"
@@ -238,6 +239,7 @@ function clearRemovalSelections() {
 
 .section {
   margin-top: 35px;
+  width: 100%;
 
   .header {
     color: colors.use("primary");

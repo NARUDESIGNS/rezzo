@@ -86,6 +86,10 @@ const removeField = (index: number) => {
 <style module lang="scss">
 @use "@/scss/colors";
 
+.section {
+  width: 100%;
+}
+
 .sub_header {
   color: colors.use("primary");
   margin: 50px 0 10px 0;

@@ -91,6 +91,7 @@ const steps = ref(["personal", "experience", "skills", "education"]);
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 100%;
   }
 
   .actionBtnsWrap {

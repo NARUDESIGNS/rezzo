@@ -28,6 +28,7 @@ const skills = ref<Skills>([]);
 
 .section {
   margin-top: 35px;
+  width: 100%;
 
   .description {
     margin-bottom: 10px;

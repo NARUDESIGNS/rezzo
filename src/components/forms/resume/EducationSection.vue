@@ -152,6 +152,7 @@ function clearRemovalSelections() {
 
 .section {
   margin-top: 35px;
+  width: 100%;
 
   .sub_header {
     color: colors.use("primary");
