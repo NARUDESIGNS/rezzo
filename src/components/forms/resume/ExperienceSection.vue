@@ -35,6 +35,7 @@ const experienceData = ref<ExperienceType[]>([
 
 const isVisibleAddExperienceModal = ref(false);
 
+const taskIndexToBeRemoved = ref(-1);
 const currentModifyingTaskIndex = ref(-1);
 const isVisibleNewTask = ref(false);
 function addTask(data: ExperienceType["tasks"][0]) {
@@ -45,11 +46,12 @@ function addTask(data: ExperienceType["tasks"][0]) {
   });
 }
 
-function removeTask(removeIndex: number) {
+function removeAchievement(removeIndex: number) {
   experienceData.value[currentModifyingTaskIndex.value].tasks.splice(
     removeIndex,
     1
   );
+  showConfirmModal.value = false;
 }
 
 function addExperience(data: Omit<ExperienceType, "tasks">) {
@@ -91,6 +93,8 @@ function clearRemovalSelections() {
     }
   }
 }
+
+const showConfirmModal = ref(false);
 </script>
 
 <template>
@@ -130,7 +134,7 @@ function clearRemovalSelections() {
           filled
         />
       </div>
-      <h4 :class="$style.subHeader">Tasks</h4>
+      <h4 :class="$style.subHeader">Achievements</h4>
       <div
         v-for="(task, taskIndex) in experience.tasks"
         :key="taskIndex"
@@ -166,12 +170,13 @@ function clearRemovalSelections() {
           <ButtonLabel
             v-if="experience.tasks.length > 1"
             :class="$style.removeTaskBtn"
-            label="Remove Task"
+            label="Remove Achievement"
             minus
             @click="
               () => {
                 currentModifyingTaskIndex = index;
-                removeTask(taskIndex);
+                taskIndexToBeRemoved = taskIndex;
+                showConfirmModal = true;
               }
             "
           />
@@ -179,7 +184,7 @@ function clearRemovalSelections() {
       </div>
       <ButtonLabel
         :class="$style.addTaskBtn"
-        label="Add New Task"
+        label="Add New Achievement"
         plus
         @click="
           () => ((isVisibleNewTask = true), (currentModifyingTaskIndex = index))
@@ -200,7 +205,7 @@ function clearRemovalSelections() {
         @click="isVisibleAddExperienceModal = true"
       />
       <ButtonLabel
-        :disabled="!!experienceData.length"
+        :disabled="!(experienceData.length > 1)"
         label="Remove Experience"
         minus
         @click="showRemovalModal = true"
@@ -212,6 +217,25 @@ function clearRemovalSelections() {
         @close="isVisibleAddExperienceModal = false"
       />
     </div>
+
+    <BaseDialog
+      v-model="showConfirmModal"
+      disable-close
+      @close="showConfirmModal = false"
+    >
+      <template #header>
+        <h3>Remove Achievement</h3>
+      </template>
+      <p :class="$style.dialogueText">
+        Are you sure you want remove this achievement?
+      </p>
+      <template #buttons>
+        <BaseButton @click="showConfirmModal = false"> Cancel </BaseButton>
+        <BaseButton danger @click="removeAchievement(taskIndexToBeRemoved)">
+          Remove Achievement
+        </BaseButton>
+      </template>
+    </BaseDialog>
 
     <BaseDialog v-model="showRemovalModal" @close="clearRemovalSelections">
       <template #header>
@@ -288,6 +312,9 @@ function clearRemovalSelections() {
     width: 100%;
     justify-content: flex-start;
   }
+}
+.dialogueText {
+  text-align: center;
 }
 .addTaskBtn {
   margin-bottom: 35px;

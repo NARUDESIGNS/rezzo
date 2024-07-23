@@ -53,7 +53,7 @@ function clearForm() {
   <div>
     <BaseDialog v-model="showModal" disable-close @close="clearForm">
       <template #header>
-        <h3>Add New Task</h3>
+        <h3>Add New Achievement</h3>
       </template>
       <form :class="$style.form">
         <FieldLabel
@@ -83,7 +83,7 @@ function clearForm() {
       <template #buttons>
         <BaseButton danger @click="$emit('close')"> Cancel </BaseButton>
         <BaseButton :disabled="someFieldsAreEmpty" @click="addTask">
-          Add Task
+          Add Achievement
         </BaseButton>
       </template>
     </BaseDialog>
