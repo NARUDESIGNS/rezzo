@@ -9,10 +9,10 @@ import { NewPersonalInfoType } from "@/types/PersonalInfoType";
 import { ref } from "vue";
 
 const personalInfoData = ref<FieldType[]>([
-  { title: "Full Name", value: "Paul Ibeabuchi", required: true },
-  { title: "Email", value: "ibeabuchi@gmail.com", required: true },
-  { title: "Phone", value: 2348160564736, required: false },
-  { title: "Location", value: "Lagos Nigeria", required: true },
+  { title: "Full Name", value: "", required: true },
+  { title: "Email", value: "", required: true },
+  { title: "Phone", value: "", required: false },
+  { title: "Location", value: "", required: true },
   {
     title: "LinkedIn",
     value: "https://www.linkedin.com/in/narudesigns",
