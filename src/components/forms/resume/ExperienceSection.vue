@@ -230,7 +230,9 @@ const showConfirmModal = ref(false);
         Are you sure you want remove this achievement?
       </p>
       <template #buttons>
-        <BaseButton @click="showConfirmModal = false"> Cancel </BaseButton>
+        <BaseButton outline @click="showConfirmModal = false">
+          Cancel
+        </BaseButton>
         <BaseButton danger @click="removeAchievement(taskIndexToBeRemoved)">
           Remove Achievement
         </BaseButton>
