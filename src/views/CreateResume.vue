@@ -51,9 +51,14 @@ const steps = ref(["personal", "experience", "skills", "education"]);
             @click="currentStep--"
             >Back</BaseButton
           >
-          <BaseButton :class="$style.actionBtn" @click="currentStep++">{{
-            currentStep + 1 < steps.length ? "Next" : "Create Resume"
-          }}</BaseButton>
+          <BaseButton
+            v-if="currentStep < steps.length"
+            :class="$style.actionBtn"
+            @click="currentStep < steps.length - 1 && currentStep++"
+            >{{
+              currentStep + 1 < steps.length ? "Next" : "Preview"
+            }}</BaseButton
+          >
         </div>
       </main>
     </div>
