@@ -6,18 +6,22 @@ import InputText from "@/components/base-input/InputText.vue";
 import AddPersonalInfoModal from "@/components/forms/modals/AddPersonalInfoModal.vue";
 import type { FieldType } from "@/types/FieldType";
 import { NewPersonalInfoType } from "@/types/PersonalInfoType";
-import { ref } from "vue";
+import { onUnmounted, ref, watch } from "vue";
+
+const props = defineProps<{
+  personalData: FieldType[];
+}>();
+
+const emit = defineEmits<{
+  updated: [personalInfoData: FieldType[]];
+}>();
 
 const personalInfoData = ref<FieldType[]>([
   { title: "Full Name", value: "", required: true },
   { title: "Email", value: "", required: true },
   { title: "Phone", value: "", required: false },
   { title: "Location", value: "", required: true },
-  {
-    title: "LinkedIn",
-    value: "https://www.linkedin.com/in/narudesigns",
-    required: false,
-  },
+  { title: "LinkedIn", value: "", required: false },
 ]);
 
 const canRemoveFields = ref(false);
@@ -34,6 +38,18 @@ const addNewField = (data: NewPersonalInfoType) => {
 const removeField = (index: number) => {
   personalInfoData.value.splice(index, 1);
 };
+
+watch(
+  () => props.personalData,
+  () => {
+    if (props.personalData.length) personalInfoData.value = props.personalData;
+  },
+  { immediate: true }
+);
+
+onUnmounted(() => {
+  emit("updated", personalInfoData.value);
+});
 </script>
 
 <template>

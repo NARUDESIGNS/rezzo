@@ -6,6 +6,8 @@ import EducationSection from "@/components/forms/resume/EducationSection.vue";
 import ExperienceSection from "@/components/forms/resume/ExperienceSection.vue";
 import PersonalInfoSection from "@/components/forms/resume/PersonalInfoSection.vue";
 import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
+import { useResumeDataStore } from "@/store/useResumeDataStore";
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
 enum CurrentStep {
@@ -14,6 +16,10 @@ enum CurrentStep {
   Skills,
   Education,
 }
+
+const resumeStore = useResumeDataStore();
+const { personalInfo } = storeToRefs(resumeStore);
+const { updatePersonalInfo } = resumeStore;
 
 const currentStep = ref(0);
 const steps = ref(["personal", "experience", "skills", "education"]);
@@ -36,7 +42,16 @@ const steps = ref(["personal", "experience", "skills", "education"]);
           :class="$style.steps"
         />
         <div :class="$style.sections">
-          <PersonalInfoSection v-if="currentStep === CurrentStep.Personal" />
+          <PersonalInfoSection
+            v-if="currentStep === CurrentStep.Personal"
+            :personal-data="personalInfo"
+            @updated="
+              (personalInfo) => (
+                updatePersonalInfo(personalInfo),
+                console.log('updated personal info!')
+              )
+            "
+          />
           <ExperienceSection
             v-else-if="currentStep === CurrentStep.Experience"
           />
