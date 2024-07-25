@@ -13,8 +13,16 @@ import InputText from "@/components/base-input/InputText.vue";
 import InputTextArea from "@/components/base-input/InputTextArea.vue";
 import AddExperienceTaskModal from "@/components/forms/modals/AddExperienceTaskModal.vue";
 import type { ExperienceType } from "@/types/ExperienceType";
-import { ref } from "vue";
+import { onUnmounted, ref, watch } from "vue";
 import AddExperienceModal from "../modals/AddExperienceModal.vue";
+
+const props = defineProps<{
+  experienceData: ExperienceType[];
+}>();
+
+const emit = defineEmits<{
+  updated: [experienceData: ExperienceType[]];
+}>();
 
 const experienceData = ref<ExperienceType[]>([
   {
@@ -93,6 +101,19 @@ function clearRemovalSelections() {
     }
   }
 }
+
+watch(
+  () => props.experienceData,
+  () => {
+    if (props.experienceData.length)
+      experienceData.value = props.experienceData;
+  },
+  { immediate: true }
+);
+
+onUnmounted(() => {
+  emit("updated", experienceData.value);
+});
 
 const showConfirmModal = ref(false);
 </script>

@@ -11,7 +11,15 @@ import { degrees } from "@/components/forms/data/degree";
 import AddEducationModal from "@/components/forms/modals/AddEducationModal.vue";
 import { EducationType } from "@/types/EducationType";
 import { parse } from "date-fns";
-import { ref } from "vue";
+import { onUnmounted, ref, watch } from "vue";
+
+const props = defineProps<{
+  educationData: EducationType[];
+}>();
+
+const emit = defineEmits<{
+  updated: [personalInfoData: EducationType[]];
+}>();
 
 const educationData = ref<EducationType[]>([
   {
@@ -59,6 +67,18 @@ function clearRemovalSelections() {
     }
   }
 }
+
+watch(
+  () => props.educationData,
+  () => {
+    if (props.educationData.length) educationData.value = props.educationData;
+  },
+  { immediate: true }
+);
+
+onUnmounted(() => {
+  emit("updated", educationData.value);
+});
 </script>
 
 <template>

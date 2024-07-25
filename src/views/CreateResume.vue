@@ -18,8 +18,10 @@ enum CurrentStep {
 }
 
 const resumeStore = useResumeDataStore();
-const { personalInfo } = storeToRefs(resumeStore);
-const { updatePersonalInfo } = resumeStore;
+const { personalInfo, experience, skills, education } =
+  storeToRefs(resumeStore);
+const { updatePersonalInfo, updateExperience, updateSkills, updateEducation } =
+  resumeStore;
 
 const currentStep = ref(0);
 const steps = ref(["personal", "experience", "skills", "education"]);
@@ -45,18 +47,23 @@ const steps = ref(["personal", "experience", "skills", "education"]);
           <PersonalInfoSection
             v-if="currentStep === CurrentStep.Personal"
             :personal-data="personalInfo"
-            @updated="
-              (personalInfo) => (
-                updatePersonalInfo(personalInfo),
-                console.log('updated personal info!')
-              )
-            "
+            @updated="(personalInfo) => updatePersonalInfo(personalInfo)"
           />
           <ExperienceSection
             v-else-if="currentStep === CurrentStep.Experience"
+            :experience-data="experience"
+            @updated="(experienceData) => updateExperience(experienceData)"
           />
-          <SkillsSection v-else-if="currentStep === CurrentStep.Skills" />
-          <EducationSection v-else-if="currentStep === CurrentStep.Education" />
+          <SkillsSection
+            v-else-if="currentStep === CurrentStep.Skills"
+            :skills-data="skills"
+            @updated="(skillsData) => updateSkills(skillsData)"
+          />
+          <EducationSection
+            v-else-if="currentStep === CurrentStep.Education"
+            :education-data="education"
+            @updated="(educationData) => updateEducation(educationData)"
+          />
         </div>
         <div :class="$style.actionBtnsWrap">
           <BaseButton

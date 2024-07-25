@@ -1,9 +1,29 @@
 <script setup lang="ts">
 import InputMultiText from "@/components/base-input/InputMultiText.vue";
-import { ref } from "vue";
+import { onUnmounted, ref, watch } from "vue";
+
+const props = defineProps<{
+  skillsData: string[];
+}>();
+
+const emit = defineEmits<{
+  updated: [skillsData: string[]];
+}>();
 
 type Skills = string[];
 const skills = ref<Skills>([]);
+
+watch(
+  () => props.skillsData,
+  () => {
+    if (props.skillsData.length) skills.value = props.skillsData;
+  },
+  { immediate: true }
+);
+
+onUnmounted(() => {
+  emit("updated", skills.value);
+});
 </script>
 
 <template>
