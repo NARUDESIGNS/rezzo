@@ -22,7 +22,7 @@ watch(
 );
 
 onUnmounted(() => {
-  emit("updated", skills.value);
+  emit("updated", [...new Set(skills.value)]);
 });
 </script>
 

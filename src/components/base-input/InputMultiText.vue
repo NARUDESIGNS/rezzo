@@ -47,8 +47,10 @@ const emitData = () => {
 };
 
 function addNewItem(e: Event) {
+  const value = capitalize((e.target as HTMLInputElement).value).trim();
   (e.target as HTMLInputElement).value &&
-    items.value.push(capitalize((e.target as HTMLInputElement).value).trim()),
+    !items.value.includes(value) &&
+    items.value.push(value),
     ((e.target as HTMLInputElement).value = "");
 }
 </script>
