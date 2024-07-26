@@ -2,9 +2,11 @@
 import CalendarIcon from "@/assets/CalendarIcon.vue";
 import { stringToDate } from "@/utils/stringToDate";
 import DatePicker from "@vuepic/vue-datepicker";
+import { useVModel } from "@vueuse/core";
+import { computed } from "vue";
 import InputText from "./InputText.vue";
 
-defineProps<{
+const props = defineProps<{
   /** Model value */
   modelValue: string;
   /** Disabled */
@@ -23,13 +25,19 @@ const emit = defineEmits<{
 
 const handleEmit = (value: Date) => {
   emit("update:modelValue", value.toLocaleDateString());
-  // TODO: remember to store date as ISO string in db -> value.toISOString()
 };
+
+const modelDate = useVModel(props, "modelValue", emit);
+
+const date = computed({
+  get: () => stringToDate(modelDate.value),
+  set: (value) => (modelDate.value = value ? value.toLocaleDateString() : ""),
+});
 </script>
 
 <template>
   <DatePicker
-    :model-value="stringToDate(modelValue)"
+    v-model="date"
     :enable-time-picker="false"
     format="dd/MM/yyyy"
     :disabled="disabled"
@@ -40,7 +48,7 @@ const handleEmit = (value: Date) => {
     auto-apply
     month-name-format="long"
     :clearable="false"
-    @update:model-value="(value) => handleEmit(value)"
+    @update:model-value="(value) => value && handleEmit(value)"
   >
     <template #dp-input="{ value, onInput, onEnter, onTab, onBlur }">
       <div :class="$style.container">
