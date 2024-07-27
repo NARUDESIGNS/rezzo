@@ -40,6 +40,11 @@ const route = createRouter({
       component: () => import("@/views/CreateResume.vue"),
     },
     {
+      path: "/resume-preview",
+      name: "resume-preview",
+      component: () => import("@/views/PreviewResume.vue"),
+    },
+    {
       path: "/preview",
       name: "preview",
       component: () => import("@/views/ComponentsPreview.vue"),
