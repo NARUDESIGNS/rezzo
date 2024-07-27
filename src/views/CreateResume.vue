@@ -9,9 +9,10 @@ import SkillsSection from "@/components/forms/resume/SkillsSection.vue";
 import { useResumeDataStore } from "@/store/useResumeDataStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 enum CurrentStep {
-  Personal,
+  Personal = 1,
   Experience,
   Skills,
   Education,
@@ -23,8 +24,13 @@ const { personalInfo, experience, skills, education } =
 const { updatePersonalInfo, updateExperience, updateSkills, updateEducation } =
   resumeStore;
 
-const currentStep = ref(0);
+const currentStep = ref(CurrentStep.Personal);
 const steps = ref(["personal", "experience", "skills", "education"]);
+
+const router = useRouter();
+function showPreview() {
+  router.push({ name: "resume-preview" });
+}
 </script>
 
 <template>
@@ -62,25 +68,32 @@ const steps = ref(["personal", "experience", "skills", "education"]);
           <EducationSection
             v-else-if="currentStep === CurrentStep.Education"
             :education-data="education"
-            @updated="(educationData) => updateEducation(educationData)"
+            @updated="
+              (educationData) => {
+                updateEducation(educationData);
+              }
+            "
           />
         </div>
         <div :class="$style.actionBtnsWrap">
           <BaseButton
-            v-if="currentStep > 0"
+            v-if="currentStep > CurrentStep.Personal"
             :class="$style.actionBtn"
             outline
             @click="currentStep--"
             >Back</BaseButton
           >
           <BaseButton
-            v-if="currentStep < steps.length"
             :class="$style.actionBtn"
-            @click="currentStep < steps.length - 1 && currentStep++"
-            >{{
-              currentStep + 1 < steps.length ? "Next" : "Preview"
-            }}</BaseButton
+            @click="
+              () => {
+                currentStep === CurrentStep.Education && showPreview();
+                currentStep < CurrentStep.Education && currentStep++;
+              }
+            "
           >
+            {{ currentStep < CurrentStep.Education ? "Next" : "Preview" }}
+          </BaseButton>
         </div>
       </main>
     </div>
