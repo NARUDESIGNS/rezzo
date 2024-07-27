@@ -27,16 +27,16 @@ const steps = computed(() => props.steps);
   <div :class="$style.wrap">
     <template v-for="(step, index) in steps" :key="index">
       <div
-        :class="[$style.step, { [$style.completed]: currentStep >= index + 1 }]"
+        :class="[$style.step, { [$style.completed]: currentStep > index + 1 }]"
         @click="$emit('step-clicked', step)"
       >
-        <CheckIcon v-if="currentStep >= index + 1" :class="$style.checkIcon" />
+        <CheckIcon v-if="currentStep > index + 1" :class="$style.checkIcon" />
         <p v-else>{{ step }}</p>
       </div>
       <div
         :class="[
           $style.progressLine,
-          { [$style.completedProgressLine]: currentStep >= index + 1 },
+          { [$style.completedProgressLine]: currentStep > index + 1 },
         ]"
       />
     </template>
