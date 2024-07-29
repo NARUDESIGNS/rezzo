@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PageCenter from "@/components/PageCenter.vue";
 import { useResumeDataStore } from "@/store/useResumeDataStore";
 import { storeToRefs } from "pinia";
 
@@ -7,9 +8,11 @@ const { resumeData } = storeToRefs(resumeStore);
 </script>
 
 <template>
-  <p>
-    {{ resumeData }}
-  </p>
+  <PageCenter>
+    <p>
+      {{ resumeData }}
+    </p>
+  </PageCenter>
 </template>
 
 <style module lang="scss">
