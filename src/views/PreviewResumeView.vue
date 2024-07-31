@@ -9,6 +9,10 @@ const { resumeData } = storeToRefs(resumeStore);
 
 <template>
   <PageCenter>
+    <h4>Personal Information</h4>
+    <template v-for="personal in resumeData.personalInfo" :key="personal.title">
+      <p>{{ personal.value }}</p>
+    </template>
     <p>
       {{ resumeData }}
     </p>
