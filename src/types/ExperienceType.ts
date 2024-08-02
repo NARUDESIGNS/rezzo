@@ -2,11 +2,11 @@ export interface ExperienceType {
   company: string;
   position: string;
   isCurrentPosition: boolean;
-  fromDate: string;
-  toDate: string;
+  startDate: string;
+  endDate: string;
   tasks: Array<{
     summary: string;
     skills: string[];
-    impact?: number;
+    impact?: string;
   }>;
 }
