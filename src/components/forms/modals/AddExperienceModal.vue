@@ -27,8 +27,8 @@ const data = ref<Omit<ExperienceType, "tasks">>({
   company: "",
   position: "",
   isCurrentPosition: false,
-  fromDate: "",
-  toDate: "",
+  startDate: "",
+  endDate: "",
 });
 
 const addExperience = () => {
@@ -39,7 +39,7 @@ const addExperience = () => {
 type DataKey = keyof typeof data.value;
 const someFieldsAreEmpty = computed(() => {
   return Object.keys(data.value).some((item) => {
-    if (data.value.isCurrentPosition && item === "toDate") return false;
+    if (data.value.isCurrentPosition && item === "endDate") return false;
     return (
       data.value[item as DataKey] === "" ||
       data.value[item as DataKey] === undefined
@@ -52,8 +52,8 @@ function clearForm() {
   data.value.company = "";
   data.value.position = "";
   data.value.isCurrentPosition = false;
-  data.value.fromDate = "";
-  data.value.toDate = "";
+  data.value.startDate = "";
+  data.value.endDate = "";
 }
 </script>
 
@@ -71,13 +71,13 @@ function clearForm() {
         <div :class="$style.experience_date">
           <div :class="$style.dateFrom">
             <FieldLabel label="From" required />
-            <InputDate v-model="data.fromDate" required />
+            <InputDate v-model="data.startDate" required />
           </div>
           <div :class="$style.dateTo">
             <FieldLabel label="To" :required="!data.isCurrentPosition" />
             <InputDate
-              v-model="data.toDate"
-              :disabled="data.toDate === undefined || data.isCurrentPosition"
+              v-model="data.endDate"
+              :disabled="data.endDate === undefined || data.isCurrentPosition"
               :required="!data.isCurrentPosition"
             />
           </div>

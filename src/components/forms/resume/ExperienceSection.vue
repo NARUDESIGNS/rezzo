@@ -29,8 +29,8 @@ const experienceData = ref<ExperienceType[]>([
     company: "",
     position: "",
     isCurrentPosition: false,
-    fromDate: "",
-    toDate: "",
+    startDate: "",
+    endDate: "",
     tasks: [
       {
         summary: "",
@@ -135,14 +135,14 @@ const showConfirmModal = ref(false);
       <div :class="$style.experience_date">
         <div :class="$style.dateFrom">
           <FieldLabel label="From" required />
-          <InputDate v-model="experience.fromDate" required />
+          <InputDate v-model="experience.startDate" required />
         </div>
         <div :class="$style.dateTo">
           <FieldLabel label="To" :required="!experience.isCurrentPosition" />
           <InputDate
-            v-model="experience.toDate"
+            v-model="experience.endDate"
             :disabled="
-              experience.toDate === undefined || experience.isCurrentPosition
+              experience.endDate === undefined || experience.isCurrentPosition
             "
             :required="!experience.isCurrentPosition"
           />
