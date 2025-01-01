@@ -39,12 +39,21 @@ export const useResumeDataStore = defineStore("resumeDataStore", () => {
     if (resumeData.value) resumeData.value.education = data;
   }
 
+  const _resumeData = computed(() => ({
+    personalInfo: resumeData.value.personalInfo,
+    experience: resumeData.value?.experience,
+    skills: resumeData.value?.skills,
+    education: resumeData.value?.education,
+  }));
+
+  const { personalInfo, experience, skills, education } = _resumeData.value;
+
   return {
     resumeData,
-    personalInfo: computed(() => resumeData.value.personalInfo),
-    experience: computed(() => resumeData.value?.experience),
-    skills: computed(() => resumeData.value?.skills),
-    education: computed(() => resumeData.value?.education),
+    personalInfo,
+    experience,
+    skills,
+    education,
     updatePersonalInfo,
     updateExperience,
     updateSkills,
