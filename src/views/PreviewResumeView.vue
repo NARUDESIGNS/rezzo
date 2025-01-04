@@ -2,8 +2,10 @@
 import PageCenter from "@/components/PageCenter.vue";
 import { useResumeDataStore } from "@/store/useResumeDataStore";
 import { storeToRefs } from "pinia";
+import { computed } from "vue";
 
 const resumeStore = useResumeDataStore();
+// temporary resume data
 const { _resumeData } = storeToRefs(resumeStore);
 
 const resumeData = {
@@ -122,6 +124,11 @@ function generateAchievmentPoint(
 function degreeShortName(degree: string) {
   return degree.split("(")[1].replace(")", "");
 }
+
+const name = computed(
+  () =>
+    resumeData.personalInfo.find(({ title }) => title === "Full Name")?.value
+);
 </script>
 
 <template>
@@ -136,47 +143,51 @@ function degreeShortName(degree: string) {
           updating any information on your resume
         </p>
       </div>
-      <h3>Personal Information</h3>
-      <div
-        v-for="({ title, value }, index) in resumeData.personalInfo"
-        :key="index"
-      >
-        <p>{{ title }} - {{ value }}</p>
-      </div>
-      <br />
-      <h3>Skills</h3>
-      <div>
-        {{ resumeData.skills.join(", ") }}
-      </div>
-      <br />
-      <h3>Experience</h3>
-      <div v-for="(experience, index) in resumeData.experience" :key="index">
-        <h4>{{ experience.company }} - {{ experience.position }}</h4>
-        {{ experience }}
-        <span>
-          {{ experience.startDate }}
-          {{
-            `- ${experience.isCurrentPosition ? "Present" : experience.endDate}`
-          }}
-        </span>
-        <ul v-for="(item, i) in experience.tasks" :key="i">
-          <li>
+      <div :class="$style.previewWrap">
+        <h3>{{ name || "Name here..." }}</h3>
+        <div
+          v-for="({ title, value }, index) in resumeData.personalInfo"
+          :key="index"
+        >
+          <p>{{ title }} - {{ value }}</p>
+        </div>
+        <br />
+        <h3>Skills</h3>
+        <div>
+          {{ resumeData.skills.join(", ") }}
+        </div>
+        <br />
+        <h3>Experience</h3>
+        <div v-for="(experience, index) in resumeData.experience" :key="index">
+          <h4>{{ experience.company }} - {{ experience.position }}</h4>
+          {{ experience }}
+          <span>
+            {{ experience.startDate }}
             {{
-              generateAchievmentPoint(item.summary, item.skills, item.impact)
+              `- ${experience.isCurrentPosition ? "Present" : experience.endDate}`
             }}
-          </li>
-        </ul>
+          </span>
+          <ul v-for="(item, i) in experience.tasks" :key="i">
+            <li>
+              {{
+                generateAchievmentPoint(item.summary, item.skills, item.impact)
+              }}
+            </li>
+          </ul>
+          <br />
+        </div>
         <br />
-      </div>
-      <br />
-      <h3>Education</h3>
-      <div v-for="(education, i) in resumeData.education" :key="i">
-        <h4>
-          {{ education.school }} - {{ degreeShortName(education.degree) }}.
-          {{ education.course }}
-        </h4>
-        <span> {{ education.startDate }} - {{ `${education.endDate}` }} </span>
-        <br />
+        <h3>Education</h3>
+        <div v-for="(education, i) in resumeData.education" :key="i">
+          <h4>
+            {{ education.school }} - {{ degreeShortName(education.degree) }}.
+            {{ education.course }}
+          </h4>
+          <span>
+            {{ education.startDate }} - {{ `${education.endDate}` }}
+          </span>
+          <br />
+        </div>
       </div>
     </div>
   </PageCenter>
