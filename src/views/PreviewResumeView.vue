@@ -194,9 +194,17 @@ const name = computed(
 </template>
 
 <style module lang="scss">
+@use "@/scss/colors";
+
 .pageHeader {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.previewWrap {
+  padding: 15px;
+  margin: 20px 0;
+  border: 1px solid lightgray;
 }
 </style>
