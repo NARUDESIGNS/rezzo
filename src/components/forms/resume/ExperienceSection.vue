@@ -28,7 +28,7 @@ const experienceData = ref<ExperienceType[]>([
   {
     company: "",
     position: "",
-    isCurrentPosition: false,
+    isCurrentCompany: false,
     startDate: "",
     endDate: "",
     tasks: [
@@ -138,19 +138,19 @@ const showConfirmModal = ref(false);
           <InputDate v-model="experience.startDate" required />
         </div>
         <div :class="$style.dateTo">
-          <FieldLabel label="To" :required="!experience.isCurrentPosition" />
+          <FieldLabel label="To" :required="!experience.isCurrentCompany" />
           <InputDate
             v-model="experience.endDate"
             :disabled="
-              experience.endDate === undefined || experience.isCurrentPosition
+              experience.endDate === undefined || experience.isCurrentCompany
             "
-            :required="!experience.isCurrentPosition"
+            :required="!experience.isCurrentCompany"
           />
         </div>
       </div>
       <div :class="$style.checkbox_wrap">
         <InputCheckboxWithLabel
-          v-model="experience.isCurrentPosition"
+          v-model="experience.isCurrentCompany"
           label="I currently work here"
           filled
         />

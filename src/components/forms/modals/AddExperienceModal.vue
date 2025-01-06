@@ -26,7 +26,7 @@ const showModal = computed({
 const data = ref<Omit<ExperienceType, "tasks">>({
   company: "",
   position: "",
-  isCurrentPosition: false,
+  isCurrentCompany: false,
   startDate: "",
   endDate: "",
 });
@@ -39,7 +39,7 @@ const addExperience = () => {
 type DataKey = keyof typeof data.value;
 const someFieldsAreEmpty = computed(() => {
   return Object.keys(data.value).some((item) => {
-    if (data.value.isCurrentPosition && item === "endDate") return false;
+    if (data.value.isCurrentCompany && item === "endDate") return false;
     return (
       data.value[item as DataKey] === "" ||
       data.value[item as DataKey] === undefined
@@ -51,7 +51,7 @@ const someFieldsAreEmpty = computed(() => {
 function clearForm() {
   data.value.company = "";
   data.value.position = "";
-  data.value.isCurrentPosition = false;
+  data.value.isCurrentCompany = false;
   data.value.startDate = "";
   data.value.endDate = "";
 }
@@ -74,17 +74,17 @@ function clearForm() {
             <InputDate v-model="data.startDate" required />
           </div>
           <div :class="$style.dateTo">
-            <FieldLabel label="To" :required="!data.isCurrentPosition" />
+            <FieldLabel label="To" :required="!data.isCurrentCompany" />
             <InputDate
               v-model="data.endDate"
-              :disabled="data.endDate === undefined || data.isCurrentPosition"
-              :required="!data.isCurrentPosition"
+              :disabled="data.endDate === undefined || data.isCurrentCompany"
+              :required="!data.isCurrentCompany"
             />
           </div>
         </div>
         <div :class="$style.checkbox_wrap">
           <InputCheckboxWithLabel
-            v-model="data.isCurrentPosition"
+            v-model="data.isCurrentCompany"
             label="I currently work here"
             filled
           />

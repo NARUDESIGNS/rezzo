@@ -40,7 +40,7 @@ const resumeData = {
     {
       company: "OPay",
       position: "Technical Support Engineer",
-      isCurrentPosition: false,
+      isCurrentCompany: false,
       endDate: "01/08/2024",
       startDate: "31/08/2024",
       tasks: [
@@ -60,7 +60,7 @@ const resumeData = {
     {
       company: "Worklio",
       position: "Senior Frontend Engineer",
-      isCurrentPosition: true,
+      isCurrentCompany: true,
       endDate: "24/05/2022",
       startDate: "31/07/2024",
       tasks: [
@@ -164,7 +164,7 @@ const name = computed(
           <span>
             {{ experience.startDate }}
             {{
-              `- ${experience.isCurrentPosition ? "Present" : experience.endDate}`
+              `- ${experience.isCurrentCompany ? "Present" : experience.endDate}`
             }}
           </span>
           <ul v-for="(item, i) in experience.tasks" :key="i">
